@@ -1,0 +1,83 @@
+{
+  "meta": { "area": "橋本駅起点", "updated": "2026-07-03" },
+  "weekends": [
+    {
+      "id": "2026-07-04",
+      "weather": {
+        "sat": "小雨 23°（降水77%）",
+        "sun": "小雨 22°（降水100%）",
+        "checkedAt": "7/3(金) 夜"
+      },
+      "plans": [
+        {
+          "id": "2026-07-04-a",
+          "kind": "honmei",
+          "title": "高尾山温泉で、雨をごちそうに",
+          "catch": "山は登らず麓でとろける・蕎麦つき",
+          "motif": "onsen",
+          "day": "sun",
+          "course": [
+            { "time": "10:30", "spot": "橋本 発", "note": "JR横浜線→八王子→高尾→高尾山口", "url": "" },
+            { "time": "11:20", "spot": "京王高尾山温泉 極楽湯", "note": "駅隣接・露天は雨がむしろ風情", "url": "https://www.takaosan-onsen.jp/" },
+            { "time": "13:30", "spot": "遅めの昼・蕎麦", "note": "館内食事処か参道の蕎麦処（各店の営業は当日確認）", "url": "" },
+            { "time": "15:00", "spot": "TAKAO 599 MUSEUM", "note": "入館無料・8:00-17:00・駅から徒歩4分", "url": "https://www.takao599museum.jp/" }
+          ],
+          "access": "電車: 橋本→高尾山口 約45分（八王子・高尾乗換）",
+          "budget": "二人で〜7,000円（入浴＋食事）",
+          "why": "雨の週末の屋内切替ローテ「温泉・スパ」の直球。核の「癒し×食」をどちらの日でも崩れない形で。",
+          "sources": [
+            "https://www.takaosan-onsen.jp/info/index.html",
+            "https://www.takao599museum.jp/"
+          ],
+          "caveats": "極楽湯は年中無休・8:00-22:30（調査日時点）。料金は当日公式で確認を。日曜は雨が強めの予報なので一番の逃げ場。"
+        },
+        {
+          "id": "2026-07-04-b",
+          "kind": "honmei2",
+          "title": "湘南ひらつか七夕まつり",
+          "catch": "この週末だけの夏祭り・露店食べ歩き",
+          "motif": "tenji",
+          "day": "sat",
+          "course": [
+            { "time": "14:00", "spot": "橋本 発", "note": "JR相模線→茅ヶ崎→東海道線→平塚", "url": "" },
+            { "time": "15:30", "spot": "湘南スターモールの大型飾り", "note": "駅北口すぐ・第74回", "url": "https://tanabata-hiratsuka.com/" },
+            { "time": "16:30", "spot": "露店で食べ歩き", "note": "露店は19:30まで（最終日は18:30）", "url": "" },
+            { "time": "18:30", "spot": "夕暮れの飾りを撮る", "note": "写真さんぽ枠・飾りは夜が映える", "url": "" },
+            { "time": "19:30", "spot": "平塚 発", "note": "まつりは20:30終了（最終日19:00）", "url": "" }
+          ],
+          "access": "電車: 橋本→平塚 約70〜80分（茅ヶ崎乗換）",
+          "budget": "二人で〜6,000円（露店＋交通）",
+          "why": "「夏祭りは毎年出したい」季節の一期一会——開催は7/3〜7/5、この週末しかない。行くなら土曜（日曜は終了が早く雨も強い）。",
+          "sources": [
+            "https://www.city.hiratsuka.kanagawa.jp/kanko/page-c_01099.html",
+            "https://tanabata-hiratsuka.com/"
+          ],
+          "caveats": "小雨でも開催が通例だが、荒天時の中止・変更は公式サイト/Xで当日確認を。傘必須・混雑必至。"
+        },
+        {
+          "id": "2026-07-04-c",
+          "kind": "kaze",
+          "title": "猫カフェ、はじめての午後",
+          "catch": "やりたいことリストの一番手・全行程屋内",
+          "motif": "neko",
+          "day": "sat",
+          "course": [
+            { "time": "13:00", "spot": "橋本 発", "note": "JR横浜線 快速で約10分", "url": "" },
+            { "time": "13:30", "spot": "猫カフェ MOCHA 町田ジョルナ店", "note": "予約不要・10:30-20:00（調査日時点）", "url": "https://catmocha.jp/shop/machida/" },
+            { "time": "15:00", "spot": "駅ビルでゲーセン・雑貨", "note": "UFOキャッチャー勝負もあり", "url": "" },
+            { "time": "16:30", "spot": "カフェでひと休み", "note": "猫の写真を見返す時間", "url": "" }
+          ],
+          "access": "電車: 橋本→町田 約10分（JR横浜線）",
+          "budget": "二人で〜6,000円（時間制＋ドリンク＋お茶）",
+          "why": "風の枠: やりたいことリスト未実施の筆頭「猫カフェ」。雨でも全行程屋内で成立し、「動物カフェは別腹」仮説の検証にもなる。",
+          "sources": [
+            "https://catmocha.jp/shop/machida/",
+            "https://www.jorna.gr.jp/shop/detail/140040?tenant_cd=140040"
+          ],
+          "caveats": "MOCHAは当日先着制のため混雑時は入場待ちあり。料金体系（時間制＋ワンドリンク）は当日の掲示を確認。"
+        }
+      ],
+      "feedback": { "chosen": null, "went": null, "rating": null, "memo": null }
+    }
+  ]
+}
