@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 小サイズ用の簡略版: 台紙＋チェキ1枚（太く・要素最少・回転なし） -->
+  <rect width="512" height="512" fill="#EFE8D8"/>
+  <rect x="96" y="48" width="320" height="416" fill="#FFFEF9" stroke="#3A352E" stroke-opacity=".25" stroke-width="8"/>
+  <rect x="128" y="80" width="256" height="288" fill="#C2D6AE"/>
+  <circle cx="330" cy="140" r="38" fill="#E9B84C"/>
+  <path d="M128 368 L128 268 L214 188 L292 272 L340 220 L384 268 L384 368 Z" fill="#4F6D3A"/>
+  <rect x="152" y="400" width="208" height="24" rx="12" fill="#3C5872" opacity=".8"/>
+</svg>
