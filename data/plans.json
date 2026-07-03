@@ -77,7 +77,7 @@
           "caveats": "MOCHAは当日先着制のため混雑時は入場待ちあり。料金体系（時間制＋ワンドリンク）は当日の掲示を確認。"
         }
       ],
-      "feedback": { "chosen": null, "went": null, "rating": null, "memo": null }
+      "feedback": { "chosen": "b", "went": false, "rating": null, "memo": "" }
     }
   ]
 }
