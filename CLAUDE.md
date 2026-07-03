@@ -49,7 +49,9 @@
       "sources": ["https://..."],      // 開催日・営業を確認したURL
       "caveats": "雨天中止あり・要予約 等"
     } ],
-    "feedback": { "chosen": "a|b|c|none", "went": true, "rating": "...", "memo": "..." }  // /learnが記入
+    "feedback": { "likes": ["a","b"], "went": "b|none|null", "rating": "...", "memo": "..." }
+    // /learnが記入。likes=いいねした案（複数可・提案の良さ）、went=実際に行った案1つ（noneは行かず）
+    // likesに入りwentでない案は「とっておき」——後日の/planが時季・天気の合う週に再提案してよい
   } ] }
 ```
 ### data/taste-profile.md — 3層構造（design-dojo と同じ規律）
@@ -66,10 +68,11 @@
 - 過去4週と同じ主目的地は出さない（visited.json 照合）。
 
 ## 6. フィードバック往復（viz round-trip 方式）
-- プランページに「選択をコピー」ボタン: 週末ID・選んだ案・行った/行かない・一言感想を
-  JSON+短文で clipboard へ。ユーザーがチャットに貼る。
+- プランページ: 各案に**いいねシール**（複数可・提案の良さを残す）＋「行った一枚」（A/B/C/行かなかった）＋一言感想。
+  「選択をコピー」で 週末ID・likes・went・memo を JSON+短文で clipboard へ。ユーザーがチャットに貼る。
 - `/learn` コマンド: 貼られた内容で plans.json の feedback を埋め、taste-profile の選択ログに1行追記、
-  訪問先を visited.json に登録。仮説が3回支持されたら確定へ昇格。
+  行った先を visited.json に登録。likes は「方向性が刺さった」証拠として仮説に反映。仮説が3回支持されたら確定へ昇格。
+- いいね付き未実行の案は「とっておき」として /plan が再提案候補にする（営業・開催の再確認必須）。
 
 ## 7. デザイン
 - **design-dojo を必ず発動**（3案儀式・構造から変える・好みプロファイル参照）。

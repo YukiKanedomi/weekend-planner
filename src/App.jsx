@@ -32,18 +32,31 @@ function Photo({ motif, stamp }) {
   )
 }
 
-function Cheki({ plan, weekendId, letter, active, onSelect }) {
+function Cheki({ plan, weekendId, letter, active, onSelect, liked, onToggleLike, wentStamp }) {
   const kind = KIND[plan.kind] ?? KIND.honmei
+  const onKey = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect() }
+  }
   return (
-    <button type="button" className={`cheki c${letter} ${active ? 'active' : ''}`} onClick={onSelect}>
+    <div role="button" tabIndex={0} aria-pressed={active}
+      className={`cheki c${letter} ${active ? 'active' : ''}`}
+      onClick={onSelect} onKeyDown={onKey}>
       <span className="tape" aria-hidden="true"></span>
       <span className={`seal ${kind.cls}`}>{kind.label}</span>
+      {onToggleLike ? (
+        <button type="button" className={`like ${liked ? 'on' : ''}`}
+          aria-pressed={liked} aria-label={`案${'ABC'[letter - 1]}にいいね`}
+          onClick={(e) => { e.stopPropagation(); onToggleLike() }}>いいね</button>
+      ) : (
+        liked && <span className="like on">いいね</span>
+      )}
+      {wentStamp && <span className="zumi cheki-zumi">現像<br />済</span>}
       <Photo motif={plan.motif} stamp={dateStamp(weekendId, plan.day)} />
       <span className="caption">
         {plan.title}
         <small>{plan.catch}</small>
       </span>
-    </button>
+    </div>
   )
 }
 
@@ -104,25 +117,28 @@ function PlanNotes({ plan }) {
   )
 }
 
-function OrderSlip({ weekend }) {
-  const [chosen, setChosen] = useState('')
+function OrderSlip({ weekend, likes }) {
   const [went, setWent] = useState('')
   const [memo, setMemo] = useState('')
   const [copied, setCopied] = useState(false)
   const letters = weekend.plans.map((_, i) => 'abc'[i])
 
+  const likesLabel = likes.length
+    ? likes.map((l) => `案${l.toUpperCase()}`).join('・')
+    : 'なし'
+
   const buildText = () => {
     const payload = {
       weekend: weekend.id,
-      chosen: chosen || 'none',
-      went: went === 'yes',
+      likes: [...likes].sort(),
+      went: went || null,
       memo: memo.trim(),
     }
-    const label = chosen
-      ? `案${chosen.toUpperCase()}「${weekend.plans[letters.indexOf(chosen)]?.title ?? ''}」`
-      : '選ばなかった'
+    const wentLabel = went && went !== 'none'
+      ? `案${went.toUpperCase()}「${weekend.plans[letters.indexOf(went)]?.title ?? ''}」`
+      : went === 'none' ? '行かなかった' : '未定'
     return [
-      `/learn ${fmtWeekend(weekend.id)}の選択: ${label} / ${went === 'yes' ? '行った' : '行かなかった'}${memo.trim() ? ` / ${memo.trim()}` : ''}`,
+      `/learn ${fmtWeekend(weekend.id)}: いいね=${likesLabel} / 行った=${wentLabel}${memo.trim() ? ` / ${memo.trim()}` : ''}`,
       JSON.stringify(payload),
     ].join('\n')
   }
@@ -141,20 +157,18 @@ function OrderSlip({ weekend }) {
     <section className="slip">
       <h2 className="slip-title">現像注文票 <small>— 選択をコピーしてチャットに貼ると、好みが育ちます</small></h2>
       <div className="slip-row">
-        <span className="slip-label">選んだ一枚</span>
-        <span className="chips">
-          {letters.map((l) => (
-            <button key={l} type="button" className={chosen === l ? 'chip on' : 'chip'}
-              onClick={() => setChosen(chosen === l ? '' : l)}>案{l.toUpperCase()}</button>
-          ))}
-          <button type="button" className={chosen === '' ? 'chip on' : 'chip'} onClick={() => setChosen('')}>なし</button>
-        </span>
+        <span className="slip-label">いいね</span>
+        <span className="slip-likes">{likesLabel}<small>（チェキのシールで貼り外し）</small></span>
       </div>
       <div className="slip-row">
-        <span className="slip-label">行った?</span>
+        <span className="slip-label">行った一枚</span>
         <span className="chips">
-          <button type="button" className={went === 'yes' ? 'chip on' : 'chip'} onClick={() => setWent('yes')}>行った</button>
-          <button type="button" className={went === 'no' ? 'chip on' : 'chip'} onClick={() => setWent('no')}>行かなかった</button>
+          {letters.map((l) => (
+            <button key={l} type="button" className={went === l ? 'chip on' : 'chip'}
+              onClick={() => setWent(went === l ? '' : l)}>案{l.toUpperCase()}</button>
+          ))}
+          <button type="button" className={went === 'none' ? 'chip on' : 'chip'}
+            onClick={() => setWent(went === 'none' ? '' : 'none')}>行かなかった</button>
         </span>
       </div>
       <textarea className="slip-memo" rows={2} value={memo} onChange={(e) => setMemo(e.target.value)}
@@ -173,9 +187,9 @@ function Album({ weekends, currentId, onPick }) {
       <p className="label">現像済みアルバム（これまでの週末）</p>
       <div className="row">
         {weekends.map((w, i) => {
-          const chosenIdx = 'abc'.indexOf(w.feedback?.chosen ?? '')
-          const p = chosenIdx >= 0 ? w.plans[chosenIdx] : w.plans[0]
-          const went = w.feedback?.went
+          const went = w.feedback?.went && w.feedback.went !== 'none' ? w.feedback.went : null
+          const pick = went ?? w.feedback?.likes?.[0] ?? 'a'
+          const p = w.plans['abc'.indexOf(pick)] ?? w.plans[0]
           return (
             <button type="button" key={w.id} className={`mini m${(i % 2) + 1} ${w.id === currentId ? 'active' : ''}`}
               onClick={() => onPick(w.id)}>
@@ -199,10 +213,16 @@ export default function App() {
   )
   const [currentId, setCurrentId] = useState(weekends[0]?.id)
   const [planIdx, setPlanIdx] = useState(0)
+  const [likes, setLikes] = useState(() => weekends[0]?.feedback?.likes ?? [])
 
   const weekend = weekends.find((w) => w.id === currentId)
   const isLatest = weekend && weekends[0] && weekend.id === weekends[0].id
   const plan = weekend?.plans[Math.min(planIdx, (weekend?.plans.length ?? 1) - 1)]
+
+  const toggleLike = (letter) => {
+    setLikes((prev) => prev.includes(letter) ? prev.filter((l) => l !== letter) : [...prev, letter])
+  }
+  const pastWent = weekend?.feedback?.went && weekend.feedback.went !== 'none' ? weekend.feedback.went : null
 
   return (
     <div className="stage">
@@ -225,16 +245,22 @@ export default function App() {
       {weekend && (
         <>
           <div className="prints">
-            {weekend.plans.map((p, i) => (
-              <Cheki key={p.id} plan={p} weekendId={weekend.id} letter={i + 1}
-                active={i === planIdx} onSelect={() => setPlanIdx(i)} />
-            ))}
+            {weekend.plans.map((p, i) => {
+              const letter = 'abc'[i]
+              return (
+                <Cheki key={p.id} plan={p} weekendId={weekend.id} letter={i + 1}
+                  active={i === planIdx} onSelect={() => setPlanIdx(i)}
+                  liked={isLatest ? likes.includes(letter) : (weekend.feedback?.likes ?? []).includes(letter)}
+                  onToggleLike={isLatest ? () => toggleLike(letter) : null}
+                  wentStamp={!isLatest && pastWent === letter} />
+              )
+            })}
           </div>
 
           {plan && <Film plan={plan} />}
           {plan && <PlanNotes plan={plan} />}
 
-          {isLatest && <OrderSlip weekend={weekend} />}
+          {isLatest && <OrderSlip weekend={weekend} likes={likes} />}
         </>
       )}
 

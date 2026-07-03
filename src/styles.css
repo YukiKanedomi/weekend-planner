@@ -63,7 +63,7 @@ header .yoho { font-size: 8.5px; border: 1px solid rgba(120, 105, 80, .35); bord
 /* ===== チェキ（instax mini 縦型） ===== */
 .prints { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; padding: 12px 6px 0; }
 .cheki {
-  display: block; text-align: inherit;
+  display: block; text-align: inherit; cursor: pointer;
   background:
     linear-gradient(155deg, rgba(255, 255, 255, .9), rgba(246, 242, 230, .95) 60%),
     var(--print);
@@ -114,6 +114,24 @@ header .yoho { font-size: 8.5px; border: 1px solid rgba(120, 105, 80, .35); bord
 }
 .seal-honmei { background: var(--akapen); }
 .seal-kaze { background: var(--pen); }
+/* いいねシール（左上・貼り外しできる丸シール） */
+.like {
+  position: absolute; top: -10px; left: -10px; z-index: 5;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: "Zen Kurenaido", sans-serif; font-size: 10px; letter-spacing: .04em;
+  border: 1.5px dashed rgba(120, 105, 80, .55); color: var(--usu);
+  background: rgba(255, 254, 249, .85);
+  transform: rotate(-8deg);
+  transition: transform .12s ease, background .12s ease;
+}
+.like.on {
+  border: none; color: #FFF6EC; background: var(--pen);
+  box-shadow: 0 2px 4px rgba(96, 80, 50, .35), inset 0 0 0 2px rgba(255, 255, 255, .28);
+  transform: rotate(-12deg) scale(1.04);
+}
+/* 過去週末の「現像済」印（チェキ右下） */
+.cheki-zumi { top: auto; right: -9px; bottom: 6px; }
 /* マスキングテープ */
 .tape {
   position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);
@@ -326,6 +344,8 @@ header .yoho { font-size: 8.5px; border: 1px solid rgba(120, 105, 80, .35); bord
 .slip-title small { font-size: 9.5px; color: var(--usu); letter-spacing: .02em; }
 .slip-row { display: flex; gap: 10px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
 .slip-label { font-size: 11px; min-width: 5em; color: var(--usu); letter-spacing: .08em; }
+.slip-likes { font-size: 12.5px; font-family: "Zen Kurenaido", sans-serif; color: var(--pen); }
+.slip-likes small { font-size: 9px; color: var(--usu); margin-left: 6px; font-family: "Noto Sans JP", sans-serif; }
 .chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip {
   border: 1px solid rgba(120, 105, 80, .45); background: var(--print); border-radius: 999px;
