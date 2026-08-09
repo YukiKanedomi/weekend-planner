@@ -26,8 +26,13 @@ function shortDate(id) {
 }
 
 function Photo({ motif, stamp }) {
+  const m = motif || 'michi'
   return (
-    <div className={`photo ph-${motif || 'michi'}`}>
+    <div className={`photo ph-${m}`}>
+      {/* 生成画像。読めない場合は onError で消え、下の CSS 絵柄が出る */}
+      <img className="ph-img" src={`${import.meta.env.BASE_URL}motifs/${m}.jpg`} alt=""
+        loading="lazy" onError={(e) => e.currentTarget.remove()} />
+      <span className="ph-vig" aria-hidden="true"></span>
       <span className="date">{stamp}</span>
     </div>
   )
