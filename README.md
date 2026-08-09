@@ -17,3 +17,7 @@
   初回3案（7/4-5・雨の週末: 高尾山温泉／ひらつか七夕まつり／猫カフェ）を試験配信。
   - 配信ページ: https://yukikanedomi.github.io/weekend-planner/
   - 運用: 金曜に `/plan` で3案生成 → ページの「選択をコピー」を貼って `/learn` で学習。
+- 2026-08-09: 配信をローカル定時ジョブに移行（クラウドRoutineは不達続きのため廃止）。
+  - タスク名 `WeekendPlanner-FridayPlan`・毎週金曜 17:00・`scripts/auto-plan.ps1` → `claude -p`（sonnet）で /plan 相当を実行し push。
+  - ログ: `scripts/auto-plan.log`／停止: `Unregister-ScheduledTask -TaskName 'WeekendPlanner-FridayPlan' -Confirm:$false`
+  - 冪等ガードつき: その週末IDが plans.json に既にあれば何もしない（手動 `/plan` との二重配信なし）。

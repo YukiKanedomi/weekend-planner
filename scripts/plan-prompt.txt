@@ -1,0 +1,28 @@
+あなたは weekend-planner の金曜自動配信ジョブです。CLAUDE.md（SPEC）のルールに従い、明日からの週末（土日）の3案を生成して配信してください。対話相手はいません。質問せず、以下の手順で完結させてください。
+
+## 最重要ルール
+- SPEC 0章「現実に対して嘘をつかない」を厳守。WebSearch/WebFetch で開催日・営業日を確認できたスポット・イベントだけ載せる。確認できなければ caveats に「要確認」と明記するか、その案を差し替える。
+- 営業時間・料金は断定しない（「調査日時点」と添える）。
+
+## 手順
+1. 【冪等ガード】まず `date` で今日の日付を確認し、次の土曜の日付（週末ID）を求める。data/plans.json を読み、その週末IDが既に存在したら**何も変更せず「既に配信済み」と出力して終了**する。
+2. 【git同期】`git pull --ff-only` を実行してから作業を始める。
+3. 【資産を読む】data/taste-profile.md（好み・NG・冒険枠の強さ）、data/wishlist.md（風の枠の最優先候補プール）、data/visited.json（過去4週の主目的地と重複禁止）、data/plans.json（既存週末との重複確認・過去のfeedbackのlikes）。
+4. 【天気】Open-Meteo で橋本駅周辺（35.5946, 139.3450）の土日予報を取得:
+   https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo
+   取得日時を weather.checkedAt に記録。
+5. 【案を組む】SPEC 5章と .claude/commands/plan.md の生成ルールに従う:
+   - とっておき（過去feedbackで likes に入り went でない案）は時季・天気が合えば営業再確認のうえ本命枠で再提案してよい（why に「以前いいねが付いた案」と書く）。
+   - 本命2案 = taste-profile の「散策×食×癒し」直球。天気適合を最優先（雨予報→屋内ローテ）。
+   - 風の枠1案 = 優先順 ①wishlist未実施（☐）で時季が合うもの ②未訪問エリア ③未経験ジャンル ④その週末だけの季節もの。why に「なぜ新しいか」を書く。奇抜さは「ほどほど」。
+   - 各案は半日〜1日・タイムライン2〜5点。詰め込まない。過去4週と同じ主目的地は出さない。
+6. 【実在確認】各案の主要スポット・イベントを WebSearch/WebFetch で確認し、確認できた公式ページ等のURLを sources に入れる。
+7. 【追記】data/plans.json の weekends 先頭に新しい週末を追加（id=土曜日付、各案に motif キー: yama/pan/neko/kouen/machi/yoru/onsen/umi/tenji/cafe/michi、day: "sat"/"sun"）。meta.updated を今日の日付に更新。feedback は { "likes": [], "went": null, "rating": null, "memo": null }。
+8. 【検証】`node -e "JSON.parse(require('fs').readFileSync('data/plans.json','utf8'))"` でJSONを検証し、`npm run build` が通ることを確認。**どちらかが失敗したら plans.json への変更を `git checkout -- data/plans.json` で戻し、失敗内容を出力して終了（pushしない）**。
+9. 【配信】`git add data/plans.json` → commit（メッセージ: "/plan: <週末ID> 週末の3案を配信（金曜自動）"）→ `git push origin main`。pushが拒否されたら `git pull --ff-only` 後に再試行を1回だけ。
+10. 【確認】`gh run list --limit 1` でActionsが起動したことを確認して結果を出力する。デプロイ完了までは待たなくてよい。
+
+## トークン・環境規律
+- 調査は必要最小限（各案の主要スポットの確認まで。周辺店の網羅調査はしない）。
+- 開発サーバやpreviewサーバは起動しない。起動してしまったら終了前に必ず停止する。
+- MCPツールが使えない場合は黙ってスキップし、標準ツールだけで完結させる。
