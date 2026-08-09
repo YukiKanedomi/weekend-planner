@@ -6,7 +6,7 @@
   --pen: #3C5872;
   --akapen: #BE5843;
   --film: #211E1A;
-  --usu: #8D8371;
+  --usu: #7A7060;
   --date: #FF9430;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -112,7 +112,7 @@ header .yoho { font-size: 8.5px; border: 1px solid rgba(120, 105, 80, .35); bord
   font-family: "Zen Kurenaido", sans-serif; font-size: 14px; color: var(--pen);
   padding: 8px 0 12px; line-height: 1.35; text-align: center;
 }
-.cheki .caption small { font-size: 10px; display: block; color: #7E8DA0; margin-top: 1px; word-break: keep-all; }
+.cheki .caption small { font-size: 10.5px; display: block; color: #6B7C90; margin-top: 1px; word-break: keep-all; }
 /* 丸シール（本命/風） */
 .seal {
   position: absolute; top: -8px; right: -8px; z-index: 5;
@@ -320,10 +320,10 @@ header .yoho { font-size: 8.5px; border: 1px solid rgba(120, 105, 80, .35); bord
   position: absolute; top: -14px; right: 2px;
   font-family: "DotGothic16", monospace; font-size: 8px; color: rgba(240, 200, 140, .8); letter-spacing: .1em;
 }
-.frame .t { font-size: 11.5px; font-weight: 700; color: #F2C894; font-variant-numeric: tabular-nums; display: block; }
-.frame .n { font-size: 9.5px; line-height: 1.4; display: block; margin-top: 2px; }
+.frame .t { font-size: 12px; font-weight: 700; color: #F2C894; font-variant-numeric: tabular-nums; display: block; }
+.frame .n { font-size: 10.5px; line-height: 1.4; display: block; margin-top: 2px; }
 .frame .n a { color: #EDE4CD; text-decoration-color: rgba(242, 200, 148, .5); text-underline-offset: 2px; }
-.frame .m { font-size: 7.5px; color: #A79B83; display: block; margin-top: 2px; line-height: 1.4; }
+.frame .m { font-size: 9px; color: #B5AA92; display: block; margin-top: 2px; line-height: 1.45; }
 .filmnote { display: flex; justify-content: space-between; gap: 10px; padding: 8px 18px 0; font-size: 9.5px; color: var(--usu); flex-wrap: wrap; }
 .filmnote b { color: var(--sumi); }
 
