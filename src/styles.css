@@ -363,6 +363,38 @@ header .yoho { font-size: 8.5px; border: 1px solid rgba(120, 105, 80, .35); bord
 }
 .copy-btn:active { transform: translateY(1px); }
 
+/* ===== 次号予告（イベントウォッチ） ===== */
+.board { margin: 24px 18px 0; }
+.board .label {
+  font-family: "Zen Kurenaido", sans-serif; color: var(--sumi); font-size: 13.5px;
+  padding-bottom: 6px; letter-spacing: .08em;
+}
+.b-list {
+  list-style: none;
+  background: var(--print);
+  border: 1px solid rgba(120, 105, 80, .35); border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(96, 80, 50, .18);
+  padding: 4px 12px;
+}
+.b-list li {
+  display: flex; gap: 10px; padding: 9px 0;
+  border-bottom: 1px dashed rgba(120, 105, 80, .28);
+}
+.b-list li:last-child { border-bottom: none; }
+.b-date {
+  flex-shrink: 0; width: 7.5em; padding-top: 1px;
+  font-size: 10.5px; font-weight: 700; color: var(--akapen);
+  font-variant-numeric: tabular-nums; line-height: 1.5;
+}
+.b-body { min-width: 0; font-size: 12px; line-height: 1.5; }
+.b-body a {
+  font-family: "Zen Kurenaido", sans-serif; font-size: 13px; color: var(--pen);
+  text-decoration-color: rgba(60, 88, 114, .4); text-underline-offset: 3px;
+}
+.b-body small { display: block; font-size: 9.5px; color: var(--usu); margin-top: 1px; }
+.b-body .b-match { color: #6B7F52; }
+.b-foot { font-size: 8.5px; color: var(--usu); margin-top: 5px; padding: 0 2px; }
+
 /* ===== 現像済みアルバム ===== */
 .album { margin: 24px 18px 0; }
 .album .label { padding-left: 0; }

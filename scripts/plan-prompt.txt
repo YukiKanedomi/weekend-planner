@@ -17,6 +17,7 @@
    - 風の枠1案 = 優先順 ①wishlist未実施（☐）で時季が合うもの ②未訪問エリア ③未経験ジャンル ④その週末だけの季節もの。why に「なぜ新しいか」を書く。奇抜さは「ほどほど」。
    - 各案は半日〜1日・タイムライン2〜5点。詰め込まない。過去4週と同じ主目的地は出さない。
 6. 【実在確認】各案の主要スポット・イベントを WebSearch/WebFetch で確認し、確認できた公式ページ等のURLを sources に入れる。
+6.5.【イベント台帳の更新】data/events.json を読み、(a) 終了したイベント（to が過去）を削除、(b) 向こう6週間の「ビッグサイト級イベント・お祭り・花火」を WebSearch で調査し、開催日を確認できた公式ページ等の URL つきで追記する（各回2〜3件の調査で十分。確認できないものは載せない）。match には taste-profile / wishlist のどこに効くかを書く。meta.updated を今日の日付に。この台帳の該当週末のイベントは、風の枠・本命の候補として優先検討する。
 7. 【追記】data/plans.json の weekends 先頭に新しい週末を追加（id=土曜日付、各案に motif キー: yama/pan/neko/kouen/machi/yoru/onsen/umi/tenji/cafe/michi、day: "sat"/"sun"）。meta.updated を今日の日付に更新。feedback は { "likes": [], "went": null, "rating": null, "memo": null }。
 8. 【検証】`node -e "JSON.parse(require('fs').readFileSync('data/plans.json','utf8'))"` でJSONを検証し、`npm run build` が通ることを確認。**どちらかが失敗したら plans.json への変更を `git checkout -- data/plans.json` で戻し、失敗内容を出力して終了（pushしない）**。
 9. 【配信】`git add data/plans.json` → commit（メッセージ: "/plan: <週末ID> 週末の3案を配信（金曜自動）"）→ `git push origin main`。pushが拒否されたら `git pull --ff-only` 後に再試行を1回だけ。

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import plansData from '../data/plans.json'
+import eventsData from '../data/events.json'
 
 const KIND = {
   honmei: { label: '本命', cls: 'seal-honmei' },
@@ -180,6 +181,33 @@ function OrderSlip({ weekend, likes }) {
   )
 }
 
+function EventBoard() {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const list = (eventsData.events ?? [])
+    .filter((e) => new Date(e.to + 'T23:59:59') >= today)
+    .sort((a, b) => (a.from < b.from ? -1 : 1))
+  if (list.length === 0) return null
+  return (
+    <section className="board">
+      <p className="label">次号予告（この先の一期一会）</p>
+      <ul className="b-list">
+        {list.map((e) => (
+          <li key={e.id}>
+            <span className="b-date">{e.dates}</span>
+            <span className="b-body">
+              <a href={e.url} target="_blank" rel="noreferrer">{e.title}</a>
+              <small>{e.place}{e.note ? `・${e.note}` : ''}</small>
+              {e.match && <small className="b-match">◎ {e.match}</small>}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className="b-foot">開催日は出典で確認済み（{eventsData.meta.updated} 調査時点）。おでかけ前に公式で最終確認を。</p>
+    </section>
+  )
+}
+
 function Album({ weekends, currentId, onPick }) {
   if (weekends.length === 0) return null
   return (
@@ -274,6 +302,8 @@ export default function App() {
           {canEdit && <OrderSlip key={weekend.id} weekend={weekend} likes={likes} />}
         </>
       )}
+
+      <EventBoard />
 
       <Album weekends={weekends.slice(1)} currentId={currentId} onPick={pickWeekend} />
       {!isLatest && weekend && (

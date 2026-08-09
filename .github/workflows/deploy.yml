@@ -34,3 +34,8 @@ jobs:
           path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
+      # deploy-pages が一時エラー（"try again later" 等）で落ちた場合の1回リトライ
+      - id: deployment-retry
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4

@@ -23,7 +23,7 @@ $prompt = Get-Content -Raw -Encoding UTF8 $promptFile
 # EAP=Continue around the claude call: PS 5.1 wraps native stderr as ErrorRecords
 # under 2>&1, which EAP=Stop turns fatal. $null| closes stdin (skips the 3s wait).
 $ErrorActionPreference = 'Continue'
-$null | & claude -p $prompt --model sonnet --permission-mode acceptEdits `
+$null | & claude -p $prompt --model opus --permission-mode acceptEdits `
   --allowedTools 'WebSearch' 'WebFetch' 'Read' 'Bash(node:*)' 'Bash(npm:*)' 'Bash(git:*)' 'Bash(gh:*)' 'Bash(curl:*)' `
   --output-format text 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
 $claudeExit = $LASTEXITCODE
