@@ -25,13 +25,17 @@ function shortDate(id) {
   return `${sat.getMonth() + 1}.${sat.getDate()}`
 }
 
-function Photo({ motif, stamp }) {
+function Photo({ motif, img, stamp }) {
   const m = motif || 'michi'
+  // 週次生成画像(img) → モチーフライブラリ → CSS絵柄 のフォールバック連鎖
+  const candidates = [...(img ? [img] : []), `motifs/${m}.jpg`]
+  const [srcIdx, setSrcIdx] = useState(0)
   return (
     <div className={`photo ph-${m}`}>
-      {/* 生成画像。読めない場合は onError で消え、下の CSS 絵柄が出る */}
-      <img className="ph-img" src={`${import.meta.env.BASE_URL}motifs/${m}.jpg`} alt=""
-        loading="lazy" onError={(e) => e.currentTarget.remove()} />
+      {srcIdx < candidates.length && (
+        <img className="ph-img" src={import.meta.env.BASE_URL + candidates[srcIdx]} alt=""
+          loading="lazy" onError={() => setSrcIdx(srcIdx + 1)} />
+      )}
       <span className="ph-vig" aria-hidden="true"></span>
       <span className="date">{stamp}</span>
     </div>
@@ -57,7 +61,7 @@ function Cheki({ plan, weekendId, letter, active, onSelect, liked, onToggleLike,
         liked && <span className="like on">いいね</span>
       )}
       {wentStamp && <span className="zumi cheki-zumi">現像<br />済</span>}
-      <Photo motif={plan.motif} stamp={dateStamp(weekendId, plan.day)} />
+      <Photo motif={plan.motif} img={plan.img} stamp={dateStamp(weekendId, plan.day)} />
       <span className="caption">
         {plan.title}
         <small>{plan.catch}</small>
@@ -228,7 +232,7 @@ function Album({ weekends, currentId, onPick }) {
               onClick={() => onPick(w.id)}>
               <span className="corner tl" aria-hidden="true"></span>
               <span className="corner br" aria-hidden="true"></span>
-              <Photo motif={p?.motif} stamp="" />
+              <Photo motif={p?.motif} img={p?.img} stamp="" />
               <span className="caption">{shortDate(w.id)} {p?.title ?? ''}</span>
               {went && <span className="zumi">現像<br />済</span>}
             </button>

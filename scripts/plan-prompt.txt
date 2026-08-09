@@ -19,6 +19,10 @@
 6. 【実在確認】各案の主要スポット・イベントを WebSearch/WebFetch で確認し、確認できた公式ページ等のURLを sources に入れる。
 6.5.【イベント台帳の更新】data/events.json を読み、(a) 終了したイベント（to が過去）を削除、(b) 向こう6週間の「ビッグサイト級イベント・お祭り・花火」を WebSearch で調査し、開催日を確認できた公式ページ等の URL つきで追記する（各回2〜3件の調査で十分。確認できないものは載せない）。match には taste-profile / wishlist のどこに効くかを書く。meta.updated を今日の日付に。この台帳の該当週末のイベントは、風の枠・本命の候補として優先検討する。
 7. 【追記】data/plans.json の weekends 先頭に新しい週末を追加（id=土曜日付、各案に motif キー: yama/pan/neko/kouen/machi/yoru/onsen/umi/tenji/cafe/michi、day: "sat"/"sun"）。meta.updated を今日の日付に更新。feedback は { "likes": [], "went": null, "rating": null, "memo": null }。
+7.5.【チェキ画像の生成】3案それぞれの情景を表す英語プロンプト（1〜2文。場所・時間帯・季節・主要な物。人物と文字は入れない）を scripts/image-briefs.json に書く:
+   [{ "id": "<案のid>", "prompt": "<english scene description>" }, ...]
+   画風は書かない（スクリプト側で固定済み）。書いたら `powershell -NoProfile -File scripts/gen-plan-images.ps1` を実行（3枚で5〜10分かかる。出力の OK:/NG: を読む）。
+   OK だった案にだけ plans.json の該当 plan に "img": "motifs/weekly/<id>.jpg" を追加する。NG の案には img を付けない（モチーフ絵柄に自動フォールバックされるので配信は続行）。生成した public/motifs/weekly/*.jpg も commit に含める。codex が使えない・全滅した場合も配信は止めず、ログに残して先へ進む。
 8. 【検証】`node -e "JSON.parse(require('fs').readFileSync('data/plans.json','utf8'))"` でJSONを検証し、`npm run build` が通ることを確認。**どちらかが失敗したら plans.json への変更を `git checkout -- data/plans.json` で戻し、失敗内容を出力して終了（pushしない）**。
 9. 【配信】`git add data/plans.json` → commit（メッセージ: "/plan: <週末ID> 週末の3案を配信（金曜自動）"）→ `git push origin main`。pushが拒否されたら `git pull --ff-only` 後に再試行を1回だけ。
 10. 【確認】`gh run list --limit 1` でActionsが起動したことを確認して結果を出力する。デプロイ完了までは待たなくてよい。

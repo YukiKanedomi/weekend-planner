@@ -34,6 +34,9 @@ for (const [i, w] of (data.weekends ?? []).entries()) {
     if (!KINDS.includes(plan.kind)) err(`${q}.kind`, `${KINDS.join('|')} のいずれかが必要 (got: ${plan.kind})`)
     if (!MOTIFS.includes(plan.motif)) err(`${q}.motif`, `許容値外 (got: ${plan.motif})`)
     if (!DAYS.includes(plan.day)) err(`${q}.day`, `sat|sun が必要 (got: ${plan.day})`)
+    if (plan.img !== undefined && !/^motifs\/weekly\/[\w-]+\.jpg$/.test(plan.img)) {
+      err(`${q}.img`, `motifs/weekly/<id>.jpg 形式が必要 (got: ${plan.img})`)
+    }
     for (const k of ['title', 'catch', 'access', 'budget', 'why']) {
       if (typeof plan[k] !== 'string' || !plan[k]) err(`${q}.${k}`, '非空の文字列が必要')
     }

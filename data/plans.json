@@ -15,6 +15,7 @@
           "title": "にわか雨は、岩盤浴でやり過ごす",
           "catch": "橋本駅から無料送迎バスで直行。都内最大級の湯どころ",
           "motif": "onsen",
+          "img": "motifs/weekly/2026-08-08-a.jpg",
           "day": "sun",
           "course": [
             { "time": "15:00", "spot": "橋本駅 発", "note": "無料送迎バスあり（八王子みなみ野・八王子・北野からも運行）。運行時刻は公式で確認", "url": "https://hachioji.ryusenjinoyu.com/" },
@@ -36,6 +37,7 @@
           "title": "港の夜、19時半の花火5分間",
           "catch": "今夜だけの横浜ナイトフラワーズ150発＋中華街で締め",
           "motif": "umi",
+          "img": "motifs/weekly/2026-08-08-b.jpg",
           "day": "sun",
           "course": [
             { "time": "16:30", "spot": "橋本 発", "note": "JR横浜線→桜木町 約55分", "url": "" },
@@ -59,6 +61,7 @@
           "title": "ネオンの街を、撮り歩く夜",
           "catch": "やりたいことリストの「ネオンいっぱいのところ」へ",
           "motif": "machi",
+          "img": "motifs/weekly/2026-08-08-c.jpg",
           "day": "sun",
           "course": [
             { "time": "16:30", "spot": "橋本 発", "note": "京王相模原線で新宿へ 約50分", "url": "" },

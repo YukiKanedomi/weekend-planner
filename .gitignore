@@ -1,3 +1,5 @@
 node_modules
 dist
 scripts/auto-plan.log
+scripts/image-briefs.json
+scripts/imggen-tmp/

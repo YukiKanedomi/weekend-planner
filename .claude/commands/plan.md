@@ -31,4 +31,6 @@ CLAUDE.md（SPEC）の生成ルールに従い、**次の週末**（今日が金
 
 5. **plans.json に追記**: SPEC 4章のデータモデル通り。`id` は週末の土曜日付。`motif` フィールドに絵柄キーを1つ指定（yama/pan/neko/kouen/machi/yoru/onsen/umi/tenji/cafe/michi）。`meta.updated` を更新。
 
+5.5. **チェキ画像の生成**: 3案の情景の英語プロンプト（人物・文字なし）を `scripts/image-briefs.json` に書き、`powershell -NoProfile -File scripts/gen-plan-images.ps1` を実行（画風はスクリプト側で固定）。OK の案にだけ `"img": "motifs/weekly/<id>.jpg"` を追加。NG はモチーフ絵柄フォールバックのまま配信を続行。
+
 6. **検証と配信**: `npm run build` が通ることを確認し、commit → push（GitHub Actions が自動デプロイ）。反映は deploy-pages スキルの流儀（内容マーカー＋キャッシュバスター）で確認し、URL `https://yukikanedomi.github.io/weekend-planner/` を提示する。

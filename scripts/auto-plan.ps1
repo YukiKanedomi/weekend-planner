@@ -24,7 +24,7 @@ $prompt = Get-Content -Raw -Encoding UTF8 $promptFile
 # under 2>&1, which EAP=Stop turns fatal. $null| closes stdin (skips the 3s wait).
 $ErrorActionPreference = 'Continue'
 $null | & claude -p $prompt --model opus --permission-mode acceptEdits `
-  --allowedTools 'WebSearch' 'WebFetch' 'Read' 'Bash(node:*)' 'Bash(npm:*)' 'Bash(git:*)' 'Bash(gh:*)' 'Bash(curl:*)' `
+  --allowedTools 'WebSearch' 'WebFetch' 'Read' 'Bash(node:*)' 'Bash(npm:*)' 'Bash(git:*)' 'Bash(gh:*)' 'Bash(curl:*)' 'Bash(powershell:*)' `
   --output-format text 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
 $claudeExit = $LASTEXITCODE
 $ErrorActionPreference = 'Stop'
