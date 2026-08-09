@@ -219,6 +219,17 @@ export default function App() {
   const isLatest = weekend && weekends[0] && weekend.id === weekends[0].id
   const plan = weekend?.plans[Math.min(planIdx, (weekend?.plans.length ?? 1) - 1)]
 
+  // フィードバック未記入の週は、過去週でもいいね＋注文票を操作できる
+  const hasFeedback = (w) => !!(w?.feedback && (w.feedback.went != null || (w.feedback.likes?.length ?? 0) > 0))
+  const canEdit = !!weekend && !hasFeedback(weekend)
+
+  const pickWeekend = (id) => {
+    setCurrentId(id)
+    setPlanIdx(0)
+    const w = weekends.find((x) => x.id === id)
+    setLikes(w?.feedback?.likes ?? [])
+  }
+
   const toggleLike = (letter) => {
     setLikes((prev) => prev.includes(letter) ? prev.filter((l) => l !== letter) : [...prev, letter])
   }
@@ -250,8 +261,8 @@ export default function App() {
               return (
                 <Cheki key={p.id} plan={p} weekendId={weekend.id} letter={i + 1}
                   active={i === planIdx} onSelect={() => setPlanIdx(i)}
-                  liked={isLatest ? likes.includes(letter) : (weekend.feedback?.likes ?? []).includes(letter)}
-                  onToggleLike={isLatest ? () => toggleLike(letter) : null}
+                  liked={canEdit ? likes.includes(letter) : (weekend.feedback?.likes ?? []).includes(letter)}
+                  onToggleLike={canEdit ? () => toggleLike(letter) : null}
                   wentStamp={!isLatest && pastWent === letter} />
               )
             })}
@@ -260,15 +271,14 @@ export default function App() {
           {plan && <Film plan={plan} />}
           {plan && <PlanNotes plan={plan} />}
 
-          {isLatest && <OrderSlip weekend={weekend} likes={likes} />}
+          {canEdit && <OrderSlip key={weekend.id} weekend={weekend} likes={likes} />}
         </>
       )}
 
-      <Album weekends={weekends.slice(1)} currentId={currentId}
-        onPick={(id) => { setCurrentId(id); setPlanIdx(0) }} />
+      <Album weekends={weekends.slice(1)} currentId={currentId} onPick={pickWeekend} />
       {!isLatest && weekend && (
         <p className="backrow">
-          <button type="button" className="chip" onClick={() => { setCurrentId(weekends[0].id); setPlanIdx(0) }}>
+          <button type="button" className="chip" onClick={() => pickWeekend(weekends[0].id)}>
             ← 今週末にもどる
           </button>
         </p>
