@@ -1,6 +1,177 @@
 {
-  "meta": { "area": "橋本駅起点", "updated": "2026-09-11" },
+  "meta": {
+    "area": "橋本駅起点",
+    "updated": "2026-09-25"
+  },
   "weekends": [
+    {
+      "id": "2026-09-26",
+      "weather": {
+        "sat": "一日じゅう雨 21°（降水確率98%。時間別予報でも朝から夜まで90%前後）",
+        "sun": "くもり 21°（降水確率71%は未明の小雨のぶん。時間別では昼前後が20〜30%台。この週末に出かけるなら日曜です）",
+        "checkedAt": "9/25(金) 17:00 Open-Meteo"
+      },
+      "plans": [
+        {
+          "id": "2026-09-26-a",
+          "kind": "honmei",
+          "title": "雨の土曜は、旅の見本市へ",
+          "catch": "ツーリズムEXPOジャパン。国内外の観光地が東京ビッグサイトに集まる二日間の一般日",
+          "motif": "tenji",
+          "img": "motifs/weekly/2026-09-26-a.jpg",
+          "day": "sat",
+          "course": [
+            {
+              "time": "09:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線で新宿へ→りんかい線直通の埼京線で国際展示場。約1時間半。乗換経路は当日の検索で",
+              "url": ""
+            },
+            {
+              "time": "11:00",
+              "spot": "ツーリズムEXPOジャパン2026（東京ビッグサイト）",
+              "note": "土曜は10:00〜18:00（公式）。世界の国と地域、日本各地の観光地のブース、ステージ、伝統芸能、グルメ",
+              "url": "https://www.t-expo.jp/public/about"
+            },
+            {
+              "time": "12:30",
+              "spot": "会場のご当地グルメでお昼",
+              "note": "グルメやお取り寄せのコーナーがある（公式の見どころ紹介）。座れる場所で一度休む",
+              "url": ""
+            },
+            {
+              "time": "14:00",
+              "spot": "気になった地方のブースをもう一周",
+              "note": "箱根・伊豆・四国など、やりたいことリストの「遠出・泊まり」の行き先をここで下見するつもりで",
+              "url": ""
+            },
+            {
+              "time": "16:30",
+              "spot": "帰路",
+              "note": "閉場前に出れば駅も混みにくいはず",
+              "url": ""
+            }
+          ],
+          "access": "電車: 橋本→国際展示場 約1時間半（新宿乗換・りんかい線）。駅から会場までは屋外を歩くので傘を",
+          "budget": "二人で〜8,000円（当日券 大人1,500円×2＋交通費・会場の食べ歩き。料金は調査日時点）",
+          "why": "展示会・大型イベントは確定した好み（デザフェス・メーカーフェア・おもちゃショー☑）で、土曜の雨を丸ごと屋内でやり過ごせます。9月のMaker Faireは作り手に会うイベントでしたが、こちらは「旅先に出会う」見本市で、各地のグルメもつまめます。やりたいことリストに残っている箱根・伊豆・熱海・四国制覇の、次の遠出の種探しにもなります",
+          "sources": [
+            "https://www.t-expo.jp/public/about",
+            "https://www.t-expo.jp/public/ticket",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
+          "caveats": "入場はチケット制。前売（大人1,200円）は9/25(金)23:59まで、当日券は大人1,500円でコンビニ・公式サイト・会場窓口で販売（会場窓口は土曜9:30〜17:30、現金不可のキャッシュレスのみ）。いずれも公式の調査日時点の案内です。学生は来場登録と学生証で無料。ブースの試食・物販は出展者ごとに違います"
+        },
+        {
+          "id": "2026-09-26-b",
+          "kind": "honmei2",
+          "title": "雨あがりの日曜、元町のパンと山手の洋館",
+          "catch": "元町の老舗ベーカリーでパン、坂を上って無料で入れる西洋館めぐり、洋館の喫茶室でお茶",
+          "motif": "pan",
+          "img": "motifs/weekly/2026-09-26-b.jpg",
+          "day": "sun",
+          "course": [
+            {
+              "time": "10:00",
+              "spot": "橋本 発",
+              "note": "JR横浜線で東神奈川へ→京浜東北・根岸線で石川町。約1時間。直通列車の有無は時刻表で",
+              "url": ""
+            },
+            {
+              "time": "11:00",
+              "spot": "ポンパドウル 元町本店",
+              "note": "1969年に元町で創業したベーカリー。9:00〜20:00・不定休、イートインあり（公式・調査日時点）。石川町駅元町口から徒歩7分",
+              "url": "https://www.pompadour.co.jp/topics/shop/motomachi"
+            },
+            {
+              "time": "12:00",
+              "spot": "元町の通りをぶらぶら、坂を上って山手へ",
+              "note": "急がずに。坂の上から港が見えます",
+              "url": ""
+            },
+            {
+              "time": "13:00",
+              "spot": "山手西洋館めぐり",
+              "note": "7つの洋館が並ぶ。入館無料・9:30〜17:00（公式）。休館日は水曜なので日曜は開館日。全館回らず2〜3館で十分",
+              "url": "https://www.hama-midorinokyokai.or.jp/yamate-seiyoukan/faq.php"
+            },
+            {
+              "time": "14:30",
+              "spot": "山手111番館「カフェ・ザ・ローズ」でお茶",
+              "note": "10:00〜17:00（L.O.16:30）・予約不可（公式）。ほかにエリスマン邸・外交官の家にも喫茶室があります",
+              "url": "https://www.hama-midorinokyokai.or.jp/yamate-seiyoukan/cafe.php"
+            }
+          ],
+          "access": "電車: 橋本→石川町 約1時間（JR横浜線・東神奈川で根岸線に乗換）。帰りは元町・中華街駅からみなとみらい線でも",
+          "budget": "二人で〜6,000円（パン・喫茶・交通費。西洋館は無料。料金は調査日時点）",
+          "why": "好みの核「散策×食×癒し」を、パン屋→街ぶら→洋館の喫茶室という流れにしました。晴れ間の出る日曜に、橋本から乗換1回で行けます。7月の横浜は港と夕暮れの写真さんぽでしたが、今回は坂の上の山手側。洋館の窓や庭は写真さんぽにも向きます。美術館・寺社は「散策の1点として混ぜるなら」という仮説どおり、洋館は通り道の寄り道の扱いです",
+          "sources": [
+            "https://www.pompadour.co.jp/topics/shop/motomachi",
+            "https://www.hama-midorinokyokai.or.jp/yamate-seiyoukan/faq.php",
+            "https://www.hama-midorinokyokai.or.jp/yamate-seiyoukan/cafe.php",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
+          "caveats": "営業時間はいずれも調査日9/25時点の公式表示。ポンパドウルは不定休なので、気になるなら当日に電話で確認を（045-681-3956）。西洋館は工事などで臨時休館する場合があると公式にあります。日曜の喫茶室は混むことがあり、予約はできません。未明に雨が残る予報なので、坂道は滑りにくい靴で"
+        },
+        {
+          "id": "2026-09-26-c",
+          "kind": "kaze",
+          "title": "一面の赤い花、巾着田の曼珠沙華",
+          "catch": "日曜に見頃。ローカル線の八高線に揺られて、埼玉・日高の彼岸花の群生へ",
+          "motif": "kouen",
+          "img": "motifs/weekly/2026-09-26-c.jpg",
+          "day": "sun",
+          "course": [
+            {
+              "time": "08:30",
+              "spot": "橋本 発",
+              "note": "JR横浜線で八王子→JR八高線で東飯能→西武池袋線で高麗（1駅）。約1時間半。八高線は本数が少ないので時刻表を先に確認を",
+              "url": ""
+            },
+            {
+              "time": "10:15",
+              "spot": "高麗駅から歩いて巾着田へ",
+              "note": "徒歩約15分（日高市観光協会）",
+              "url": "https://hidakashikankou.gr.jp/manjushage/index.html"
+            },
+            {
+              "time": "10:30",
+              "spot": "巾着田曼珠沙華まつり",
+              "note": "9/21〜10/6、9:00〜16:30。入場料は1人500円（日高市公式）。管理事務所の開花速報では9/25時点で「見頃」",
+              "url": "https://kinchakuda.com/forecast/"
+            },
+            {
+              "time": "12:30",
+              "spot": "会場の「うまいもの市」でお昼",
+              "note": "日高市内の特産品の出店（観光協会の案内）。何が出ているかは当日のお楽しみ",
+              "url": "https://hidakashikankou.gr.jp/manjushage/index.html"
+            },
+            {
+              "time": "14:00",
+              "spot": "高麗駅から帰路",
+              "note": "帰りも八高線。車窓の田んぼと山を眺めながらゆっくり",
+              "url": ""
+            }
+          ],
+          "access": "電車: 橋本→高麗 約1時間半（八王子・東飯能で乗換）。高麗駅から巾着田まで徒歩約15分",
+          "budget": "二人で〜6,000円（入場料500円×2・うまいもの市・交通費。料金は調査日時点）",
+          "why": "やりたいことリストの未実施「おはないっぱいはえてるとこ」への、季節ぴったりの答えです。巾着田は川が巾着の形に曲がった土地に曼珠沙華が群生する場所で、咲くのは毎年この2週間ほど。埼玉の日高は初めての土地で、行きに乗る八高線は本数の少ないローカル線なので、もうひとつの未実施「ローカル線ぶらり旅」の小さな味見にもなります。赤一色の景色は写真さんぽ向き。電車で1時間半とやや遠いぶん、コースは花とお昼だけにしました",
+          "sources": [
+            "https://www.city.hidaka.lg.jp/event_info/33399.html",
+            "https://kinchakuda.com/forecast/",
+            "https://hidakashikankou.gr.jp/manjushage/index.html",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
+          "caveats": "開花は日ごとに進むので、出発前に巾着田管理事務所の開花速報（公式HP・Instagram）か電話案内（042-982-0268）で確認を。見頃の日曜は混雑が予想されます。雨上がりは足元がぬかるむかもしれません。乗換時刻と所要時間は調査日時点の目安（要確認）"
+        }
+      ],
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
+    },
     {
       "id": "2026-09-12",
       "weather": {
@@ -181,16 +352,45 @@
           "img": "motifs/weekly/2026-09-05-a.jpg",
           "day": "sun",
           "course": [
-            { "time": "09:10", "spot": "橋本 発", "note": "京王相模原線→新宿→有楽町線 豊洲→ゆりかもめで有明テニスの森へ。りんかい線 国際展示場からでも行けます", "url": "" },
-            { "time": "10:50", "spot": "Maker Faire Tokyo 2026（有明GYM-EX）", "note": "日曜は10:00〜17:00・入場は終了30分前まで。個人と小さなチームの作品が並ぶ、動かして触って話を聞く展示会", "url": "https://makezine.jp/event/mft2026/about/" },
-            { "time": "12:30", "spot": "会場で軽く昼ごはん、休憩", "note": "一周したら座る時間を取る。全部は見きれない前提でいいと思います", "url": "" },
-            { "time": "14:00", "spot": "気になったブースをもう一度", "note": "作った本人がいるので、二周目のほうが話が聞ける。撮影可否は各ブースの表示に従って", "url": "" },
-            { "time": "16:00", "spot": "撤収して帰路", "note": "混む前に。有明テニスの森駅までは一本道です", "url": "" }
+            {
+              "time": "09:10",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→有楽町線 豊洲→ゆりかもめで有明テニスの森へ。りんかい線 国際展示場からでも行けます",
+              "url": ""
+            },
+            {
+              "time": "10:50",
+              "spot": "Maker Faire Tokyo 2026（有明GYM-EX）",
+              "note": "日曜は10:00〜17:00・入場は終了30分前まで。個人と小さなチームの作品が並ぶ、動かして触って話を聞く展示会",
+              "url": "https://makezine.jp/event/mft2026/about/"
+            },
+            {
+              "time": "12:30",
+              "spot": "会場で軽く昼ごはん、休憩",
+              "note": "一周したら座る時間を取る。全部は見きれない前提でいいと思います",
+              "url": ""
+            },
+            {
+              "time": "14:00",
+              "spot": "気になったブースをもう一度",
+              "note": "作った本人がいるので、二周目のほうが話が聞ける。撮影可否は各ブースの表示に従って",
+              "url": ""
+            },
+            {
+              "time": "16:00",
+              "spot": "撤収して帰路",
+              "note": "混む前に。有明テニスの森駅までは一本道です",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→有明テニスの森 約1時間40分（新宿・豊洲乗換／ゆりかもめ「有明テニスの森」2A口から徒歩5分。りんかい線「国際展示場」A口からは徒歩17分）",
           "budget": "二人で〜9,000円（前売 大人1,400円×2＋交通費・会場での軽食。料金は調査日時点）",
           "why": "やりたいことリストで☑済みの「メーカーフェア東京」＝「またやってもいい」枠の再訪です。展示会・大型イベントは実績4件の確定級ジャンルで、日曜は降水確率100%——傘の出番がない完全屋内の会場に一日いられるのが今週いちばん強い。押上・調布・高円寺と続いた3週とも方向がまったく違う一本です",
-          "sources": ["https://makezine.jp/event/mft2026/about/", "https://www.bigsight.jp/organizer/buildings/gym-ex/access.html", "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"],
+          "sources": [
+            "https://makezine.jp/event/mft2026/about/",
+            "https://www.bigsight.jp/organizer/buildings/gym-ex/access.html",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
           "caveats": "料金・時間は調査日（9/4）時点。会場は例年の東京ビッグサイトではなく有明GYM-EXに変更されています。前売（大人1,400円）はイープラスがイベント当日まで、ローソンチケットは9/4までの販売。当日券は大人1,800円、日曜は15時以降の「夕方割」1,300円という手もあります。土曜（9/5）も12:00〜18:00で開催しています"
         },
         {
@@ -202,16 +402,45 @@
           "img": "motifs/weekly/2026-09-05-b.jpg",
           "day": "sat",
           "course": [
-            { "time": "10:30", "spot": "橋本 発", "note": "京王相模原線→都営新宿線の直通で神保町まで乗換なし・約58分。直通の本数は限られるので時刻表で確認を", "url": "" },
-            { "time": "11:40", "spot": "三省堂書店 神田神保町本店", "note": "2026年3月19日にリニューアルオープンした本店。10:00〜20:00・年中無休（元日を除く／公式サイト・調査日時点）。3階に喫茶「ちそう」があります", "url": "https://jinbocho.books-sanseido.co.jp/shop" },
-            { "time": "13:00", "spot": "すずらん通り〜靖国通りの古書店街", "note": "書店は約130店。店から店へは数十mずつなので、傘を出したりたたんだりが少なくて済みます", "url": "https://jimbou.info/" },
-            { "time": "15:00", "spot": "さぼうる（珈琲と洋酒の店）", "note": "神保町の老舗喫茶。日曜・祝日が定休なので、行けるのは土曜のこちらの案だけ", "url": "https://rurubu.jp/andmore/spot/80010466" },
-            { "time": "17:00", "spot": "神保町で早めの夕食をとって帰路", "note": "帰りも新宿線直通なら座って帰れます", "url": "" }
+            {
+              "time": "10:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線→都営新宿線の直通で神保町まで乗換なし・約58分。直通の本数は限られるので時刻表で確認を",
+              "url": ""
+            },
+            {
+              "time": "11:40",
+              "spot": "三省堂書店 神田神保町本店",
+              "note": "2026年3月19日にリニューアルオープンした本店。10:00〜20:00・年中無休（元日を除く／公式サイト・調査日時点）。3階に喫茶「ちそう」があります",
+              "url": "https://jinbocho.books-sanseido.co.jp/shop"
+            },
+            {
+              "time": "13:00",
+              "spot": "すずらん通り〜靖国通りの古書店街",
+              "note": "書店は約130店。店から店へは数十mずつなので、傘を出したりたたんだりが少なくて済みます",
+              "url": "https://jimbou.info/"
+            },
+            {
+              "time": "15:00",
+              "spot": "さぼうる（珈琲と洋酒の店）",
+              "note": "神保町の老舗喫茶。日曜・祝日が定休なので、行けるのは土曜のこちらの案だけ",
+              "url": "https://rurubu.jp/andmore/spot/80010466"
+            },
+            {
+              "time": "17:00",
+              "spot": "神保町で早めの夕食をとって帰路",
+              "note": "帰りも新宿線直通なら座って帰れます",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→神保町 約58分・乗換0回（京王相模原線と都営新宿線の直通運転）。この夏に出した行き先の中でいちばん乗り換えが楽です",
           "budget": "二人で〜7,000円（交通費・喫茶・食事。本代は別途）",
           "why": "核の「街ぶら × 食 × 癒し」を、雨の日用に組み替えた一本です。屋根が続くアーケードはないかわりに、次の店までが数十mしかない街なので、傘を持ったままでも歩けてしまう。しかも建て替えの間ずっと不在だった三省堂本店が今年3月に戻ってきたばかりで、街として見どころが増えた年です。神保町は記録上まだ未訪問。橋本から乗換なしで着く数少ない都心の街でもあります",
-          "sources": ["https://jimbou.info/", "https://jinbocho.books-sanseido.co.jp/shop", "https://rurubu.jp/andmore/spot/80010466"],
+          "sources": [
+            "https://jimbou.info/",
+            "https://jinbocho.books-sanseido.co.jp/shop",
+            "https://rurubu.jp/andmore/spot/80010466"
+          ],
           "caveats": "さぼうるの営業時間・定休日は媒体によって記載が分かれています（「月〜土 9:30〜23:00／日曜・祝日 定休」とする情報が多数・調査日時点）——公式の発信が確認できなかったので**要確認**です。人気店で待ちが出ることもあります。三省堂の営業時間は公式サイト記載のもの。なお同じ土曜の夜には地元・相模原納涼花火大会（19:00〜／高田橋上流）がありますが、この案からは時間的に間に合いません。花火は開催可否を当日9/5の10:00に公式発表する予定で、降水確率96%なので流れる可能性が高そうです"
         },
         {
@@ -223,19 +452,48 @@
           "img": "motifs/weekly/2026-09-05-c.jpg",
           "day": "sun",
           "course": [
-            { "time": "11:30", "spot": "橋本 発", "note": "京王相模原線→新宿→東京メトロ丸ノ内線で銀座へ 約1時間15分", "url": "" },
-            { "time": "13:00", "spot": "Ginza Sony Park（銀座5-3-1）", "note": "11:00〜19:00・入園無料。地下3階のダイニングから5階ルーフトップまで、上下に歩き回れる建物です。丸ノ内線・日比谷線 銀座駅から徒歩約2分", "url": "https://www.ginzasonypark.com/visit/" },
-            { "time": "15:00", "spot": "無印良品 銀座", "note": "銀座駅B4出口から徒歩3分。1階にベーカリーとコーヒー、6階に MUJI BOOKS と ATELIER MUJI。座って休める階があります", "url": "https://shop.muji.com/jp/ginza/" },
-            { "time": "17:00", "spot": "銀座の地下街で早めの夕食、帰路", "note": "地下鉄の駅から地上に出ずに済ませて帰る", "url": "" }
+            {
+              "time": "11:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→東京メトロ丸ノ内線で銀座へ 約1時間15分",
+              "url": ""
+            },
+            {
+              "time": "13:00",
+              "spot": "Ginza Sony Park（銀座5-3-1）",
+              "note": "11:00〜19:00・入園無料。地下3階のダイニングから5階ルーフトップまで、上下に歩き回れる建物です。丸ノ内線・日比谷線 銀座駅から徒歩約2分",
+              "url": "https://www.ginzasonypark.com/visit/"
+            },
+            {
+              "time": "15:00",
+              "spot": "無印良品 銀座",
+              "note": "銀座駅B4出口から徒歩3分。1階にベーカリーとコーヒー、6階に MUJI BOOKS と ATELIER MUJI。座って休める階があります",
+              "url": "https://shop.muji.com/jp/ginza/"
+            },
+            {
+              "time": "17:00",
+              "spot": "銀座の地下街で早めの夕食、帰路",
+              "note": "地下鉄の駅から地上に出ずに済ませて帰る",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→銀座 約1時間15分（新宿で丸ノ内線に乗換）。ソニーパークは銀座駅から徒歩約2分・JR有楽町駅からも徒歩約5分",
           "budget": "二人で〜6,000円（入園は無料。交通費と飲食のみ）",
           "why": "風の枠。やりたいことリストで未実施の「ソニーパークに行く」がそのまま叶います。何が新しいかというと、2025年1月に建て替えでオープンした今のソニーパークは当然まだ未経験で、そもそも「入園無料で、地下3階から屋上まで自由に上り下りできる建物」という施設の型自体が行ったことのない種類のもの。銀座も記録上未訪問エリアです。日曜は降水確率100%ですが、駅から徒歩2分、あとは建物の中を縦に歩くだけで半日が持ちます",
-          "sources": ["https://www.ginzasonypark.com/visit/", "https://www.ginzasonypark.com/activity/", "https://shop.muji.com/jp/ginza/"],
+          "sources": [
+            "https://www.ginzasonypark.com/visit/",
+            "https://www.ginzasonypark.com/activity/",
+            "https://shop.muji.com/jp/ginza/"
+          ],
           "caveats": "開園時間はアクティビティにより変更の場合あり（公式サイト記載・調査日9/4時点）。9/5・6に開催中の特別企画は公式のアクティビティ一覧で見つけられませんでした——次の企画「ディグる？」は9/11〜20なので、今週末は建物そのものとフロアを歩く形になります。5階のルーフトップは屋外なので、雨だと入れないかもしれません。無印良品 銀座の営業時間は確認できなかったので、公式の店舗ページでご確認を"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-08-29",
@@ -254,16 +512,47 @@
           "img": "motifs/weekly/2026-08-29-a.jpg",
           "day": "sat",
           "course": [
-            { "time": "11:00", "spot": "橋本 発", "note": "京王相模原線→新宿→都営新宿線・半蔵門線で押上（スカイツリー前）へ", "url": "" },
-            { "time": "12:20", "spot": "東京ソラマチ で昼ごはん", "note": "スカイツリータウンの商業施設。B3F〜5Fは10:00〜21:00、6F・7Fの飲食は11:00〜23:00（調査日時点）。予約なしで入れる店が多い", "url": "https://www.tokyo-solamachi.jp/" },
-            { "time": "13:30", "spot": "すみだ水族館（ソラマチ5・6F）", "note": "屋内型。ペンギンプールと江戸の金魚コーナー。「すみすい花火2026〜水と光で涼む夏。〜」は9/14まで開催中", "url": "https://www.sumida-aquarium.com/" },
-            { "time": "16:00", "spot": "ソラマチ商店街でおやつと買い物", "note": "1F・2Fの食のフロアでスイーツを一つ。雨に一度も当たらない", "url": "https://www.tokyo-solamachi.jp/" },
-            { "time": "18:00", "spot": "早めの夕食をとって帰路", "note": "混む前に。買ったおやつは翌日ぶんに", "url": "" }
+            {
+              "time": "11:00",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→都営新宿線・半蔵門線で押上（スカイツリー前）へ",
+              "url": ""
+            },
+            {
+              "time": "12:20",
+              "spot": "東京ソラマチ で昼ごはん",
+              "note": "スカイツリータウンの商業施設。B3F〜5Fは10:00〜21:00、6F・7Fの飲食は11:00〜23:00（調査日時点）。予約なしで入れる店が多い",
+              "url": "https://www.tokyo-solamachi.jp/"
+            },
+            {
+              "time": "13:30",
+              "spot": "すみだ水族館（ソラマチ5・6F）",
+              "note": "屋内型。ペンギンプールと江戸の金魚コーナー。「すみすい花火2026〜水と光で涼む夏。〜」は9/14まで開催中",
+              "url": "https://www.sumida-aquarium.com/"
+            },
+            {
+              "time": "16:00",
+              "spot": "ソラマチ商店街でおやつと買い物",
+              "note": "1F・2Fの食のフロアでスイーツを一つ。雨に一度も当たらない",
+              "url": "https://www.tokyo-solamachi.jp/"
+            },
+            {
+              "time": "18:00",
+              "spot": "早めの夕食をとって帰路",
+              "note": "混む前に。買ったおやつは翌日ぶんに",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→押上（スカイツリー前）約1時間20分（新宿乗換）。駅からソラマチへは地下・屋内でつながっています",
           "budget": "二人で〜12,000円（水族館 大人2,700円×2＋交通費・食事・おやつ。料金は調査日時点）",
           "why": "土曜は降水確率98%。傘を一度もささずに済む、駅直結で完結する場所に寄せました。水族館はやりたいことリストで☑済み＝「またやってもいい」枠で、核の「癒し」に当たります。そこにソラマチの食べ歩き・スイーツを重ねて、散策×食×癒しの形に。押上・スカイツリータウンは記録上まだ未訪問です",
-          "sources": ["https://www.sumida-aquarium.com/", "https://www.sumida-aquarium.com/about/access/", "https://www.sumida-aquarium.com/about/price/", "https://www.tokyo-solamachi.jp/", "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"],
+          "sources": [
+            "https://www.sumida-aquarium.com/",
+            "https://www.sumida-aquarium.com/about/access/",
+            "https://www.sumida-aquarium.com/about/price/",
+            "https://www.tokyo-solamachi.jp/",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
           "caveats": "料金・営業時間は調査日（8/28）時点。すみだ水族館は年中無休をうたっていますが営業時間が日によって変わるため、公式サイトのカレンダーで8/29の時間を確認してから出てください（夏期の土日は9:00〜21:00・最終入場20:00という案内が出ています）。前売り券を買っておくと窓口に並ばずに入れます"
         },
         {
@@ -275,16 +564,46 @@
           "img": "motifs/weekly/2026-08-29-b.jpg",
           "day": "sun",
           "course": [
-            { "time": "10:30", "spot": "橋本 発", "note": "京王相模原線で調布へ 約30分。調布駅北口から京王バス（深大寺行き）で15分ほど", "url": "" },
-            { "time": "11:30", "spot": "深大寺", "note": "約1300年、都内では浅草寺に次ぐ古刹。開門は6時〜17時（季節により変動・調査日時点）。門前の参道は水路と木立で涼しい", "url": "https://www.jindaiji.or.jp/" },
-            { "time": "12:15", "spot": "門前で深大寺そば", "note": "そば組合加盟の店が門前に十数軒。予約不要で入れる店ばかりなので、その日空いているところへ", "url": "https://jindaiji-soba.chofu.com/" },
-            { "time": "13:45", "spot": "神代植物公園（深大寺門から入園）", "note": "9:30〜17:00・入園は16:00まで、一般500円。大温室は雨が戻っても歩けます", "url": "https://www.tokyo-park.or.jp/park/jindai/index.html" },
-            { "time": "16:00", "spot": "参道の茶屋でひと休みして帰路", "note": "だんごやところてんの茶屋が数軒。無理せず切り上げる", "url": "" }
+            {
+              "time": "10:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線で調布へ 約30分。調布駅北口から京王バス（深大寺行き）で15分ほど",
+              "url": ""
+            },
+            {
+              "time": "11:30",
+              "spot": "深大寺",
+              "note": "約1300年、都内では浅草寺に次ぐ古刹。開門は6時〜17時（季節により変動・調査日時点）。門前の参道は水路と木立で涼しい",
+              "url": "https://www.jindaiji.or.jp/"
+            },
+            {
+              "time": "12:15",
+              "spot": "門前で深大寺そば",
+              "note": "そば組合加盟の店が門前に十数軒。予約不要で入れる店ばかりなので、その日空いているところへ",
+              "url": "https://jindaiji-soba.chofu.com/"
+            },
+            {
+              "time": "13:45",
+              "spot": "神代植物公園（深大寺門から入園）",
+              "note": "9:30〜17:00・入園は16:00まで、一般500円。大温室は雨が戻っても歩けます",
+              "url": "https://www.tokyo-park.or.jp/park/jindai/index.html"
+            },
+            {
+              "time": "16:00",
+              "spot": "参道の茶屋でひと休みして帰路",
+              "note": "だんごやところてんの茶屋が数軒。無理せず切り上げる",
+              "url": ""
+            }
           ],
           "access": "電車＋バス: 橋本→調布 約30分（京王相模原線・乗換なし）＋調布駅からバス15分。この夏いちばん近い行き先です",
           "budget": "二人で〜6,000円（入園500円×2＋そば＋交通費。料金は調査日時点）",
           "why": "日曜は降水確率24%・27°で、この週末で唯一まともに外を歩ける半日。核の「散策×食×癒し」直球で、寺の参道さんぽ→そば→植物園と、歩く・食べる・緑を見るが一本につながります。橋本から乗換なし30分という近さも今週向き。調布・深大寺は記録上未訪問で、水路と木立の参道は写真さんぽの被写体としても撮りごたえがあります",
-          "sources": ["https://www.jindaiji.or.jp/", "https://jindaiji-soba.chofu.com/", "https://www.tokyo-park.or.jp/park/jindai/index.html", "https://csa.gr.jp/contents/24248"],
+          "sources": [
+            "https://www.jindaiji.or.jp/",
+            "https://jindaiji-soba.chofu.com/",
+            "https://www.tokyo-park.or.jp/park/jindai/index.html",
+            "https://csa.gr.jp/contents/24248"
+          ],
           "caveats": "開園時間・入園料は調査日（8/28）時点。神代植物公園は月曜休園（日曜は開いています）。8月末はダリア園がまだ見ごろ前（9月下旬〜）なので、花目当てというより大温室と園内散策として行くのがよさそうです——当日の見ごろは公式の開花情報でご確認を。バスの時刻は京王バスの時刻表で確認してください"
         },
         {
@@ -296,20 +615,53 @@
           "img": "motifs/weekly/2026-08-29-c.jpg",
           "day": "sun",
           "course": [
-            { "time": "15:30", "spot": "橋本 発", "note": "京王相模原線→明大前→新宿→JR中央線 高円寺 約1時間", "url": "" },
-            { "time": "16:30", "spot": "高円寺の商店街をぶらり", "note": "純情商店街・パル商店街など。踊りが始まる前に腹ごしらえと下見を", "url": "" },
-            { "time": "17:00", "spot": "東京高円寺阿波おどり（第67回）", "note": "17:00〜20:00。駅周辺と高南通りに8つの演舞場。無料で見られる沿道が中心", "url": "https://www.koenji-awaodori.com/about/about01.html" },
-            { "time": "19:30", "spot": "屋台と商店街で食べ歩き", "note": "演舞場をひとつ移動しながら。人の流れに逆らわず", "url": "" },
-            { "time": "20:30", "spot": "カフェかファミレスで締め", "note": "「夜遊んだあとにファミレスで締めくくる」の型で。混雑が引くのを待つ意味でも", "url": "" }
+            {
+              "time": "15:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線→明大前→新宿→JR中央線 高円寺 約1時間",
+              "url": ""
+            },
+            {
+              "time": "16:30",
+              "spot": "高円寺の商店街をぶらり",
+              "note": "純情商店街・パル商店街など。踊りが始まる前に腹ごしらえと下見を",
+              "url": ""
+            },
+            {
+              "time": "17:00",
+              "spot": "東京高円寺阿波おどり（第67回）",
+              "note": "17:00〜20:00。駅周辺と高南通りに8つの演舞場。無料で見られる沿道が中心",
+              "url": "https://www.koenji-awaodori.com/about/about01.html"
+            },
+            {
+              "time": "19:30",
+              "spot": "屋台と商店街で食べ歩き",
+              "note": "演舞場をひとつ移動しながら。人の流れに逆らわず",
+              "url": ""
+            },
+            {
+              "time": "20:30",
+              "spot": "カフェかファミレスで締め",
+              "note": "「夜遊んだあとにファミレスで締めくくる」の型で。混雑が引くのを待つ意味でも",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→高円寺 約1時間（京王線→新宿→JR中央線。JR横浜線→八王子→中央線でも同程度）。演舞場は駅から徒歩5分圏",
           "budget": "二人で〜6,000円（交通費と食事のみ・沿道の観覧は無料）",
           "why": "風の枠。年に一度、この週末だけの一期一会です。何が新しいかというと、本場・徳島に次ぐ規模の阿波おどりを、舞台ではなく商店街の路上で至近距離から見る体験が未経験なこと。高円寺も記録上未訪問エリアで、やりたいことリストの「よその地域のでかい祭りにいく」に近い一杯でもあります。落語・漫才・オーケストラが全部☑という「舞台系は好き」の仮説を確かめる意味もあり、日曜は降水確率24%で外に出られる——雨で流れた祭りの多い夏の、最後の一本です",
-          "sources": ["https://www.koenji-awaodori.com/", "https://www.koenji-awaodori.com/about/about01.html"],
+          "sources": [
+            "https://www.koenji-awaodori.com/",
+            "https://www.koenji-awaodori.com/about/about01.html"
+          ],
           "caveats": "8/29(土)・30(日)の二日間開催ですが、土曜は降水確率98%なので日曜をおすすめします。前年の動員102万人という規模で大混雑必至——早めに場所を決めて動かないのが正解です。開催可否・演舞場ごとの進行・特別観覧席の有無は当日公式サイトで確認を。日曜昼の神代植物公園案（B）から高円寺へ移るのも移動35分ほどで可能ですが、それをやると詰め込みになります"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-08-22",
@@ -328,16 +680,46 @@
           "img": "motifs/weekly/2026-08-22-a.jpg",
           "day": "sat",
           "course": [
-            { "time": "11:00", "spot": "橋本 発", "note": "京王相模原線→明大前→井の頭線で吉祥寺へ", "url": "" },
-            { "time": "12:00", "spot": "吉祥寺サンロード商店街", "note": "駅北口から約300m続く全蓋アーケード。屋根の下で昼ごはんと食べ歩きを1〜2品", "url": "https://sun-road.or.jp/" },
-            { "time": "13:30", "spot": "ベッカライカフェ リンデ 吉祥寺本店", "note": "サンロード内のドイツパン店。1階でパンを選んで、2階のカフェで一息（10:00〜20:00・無休、イートインは19:30まで／調査日時点）", "url": "https://www.lindtraud.com/store/" },
-            { "time": "15:30", "spot": "キラリナ京王吉祥寺", "note": "井の頭線の駅直結。10:00〜21:00。雨に当たらずスイーツと買い物", "url": "https://www.kirarinakeiokichijoji.jp/" },
-            { "time": "17:00", "spot": "駅前で早めの夕食して帰路", "note": "予約不要の店で。買ったパンは翌朝ぶんに", "url": "" }
+            {
+              "time": "11:00",
+              "spot": "橋本 発",
+              "note": "京王相模原線→明大前→井の頭線で吉祥寺へ",
+              "url": ""
+            },
+            {
+              "time": "12:00",
+              "spot": "吉祥寺サンロード商店街",
+              "note": "駅北口から約300m続く全蓋アーケード。屋根の下で昼ごはんと食べ歩きを1〜2品",
+              "url": "https://sun-road.or.jp/"
+            },
+            {
+              "time": "13:30",
+              "spot": "ベッカライカフェ リンデ 吉祥寺本店",
+              "note": "サンロード内のドイツパン店。1階でパンを選んで、2階のカフェで一息（10:00〜20:00・無休、イートインは19:30まで／調査日時点）",
+              "url": "https://www.lindtraud.com/store/"
+            },
+            {
+              "time": "15:30",
+              "spot": "キラリナ京王吉祥寺",
+              "note": "井の頭線の駅直結。10:00〜21:00。雨に当たらずスイーツと買い物",
+              "url": "https://www.kirarinakeiokichijoji.jp/"
+            },
+            {
+              "time": "17:00",
+              "spot": "駅前で早めの夕食して帰路",
+              "note": "予約不要の店で。買ったパンは翌朝ぶんに",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→吉祥寺 約55分（京王相模原線→明大前→井の頭線。JR横浜線→八王子→中央線でも同程度）",
           "budget": "二人で〜7,000円（交通費・昼食・パンとおやつ込みの目安）",
           "why": "確定した好みの核「パン屋・スイーツ巡り × 商店街ぶら」直球。土曜は降水確率100%なので、全蓋アーケードのサンロードと駅直結ビルだけで動ける吉祥寺を選んだ（傘をたたんだまま半日いられる数少ない街ぶら先）。吉祥寺は記録上まだ未訪問",
-          "sources": ["https://sun-road.or.jp/", "https://www.lindtraud.com/store/", "https://www.kirarinakeiokichijoji.jp/", "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"],
+          "sources": [
+            "https://sun-road.or.jp/",
+            "https://www.lindtraud.com/store/",
+            "https://www.kirarinakeiokichijoji.jp/",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
           "caveats": "各店の営業時間は調査日（8/21）時点。サンロードの名物「吉祥寺さとう」（丸メンチカツ）は改装休業の情報があり営業状況を確認できていない——要確認。アーケードは屋根つきですが、横殴りの雨だと足元は濡れます"
         },
         {
@@ -349,16 +731,44 @@
           "img": "motifs/weekly/2026-08-22-b.jpg",
           "day": "sun",
           "course": [
-            { "time": "12:00", "spot": "橋本 発", "note": "京王相模原線→新宿→丸ノ内線 後楽園へ", "url": "" },
-            { "time": "13:15", "spot": "スパ ラクーア（東京ドームシティ LaQua 5〜9F・フロント6F）", "note": "11:00〜翌9:00営業。地下1,700mから湧く天然温泉と露天風呂", "url": "https://www.laqua.jp/spa/" },
-            { "time": "15:00", "spot": "ヒーリング バーデ（岩盤浴ゾーン）", "note": "別料金1,100円・18歳以上（調査日時点）。低温の部屋でだらだら過ごす枠", "url": "https://www.laqua.jp/spa/information/" },
-            { "time": "17:30", "spot": "館内の食事処で夕食", "note": "館内着のまま。予約不要", "url": "" },
-            { "time": "19:30", "spot": "帰路", "note": "後楽園駅まで屋根伝い。19時以降入館ならナイト料金という手も", "url": "" }
+            {
+              "time": "12:00",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→丸ノ内線 後楽園へ",
+              "url": ""
+            },
+            {
+              "time": "13:15",
+              "spot": "スパ ラクーア（東京ドームシティ LaQua 5〜9F・フロント6F）",
+              "note": "11:00〜翌9:00営業。地下1,700mから湧く天然温泉と露天風呂",
+              "url": "https://www.laqua.jp/spa/"
+            },
+            {
+              "time": "15:00",
+              "spot": "ヒーリング バーデ（岩盤浴ゾーン）",
+              "note": "別料金1,100円・18歳以上（調査日時点）。低温の部屋でだらだら過ごす枠",
+              "url": "https://www.laqua.jp/spa/information/"
+            },
+            {
+              "time": "17:30",
+              "spot": "館内の食事処で夕食",
+              "note": "館内着のまま。予約不要",
+              "url": ""
+            },
+            {
+              "time": "19:30",
+              "spot": "帰路",
+              "note": "後楽園駅まで屋根伝い。19時以降入館ならナイト料金という手も",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→後楽園 約1時間15分（新宿で丸ノ内線に乗換）。JR水道橋駅からも徒歩圏",
           "budget": "二人で〜12,000円（入館 大人3,500円〜×2＋岩盤浴1,100円×2＋食事。入館料は日によって変動・調査日時点）",
           "why": "核の「癒し」直球。日曜も降水確率100%なので、駅から屋根伝いで着いて、あとは建物から一歩も出ずに済む温泉に寄せた。タオルと館内着が入館料に含まれるので手ぶらで行けて、雨の日の荷物が増えない",
-          "sources": ["https://www.laqua.jp/spa/", "https://www.laqua.jp/spa/information/"],
+          "sources": [
+            "https://www.laqua.jp/spa/",
+            "https://www.laqua.jp/spa/information/"
+          ],
           "caveats": "営業時間・料金は調査日（8/21）時点。入館料は日によって変わるため公式の日別料金表で確認を。ヒーリング バーデは18歳以上・別料金。混雑時は入館制限の可能性あり。館内は撮影禁止エリアが多いのでカメラは出番なし"
         },
         {
@@ -370,19 +780,47 @@
           "img": "motifs/weekly/2026-08-22-c.jpg",
           "day": "sat",
           "course": [
-            { "time": "12:30", "spot": "橋本 発", "note": "京王相模原線→新宿→都営大江戸線 蔵前へ", "url": "" },
-            { "time": "14:00", "spot": "kako（家香）OSAJI 蔵前店", "note": "調香ワークショップ。調香60分＋アイテム製作30分。回は11:00/13:30/15:30/17:00、1回最大4人（調査日時点）", "url": "https://osaji.net/pages/kako" },
-            { "time": "16:00", "spot": "ダンデライオン・チョコレート ファクトリー＆カフェ蔵前", "note": "徒歩すぐ。カカオ豆から作る工房併設のカフェで一息", "url": "https://dandelionchocolate.jp/pages/factory-cafe-kuramae" },
-            { "time": "17:30", "spot": "蔵前の店をのぞきつつ夕食して帰路", "note": "ものづくりの店が集まる一帯。無理せず駅近で切り上げる", "url": "" }
+            {
+              "time": "12:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→都営大江戸線 蔵前へ",
+              "url": ""
+            },
+            {
+              "time": "14:00",
+              "spot": "kako（家香）OSAJI 蔵前店",
+              "note": "調香ワークショップ。調香60分＋アイテム製作30分。回は11:00/13:30/15:30/17:00、1回最大4人（調査日時点）",
+              "url": "https://osaji.net/pages/kako"
+            },
+            {
+              "time": "16:00",
+              "spot": "ダンデライオン・チョコレート ファクトリー＆カフェ蔵前",
+              "note": "徒歩すぐ。カカオ豆から作る工房併設のカフェで一息",
+              "url": "https://dandelionchocolate.jp/pages/factory-cafe-kuramae"
+            },
+            {
+              "time": "17:30",
+              "spot": "蔵前の店をのぞきつつ夕食して帰路",
+              "note": "ものづくりの店が集まる一帯。無理せず駅近で切り上げる",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→蔵前 約1時間20分（新宿で都営大江戸線に乗換）。蔵前駅から徒歩5〜7分",
           "budget": "二人で〜16,000円（ワークショップ 5,500円〜×2＋カフェ＋交通。調査日時点）",
           "why": "風の枠。wishlistで未実施の「香水をつくる」がそのまま叶う。何が新しいかというと、実績8件超の主力ジャンル「体験もの」の中でも香り系はお香作り以来で、調香（100種近い香料を自分で配合する）は未経験。蔵前も記録上未訪問のエリア。土日とも雨100%という週末に、屋内で60分座ってできる遊びは強い。締めはチョコレート工房のカフェで、核の「食×癒し」に戻ってこられる",
-          "sources": ["https://osaji.net/pages/kako", "https://dandelionchocolate.jp/pages/factory-cafe-kuramae"],
+          "sources": [
+            "https://osaji.net/pages/kako",
+            "https://dandelionchocolate.jp/pages/factory-cafe-kuramae"
+          ],
           "caveats": "予約制です（公式サイトから。空きがあれば当日案内も可能と公式に記載・調査日時点）。1回最大4人の少人数制なので土曜は埋まりやすく、行くなら早めの予約を。定休は月曜（祝日の場合は翌火曜）。料金はコースにより5,500円〜。ダンデライオン蔵前の営業時間は媒体により記載が分かれるため、公式サイトで当日の時間を確認してから向かってください"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-08-15",
@@ -401,15 +839,39 @@
           "img": "motifs/weekly/2026-08-15-a.jpg",
           "day": "sat",
           "course": [
-            { "time": "11:30", "spot": "橋本 発", "note": "JR横浜線→八王子→中央線で東京駅へ。乗り換えも屋根の下", "url": "" },
-            { "time": "12:40", "spot": "グランスタ東京（東京駅 地下1階）", "note": "駅弁・惣菜・ベーカリー・スイーツが集まる駅ナカ。まずは昼ごはんと食べ歩きを1〜2品", "url": "https://www.gransta.jp/" },
-            { "time": "14:30", "spot": "KITTE丸の内", "note": "東京駅丸の内地下道から地上に出ずに行ける。旧局舎の吹き抜けと4階の屋内展望テラスで一息", "url": "https://marunouchi.jp-kitte.jp/" },
-            { "time": "16:00", "spot": "大丸東京・グランスタ八重北でおみやげ", "note": "パンとスイーツを買って、締めに早めの夕食。混雑を避けて帰路", "url": "https://www.gransta.jp/" }
+            {
+              "time": "11:30",
+              "spot": "橋本 発",
+              "note": "JR横浜線→八王子→中央線で東京駅へ。乗り換えも屋根の下",
+              "url": ""
+            },
+            {
+              "time": "12:40",
+              "spot": "グランスタ東京（東京駅 地下1階）",
+              "note": "駅弁・惣菜・ベーカリー・スイーツが集まる駅ナカ。まずは昼ごはんと食べ歩きを1〜2品",
+              "url": "https://www.gransta.jp/"
+            },
+            {
+              "time": "14:30",
+              "spot": "KITTE丸の内",
+              "note": "東京駅丸の内地下道から地上に出ずに行ける。旧局舎の吹き抜けと4階の屋内展望テラスで一息",
+              "url": "https://marunouchi.jp-kitte.jp/"
+            },
+            {
+              "time": "16:00",
+              "spot": "大丸東京・グランスタ八重北でおみやげ",
+              "note": "パンとスイーツを買って、締めに早めの夕食。混雑を避けて帰路",
+              "url": "https://www.gransta.jp/"
+            }
           ],
           "access": "電車: 橋本→東京 約1時間10分（JR横浜線・中央線経由）",
           "budget": "二人で〜8,000円（交通費・食べ歩き・おみやげ込みの目安）",
           "why": "確定した好みの核「食べ歩き・パン屋・スイーツ巡り」直球。土曜は降水確率90%なので、雨に一度も当たらない屋内完結のコースに寄せた。歩数も少なく、途中で切り上げても成立する",
-          "sources": ["https://www.gransta.jp/", "https://marunouchi.jp-kitte.jp/", "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"],
+          "sources": [
+            "https://www.gransta.jp/",
+            "https://marunouchi.jp-kitte.jp/",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
           "caveats": "営業時間・出店店舗は調査日（8/14）時点。お盆期間は時間変更の可能性があるので公式で確認を。グランスタ東京の地下1階は改札内エリアが中心（下車せず立ち寄る場合は入場券が必要）。丸の内側のグランスタ丸の内・KITTEは改札外"
         },
         {
@@ -421,15 +883,38 @@
           "img": "motifs/weekly/2026-08-15-b.jpg",
           "day": "sun",
           "course": [
-            { "time": "12:00", "spot": "橋本 発", "note": "京王相模原線→新宿→山手線、またはJR経由で恵比寿へ", "url": "" },
-            { "time": "13:10", "spot": "東京都写真美術館（恵比寿ガーデンプレイス内）", "note": "「Nikon Small World / NIKON JOICO AWARD展」（7/25〜8/23）ほか、3階「明日の食卓」・2階の映像作家展も同時開催", "url": "https://topmuseum.jp/" },
-            { "time": "15:30", "spot": "恵比寿ガーデンプレイス センタープラザ", "note": "ガラス屋根の広場まわりをぶらり。撮れる景色が多いのでカメラ・チェキを持って", "url": "https://gardenplace.jp/" },
-            { "time": "16:30", "spot": "カフェでスイーツ、恵比寿駅前で早めの夕食", "note": "駅とガーデンプレイスは動く歩道（スカイウォーク）で屋根つき5分", "url": "https://gardenplace.jp/" }
+            {
+              "time": "12:00",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→山手線、またはJR経由で恵比寿へ",
+              "url": ""
+            },
+            {
+              "time": "13:10",
+              "spot": "東京都写真美術館（恵比寿ガーデンプレイス内）",
+              "note": "「Nikon Small World / NIKON JOICO AWARD展」（7/25〜8/23）ほか、3階「明日の食卓」・2階の映像作家展も同時開催",
+              "url": "https://topmuseum.jp/"
+            },
+            {
+              "time": "15:30",
+              "spot": "恵比寿ガーデンプレイス センタープラザ",
+              "note": "ガラス屋根の広場まわりをぶらり。撮れる景色が多いのでカメラ・チェキを持って",
+              "url": "https://gardenplace.jp/"
+            },
+            {
+              "time": "16:30",
+              "spot": "カフェでスイーツ、恵比寿駅前で早めの夕食",
+              "note": "駅とガーデンプレイスは動く歩道（スカイウォーク）で屋根つき5分",
+              "url": "https://gardenplace.jp/"
+            }
           ],
           "access": "電車: 橋本→恵比寿 約1時間5分（京王線→新宿→山手線 ほか）",
           "budget": "二人で〜7,000円（展覧会は展示ごとに料金設定）",
           "why": "「写真さんぽ」＝撮り歩き・写ルンです/チェキ実績の確定好み直球。美術館は単独目的地にせず、ガーデンプレイス散策＋甘いものと組んで散策×食の形にした。日曜も降水確率65%なので、駅から屋根伝いで行ける立地を選んでいる。Nikon Small World展は8/23までで、見られる週末はあと2回",
-          "sources": ["https://topmuseum.jp/", "https://gardenplace.jp/"],
+          "sources": [
+            "https://topmuseum.jp/",
+            "https://gardenplace.jp/"
+          ],
           "caveats": "写真美術館は10:00〜18:00（木・金は20:00まで）・月曜休館が基本。会期・開館時間・料金は調査日（8/14）時点なので、行く前に公式で確認を"
         },
         {
@@ -441,20 +926,54 @@
           "img": "motifs/weekly/2026-08-15-c.jpg",
           "day": "sun",
           "course": [
-            { "time": "08:00", "spot": "橋本 発", "note": "連合渡御は朝7:30スタート。全部は見られないので、午前の見やすい時間帯に合流する", "url": "" },
-            { "time": "09:30", "spot": "富岡八幡宮（門前仲町）", "note": "まずお参り。境内も祭り一色", "url": "https://fukagawa-web.com/wpfuka02/2026/07/21/2026hachiman-maturi-290/" },
-            { "time": "10:00", "spot": "永代通り沿いで神輿連合渡御を見る", "note": "沿道から清めの水がかかる「水かけ祭り」。濡れる前提の服装とタオル、カメラは防水対策を", "url": "https://www.baynet.ne.jp/fukagawamatsuri/" },
-            { "time": "13:00", "spot": "門前仲町で遅めの昼（深川めしなど）", "note": "祭りの熱気のまま商店街をぶらり。混むので待つ前提で", "url": "" },
-            { "time": "15:00", "spot": "清澄白河まで歩いてカフェで一息", "note": "門前仲町から徒歩圏。人ごみを外して座って帰る", "url": "" }
+            {
+              "time": "08:00",
+              "spot": "橋本 発",
+              "note": "連合渡御は朝7:30スタート。全部は見られないので、午前の見やすい時間帯に合流する",
+              "url": ""
+            },
+            {
+              "time": "09:30",
+              "spot": "富岡八幡宮（門前仲町）",
+              "note": "まずお参り。境内も祭り一色",
+              "url": "https://fukagawa-web.com/wpfuka02/2026/07/21/2026hachiman-maturi-290/"
+            },
+            {
+              "time": "10:00",
+              "spot": "永代通り沿いで神輿連合渡御を見る",
+              "note": "沿道から清めの水がかかる「水かけ祭り」。濡れる前提の服装とタオル、カメラは防水対策を",
+              "url": "https://www.baynet.ne.jp/fukagawamatsuri/"
+            },
+            {
+              "time": "13:00",
+              "spot": "門前仲町で遅めの昼（深川めしなど）",
+              "note": "祭りの熱気のまま商店街をぶらり。混むので待つ前提で",
+              "url": ""
+            },
+            {
+              "time": "15:00",
+              "spot": "清澄白河まで歩いてカフェで一息",
+              "note": "門前仲町から徒歩圏。人ごみを外して座って帰る",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→門前仲町 約1時間20分（京王線→新宿→都営大江戸線）",
           "budget": "二人で〜6,000円（交通費と食事のみ・見物は無料）",
           "why": "風の枠。深川八幡祭りの神輿連合渡御は三年に一度の本祭りで、次は2029年——この週末しかない一期一会。深川・門前仲町は未訪問エリアで、wishlistの「よその地域のでかい祭りにいく」にも近い。さらに、雨予報の週末に屋外の季節ものを出す弱点に対して、この祭りは水をかけられるのが本題なので雨でも成立する（濡れることが前提の唯一の外遊び）",
-          "sources": ["https://fukagawa-web.com/wpfuka02/2026/07/21/2026hachiman-maturi-290/", "https://www.baynet.ne.jp/fukagawamatsuri/", "https://www.gotokyo.org/jp/spot/ev093/index.html"],
+          "sources": [
+            "https://fukagawa-web.com/wpfuka02/2026/07/21/2026hachiman-maturi-290/",
+            "https://www.baynet.ne.jp/fukagawamatsuri/",
+            "https://www.gotokyo.org/jp/spot/ev093/index.html"
+          ],
           "caveats": "神輿連合渡御は8/16(日)7:30開始（タウン誌深川WEB・ケーブルテレビ特設サイトで確認、調査日8/14時点）。渡御ルート・通過時刻の詳細は当日の公式案内で確認を。大混雑必至、水を浴びるので着替え・防水必須。荒天時の運営変更もありうる"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-08-08",
@@ -473,10 +992,30 @@
           "img": "motifs/weekly/2026-08-08-a.jpg",
           "day": "sun",
           "course": [
-            { "time": "15:00", "spot": "橋本駅 発", "note": "無料送迎バスあり（八王子みなみ野・八王子・北野からも運行）。運行時刻は公式で確認", "url": "https://hachioji.ryusenjinoyu.com/" },
-            { "time": "15:30", "spot": "竜泉寺の湯 八王子みなみ野店", "note": "16種の風呂＋7種の岩盤浴。雨のピーク時間帯を全部屋内で", "url": "https://hachioji.ryusenjinoyu.com/" },
-            { "time": "18:30", "spot": "館内の食事処で夕食", "note": "湯上がりごはん。予約不要", "url": "" },
-            { "time": "20:30", "spot": "送迎バスで橋本へ", "note": "深夜3時まで営業なので延長も自由", "url": "" }
+            {
+              "time": "15:00",
+              "spot": "橋本駅 発",
+              "note": "無料送迎バスあり（八王子みなみ野・八王子・北野からも運行）。運行時刻は公式で確認",
+              "url": "https://hachioji.ryusenjinoyu.com/"
+            },
+            {
+              "time": "15:30",
+              "spot": "竜泉寺の湯 八王子みなみ野店",
+              "note": "16種の風呂＋7種の岩盤浴。雨のピーク時間帯を全部屋内で",
+              "url": "https://hachioji.ryusenjinoyu.com/"
+            },
+            {
+              "time": "18:30",
+              "spot": "館内の食事処で夕食",
+              "note": "湯上がりごはん。予約不要",
+              "url": ""
+            },
+            {
+              "time": "20:30",
+              "spot": "送迎バスで橋本へ",
+              "note": "深夜3時まで営業なので延長も自由",
+              "url": ""
+            }
           ],
           "access": "無料送迎バス: 橋本駅発着（時刻は公式サイトで当日確認）。電車なら JR横浜線 片倉駅から徒歩15分",
           "budget": "二人で〜6,000円（入浴 土日祝1,100円×2＋岩盤浴＋食事。調査日時点）",
@@ -495,11 +1034,36 @@
           "img": "motifs/weekly/2026-08-08-b.jpg",
           "day": "sun",
           "course": [
-            { "time": "16:30", "spot": "橋本 発", "note": "JR横浜線→桜木町 約55分", "url": "" },
-            { "time": "17:45", "spot": "赤レンガ倉庫あたりをぶらり", "note": "雨が残っていたら館内へ退避しつつ港さんぽ", "url": "https://www.yokohama-akarenga.jp/" },
-            { "time": "19:00", "spot": "新港ふ頭の見える水辺で場所どり", "note": "赤レンガパーク・ハンマーヘッド周辺など", "url": "" },
-            { "time": "19:30", "spot": "横浜ナイトフラワーズ（花火150発・5分間）", "note": "19:30〜19:35。短いぶん気軽、写真さんぽ枠", "url": "https://www.welcome.city.yokohama.jp/eventinfo/ev_detail.php?bid=yw11005" },
-            { "time": "20:00", "spot": "中華街で夕食", "note": "予約不要の店が多数。夜ごはんまで外OKのお二人向け", "url": "" }
+            {
+              "time": "16:30",
+              "spot": "橋本 発",
+              "note": "JR横浜線→桜木町 約55分",
+              "url": ""
+            },
+            {
+              "time": "17:45",
+              "spot": "赤レンガ倉庫あたりをぶらり",
+              "note": "雨が残っていたら館内へ退避しつつ港さんぽ",
+              "url": "https://www.yokohama-akarenga.jp/"
+            },
+            {
+              "time": "19:00",
+              "spot": "新港ふ頭の見える水辺で場所どり",
+              "note": "赤レンガパーク・ハンマーヘッド周辺など",
+              "url": ""
+            },
+            {
+              "time": "19:30",
+              "spot": "横浜ナイトフラワーズ（花火150発・5分間）",
+              "note": "19:30〜19:35。短いぶん気軽、写真さんぽ枠",
+              "url": "https://www.welcome.city.yokohama.jp/eventinfo/ev_detail.php?bid=yw11005"
+            },
+            {
+              "time": "20:00",
+              "spot": "中華街で夕食",
+              "note": "予約不要の店が多数。夜ごはんまで外OKのお二人向け",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→桜木町 約55分（JR横浜線直通）",
           "budget": "二人で〜8,000円（交通＋夕食。花火の観覧は無料）",
@@ -519,11 +1083,36 @@
           "img": "motifs/weekly/2026-08-08-c.jpg",
           "day": "sun",
           "course": [
-            { "time": "16:30", "spot": "橋本 発", "note": "京王相模原線で新宿へ 約50分", "url": "" },
-            { "time": "17:30", "spot": "新宿駅周辺で早めの夕食", "note": "雨のピークは屋内で。デパ地下や駅ビルでも", "url": "" },
-            { "time": "19:00", "spot": "歌舞伎町〜ゴジラロードのネオン", "note": "日没後が本番。雨上がりなら路面反射も撮れる", "url": "" },
-            { "time": "20:00", "spot": "思い出横丁の提灯とネオンの路地", "note": "約80店の飲屋街。撮り歩きのハイライト", "url": "https://shinjuku-omoide.com/" },
-            { "time": "21:00", "spot": "カフェかファミレスで写真を見返す", "note": "夜遊びのあとの締め文化に合わせて", "url": "" }
+            {
+              "time": "16:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線で新宿へ 約50分",
+              "url": ""
+            },
+            {
+              "time": "17:30",
+              "spot": "新宿駅周辺で早めの夕食",
+              "note": "雨のピークは屋内で。デパ地下や駅ビルでも",
+              "url": ""
+            },
+            {
+              "time": "19:00",
+              "spot": "歌舞伎町〜ゴジラロードのネオン",
+              "note": "日没後が本番。雨上がりなら路面反射も撮れる",
+              "url": ""
+            },
+            {
+              "time": "20:00",
+              "spot": "思い出横丁の提灯とネオンの路地",
+              "note": "約80店の飲屋街。撮り歩きのハイライト",
+              "url": "https://shinjuku-omoide.com/"
+            },
+            {
+              "time": "21:00",
+              "spot": "カフェかファミレスで写真を見返す",
+              "note": "夜遊びのあとの締め文化に合わせて",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→新宿 約50分（京王相模原線1本）",
           "budget": "二人で〜7,000円（夕食＋お茶）",
@@ -534,7 +1123,12 @@
           "caveats": "思い出横丁の各店の営業時間・定休日は店ごとに異なる（公式サイトも「各店へ確認を」との注記）。狭い路地なので撮影は通行の妨げにならない範囲で。"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-08-01",
@@ -552,10 +1146,30 @@
           "motif": "kouen",
           "day": "sat",
           "course": [
-            { "time": "10:00", "spot": "橋本 発", "note": "JR横浜線→長津田→田園都市線 南町田グランベリーパーク 約40分", "url": "" },
-            { "time": "10:45", "spot": "スヌーピーミュージアム", "note": "当日券あり（一般2,200円・調査日時点）。土日は19時まで", "url": "https://snoopymuseum.tokyo/" },
-            { "time": "12:30", "spot": "パーク内でランチ", "note": "予約不要の店が多数。屋内通路中心に移動", "url": "" },
-            { "time": "14:30", "spot": "ミュージアムショップとパークをぶらり", "note": "暑いので無理せず屋内中心で", "url": "" }
+            {
+              "time": "10:00",
+              "spot": "橋本 発",
+              "note": "JR横浜線→長津田→田園都市線 南町田グランベリーパーク 約40分",
+              "url": ""
+            },
+            {
+              "time": "10:45",
+              "spot": "スヌーピーミュージアム",
+              "note": "当日券あり（一般2,200円・調査日時点）。土日は19時まで",
+              "url": "https://snoopymuseum.tokyo/"
+            },
+            {
+              "time": "12:30",
+              "spot": "パーク内でランチ",
+              "note": "予約不要の店が多数。屋内通路中心に移動",
+              "url": ""
+            },
+            {
+              "time": "14:30",
+              "spot": "ミュージアムショップとパークをぶらり",
+              "note": "暑いので無理せず屋内中心で",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→南町田グランベリーパーク 約40分（長津田乗換）",
           "budget": "二人で〜10,000円（入館2,200円×2＋ランチ。調査日時点）",
@@ -573,9 +1187,24 @@
           "motif": "machi",
           "day": "sun",
           "course": [
-            { "time": "15:00", "spot": "アリオ橋本", "note": "橋本駅から徒歩すぐ。雨でも酷暑でも移動最小", "url": "" },
-            { "time": "15:30", "spot": "MOVIX橋本で映画", "note": "上映作品・時間は公式スケジュールで", "url": "https://www.smt-cinema.com/site/hashimoto/" },
-            { "time": "18:00", "spot": "アリオ内で夕食", "note": "予約不要。食後にぶらぶらも", "url": "" }
+            {
+              "time": "15:00",
+              "spot": "アリオ橋本",
+              "note": "橋本駅から徒歩すぐ。雨でも酷暑でも移動最小",
+              "url": ""
+            },
+            {
+              "time": "15:30",
+              "spot": "MOVIX橋本で映画",
+              "note": "上映作品・時間は公式スケジュールで",
+              "url": "https://www.smt-cinema.com/site/hashimoto/"
+            },
+            {
+              "time": "18:00",
+              "spot": "アリオ内で夕食",
+              "note": "予約不要。食後にぶらぶらも",
+              "url": ""
+            }
           ],
           "access": "徒歩: 橋本駅からすぐ",
           "budget": "二人で〜7,000円（映画2枚＋夕食）",
@@ -593,10 +1222,30 @@
           "motif": "tenji",
           "day": "sat",
           "course": [
-            { "time": "13:00", "spot": "橋本 発", "note": "京王線→新宿→丸ノ内線 銀座 約1時間10分", "url": "" },
-            { "time": "14:15", "spot": "Ginza Sony Park", "note": "入場無料・地上5階+地下4階の体験ビル。開催中のプログラムは公式で", "url": "https://www.ginzasonypark.com/" },
-            { "time": "16:00", "spot": "銀座を屋内伝いにぶらり", "note": "文具の伊東屋やデパ地下など、涼しいルートで", "url": "" },
-            { "time": "17:30", "spot": "カフェでおやつ休憩して帰路", "note": "予約不要の店で", "url": "" }
+            {
+              "time": "13:00",
+              "spot": "橋本 発",
+              "note": "京王線→新宿→丸ノ内線 銀座 約1時間10分",
+              "url": ""
+            },
+            {
+              "time": "14:15",
+              "spot": "Ginza Sony Park",
+              "note": "入場無料・地上5階+地下4階の体験ビル。開催中のプログラムは公式で",
+              "url": "https://www.ginzasonypark.com/"
+            },
+            {
+              "time": "16:00",
+              "spot": "銀座を屋内伝いにぶらり",
+              "note": "文具の伊東屋やデパ地下など、涼しいルートで",
+              "url": ""
+            },
+            {
+              "time": "17:30",
+              "spot": "カフェでおやつ休憩して帰路",
+              "note": "予約不要の店で",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→銀座 約1時間10分（新宿乗換）",
           "budget": "二人で〜7,000円（交通＋おやつ＋買い物少々。パーク入場は無料）",
@@ -608,7 +1257,12 @@
           "caveats": "遡及生成の参考プラン。開催プログラムは入れ替わるため、行く週に公式で確認を。"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-07-25",
@@ -626,10 +1280,30 @@
           "motif": "umi",
           "day": "sun",
           "course": [
-            { "time": "10:00", "spot": "橋本 発", "note": "JR横浜線→町田→小田急線 片瀬江ノ島 約1時間10分", "url": "" },
-            { "time": "11:15", "spot": "新江ノ島水族館", "note": "クラゲのホールと相模湾大水槽。夏は夜間イベントも開催", "url": "https://www.enosui.com/" },
-            { "time": "13:30", "spot": "館内か駅前で遅めの昼", "note": "しらす系の食堂多数・予約不要", "url": "" },
-            { "time": "15:00", "spot": "余力があれば弁天橋をちょい散歩", "note": "雨と暑さ次第で無理せず帰路へ", "url": "" }
+            {
+              "time": "10:00",
+              "spot": "橋本 発",
+              "note": "JR横浜線→町田→小田急線 片瀬江ノ島 約1時間10分",
+              "url": ""
+            },
+            {
+              "time": "11:15",
+              "spot": "新江ノ島水族館",
+              "note": "クラゲのホールと相模湾大水槽。夏は夜間イベントも開催",
+              "url": "https://www.enosui.com/"
+            },
+            {
+              "time": "13:30",
+              "spot": "館内か駅前で遅めの昼",
+              "note": "しらす系の食堂多数・予約不要",
+              "url": ""
+            },
+            {
+              "time": "15:00",
+              "spot": "余力があれば弁天橋をちょい散歩",
+              "note": "雨と暑さ次第で無理せず帰路へ",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→片瀬江ノ島 約1時間10分（町田乗換）",
           "budget": "二人で〜9,000円（入場料＋昼食。料金は公式で確認）",
@@ -647,11 +1321,36 @@
           "motif": "yoru",
           "day": "sat",
           "course": [
-            { "time": "16:00", "spot": "橋本 発", "note": "JR横浜線→八王子→中央線 立川 約40分", "url": "" },
-            { "time": "17:00", "spot": "立川駅ビルで早めの夕食", "note": "花火前に済ませるのが吉・予約不要", "url": "" },
-            { "time": "18:30", "spot": "観覧場所へ移動", "note": "2026年からメイン会場「みんなの原っぱ」は有料化。無料エリアは公式案内で", "url": "https://hanabi.tokyo-tachikawa.org/about/" },
-            { "time": "19:15", "spot": "花火大会（19:15〜20:15）", "note": "約5,000発・一尺五寸玉と芸協玉が名物", "url": "https://tokyo-tachikawa.org/event/13489/" },
-            { "time": "20:45", "spot": "混雑を少し外して帰路", "note": "立川駅は混むので一息ついてから", "url": "" }
+            {
+              "time": "16:00",
+              "spot": "橋本 発",
+              "note": "JR横浜線→八王子→中央線 立川 約40分",
+              "url": ""
+            },
+            {
+              "time": "17:00",
+              "spot": "立川駅ビルで早めの夕食",
+              "note": "花火前に済ませるのが吉・予約不要",
+              "url": ""
+            },
+            {
+              "time": "18:30",
+              "spot": "観覧場所へ移動",
+              "note": "2026年からメイン会場「みんなの原っぱ」は有料化。無料エリアは公式案内で",
+              "url": "https://hanabi.tokyo-tachikawa.org/about/"
+            },
+            {
+              "time": "19:15",
+              "spot": "花火大会（19:15〜20:15）",
+              "note": "約5,000発・一尺五寸玉と芸協玉が名物",
+              "url": "https://tokyo-tachikawa.org/event/13489/"
+            },
+            {
+              "time": "20:45",
+              "spot": "混雑を少し外して帰路",
+              "note": "立川駅は混むので一息ついてから",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→立川 約40分（八王子乗換）",
           "budget": "二人で〜8,000円（夕食＋交通。有料席を取るなら別途）",
@@ -670,10 +1369,30 @@
           "motif": "neko",
           "day": "sat",
           "course": [
-            { "time": "13:00", "spot": "橋本 発", "note": "京王線→新宿→山手線 原宿 約1時間10分", "url": "" },
-            { "time": "14:15", "spot": "HARRY 原宿駅前店", "note": "ハリネズミカフェ。11:00-19:00・無休（調査日時点）", "url": "https://harinezumi-cafe.com/store/harajuku/" },
-            { "time": "15:30", "spot": "表参道側を屋内伝いにぶらり", "note": "猛暑なのでカフェ・ショップ中心で", "url": "" },
-            { "time": "17:00", "spot": "かき氷かパフェで一息して帰路", "note": "予約不要の店で", "url": "" }
+            {
+              "time": "13:00",
+              "spot": "橋本 発",
+              "note": "京王線→新宿→山手線 原宿 約1時間10分",
+              "url": ""
+            },
+            {
+              "time": "14:15",
+              "spot": "HARRY 原宿駅前店",
+              "note": "ハリネズミカフェ。11:00-19:00・無休（調査日時点）",
+              "url": "https://harinezumi-cafe.com/store/harajuku/"
+            },
+            {
+              "time": "15:30",
+              "spot": "表参道側を屋内伝いにぶらり",
+              "note": "猛暑なのでカフェ・ショップ中心で",
+              "url": ""
+            },
+            {
+              "time": "17:00",
+              "spot": "かき氷かパフェで一息して帰路",
+              "note": "予約不要の店で",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→原宿 約1時間10分（新宿乗換）",
           "budget": "二人で〜8,000円（カフェ利用料＋お茶＋交通）",
@@ -684,7 +1403,12 @@
           "caveats": "遡及生成の参考プラン。行く週には営業時間と混雑状況（土日は入店待ちの可能性）を公式で確認を。"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-07-18",
@@ -702,10 +1426,30 @@
           "motif": "neko",
           "day": "sat",
           "course": [
-            { "time": "12:30", "spot": "橋本 発", "note": "京王相模原線で多摩センターへ 約15分＋徒歩5分", "url": "" },
-            { "time": "13:00", "spot": "サンリオピューロランド", "note": "全館屋内のテーマパーク。雨を忘れて遊ぶ", "url": "https://www.puroland.jp/" },
-            { "time": "15:30", "spot": "館内カフェでおやつ休憩", "note": "キャラクターフードで一息", "url": "" },
-            { "time": "17:30", "spot": "多摩センター駅前で早めの夕食", "note": "予約不要の店が多数", "url": "" }
+            {
+              "time": "12:30",
+              "spot": "橋本 発",
+              "note": "京王相模原線で多摩センターへ 約15分＋徒歩5分",
+              "url": ""
+            },
+            {
+              "time": "13:00",
+              "spot": "サンリオピューロランド",
+              "note": "全館屋内のテーマパーク。雨を忘れて遊ぶ",
+              "url": "https://www.puroland.jp/"
+            },
+            {
+              "time": "15:30",
+              "spot": "館内カフェでおやつ休憩",
+              "note": "キャラクターフードで一息",
+              "url": ""
+            },
+            {
+              "time": "17:30",
+              "spot": "多摩センター駅前で早めの夕食",
+              "note": "予約不要の店が多数",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→京王多摩センター 約15分（京王相模原線1本）＋徒歩5分",
           "budget": "二人で〜14,000円（パスポート2枚＋飲食。料金は来場日により変動）",
@@ -724,11 +1468,36 @@
           "motif": "tenji",
           "day": "sun",
           "course": [
-            { "time": "10:00", "spot": "橋本 発", "note": "京王相模原線→新宿→りんかい線 国際展示場", "url": "" },
-            { "time": "11:30", "spot": "東京ビッグサイト 南1ホール", "note": "博物ふぇすてぃばる！12（7/19は11:00-17:30）。650超のブース", "url": "https://www.hakubutufes.info/" },
-            { "time": "14:30", "spot": "有明ガーデンで遅めの昼", "note": "会場から徒歩圏・予約不要", "url": "" },
-            { "time": "16:00", "spot": "有明〜豊洲の水辺をぶらり", "note": "晴れ間が出たら写真さんぽ枠", "url": "" },
-            { "time": "18:00", "spot": "夕食して帰路", "note": "翌7/20は海の日でお休み。夜までゆっくりでOK", "url": "" }
+            {
+              "time": "10:00",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→りんかい線 国際展示場",
+              "url": ""
+            },
+            {
+              "time": "11:30",
+              "spot": "東京ビッグサイト 南1ホール",
+              "note": "博物ふぇすてぃばる！12（7/19は11:00-17:30）。650超のブース",
+              "url": "https://www.hakubutufes.info/"
+            },
+            {
+              "time": "14:30",
+              "spot": "有明ガーデンで遅めの昼",
+              "note": "会場から徒歩圏・予約不要",
+              "url": ""
+            },
+            {
+              "time": "16:00",
+              "spot": "有明〜豊洲の水辺をぶらり",
+              "note": "晴れ間が出たら写真さんぽ枠",
+              "url": ""
+            },
+            {
+              "time": "18:00",
+              "spot": "夕食して帰路",
+              "note": "翌7/20は海の日でお休み。夜までゆっくりでOK",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→新宿→国際展示場 約1時間20〜30分（デザフェス等で通い慣れたルート）",
           "budget": "二人で〜9,000円（前売1,800円×2＋交通・飲食）",
@@ -747,11 +1516,36 @@
           "motif": "cafe",
           "day": "sat",
           "course": [
-            { "time": "13:00", "spot": "橋本 発", "note": "京王相模原線→新宿→山手線 池袋 約1時間10分", "url": "" },
-            { "time": "14:15", "spot": "セサミストリートマーケット", "note": "サンシャインシティ アルパ1F。グッズ200種超＋併設カフェ", "url": "https://sunshinecity.jp/shop/shop_list/entry-26689.html" },
-            { "time": "15:00", "spot": "カフェでドーナツやパフェ", "note": "手作りドーナツが名物（調査日時点・カフェLO20:00）", "url": "https://sunshinecity.jp/restaurant/restaurant_list/entry-26658.html" },
-            { "time": "16:30", "spot": "サンシャインシティ館内をぶらぶら", "note": "全部屋内で雨知らず。ゲーセンで一勝負もあり", "url": "" },
-            { "time": "18:00", "spot": "池袋で夕食して帰路", "note": "予約不要の店が豊富", "url": "" }
+            {
+              "time": "13:00",
+              "spot": "橋本 発",
+              "note": "京王相模原線→新宿→山手線 池袋 約1時間10分",
+              "url": ""
+            },
+            {
+              "time": "14:15",
+              "spot": "セサミストリートマーケット",
+              "note": "サンシャインシティ アルパ1F。グッズ200種超＋併設カフェ",
+              "url": "https://sunshinecity.jp/shop/shop_list/entry-26689.html"
+            },
+            {
+              "time": "15:00",
+              "spot": "カフェでドーナツやパフェ",
+              "note": "手作りドーナツが名物（調査日時点・カフェLO20:00）",
+              "url": "https://sunshinecity.jp/restaurant/restaurant_list/entry-26658.html"
+            },
+            {
+              "time": "16:30",
+              "spot": "サンシャインシティ館内をぶらぶら",
+              "note": "全部屋内で雨知らず。ゲーセンで一勝負もあり",
+              "url": ""
+            },
+            {
+              "time": "18:00",
+              "spot": "池袋で夕食して帰路",
+              "note": "予約不要の店が豊富",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→池袋 約1時間10分（新宿乗換）",
           "budget": "二人で〜8,000円（カフェ＋グッズ少々＋夕食）",
@@ -763,7 +1557,12 @@
           "caveats": "カフェは混雑時に入店待ちの可能性。営業時間（調査日時点10:00-21:00）は当日サンシャインシティ公式で確認を。調査範囲では予約制の記載なし。"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-07-11",
@@ -781,11 +1580,36 @@
           "motif": "yama",
           "day": "sat",
           "course": [
-            { "time": "8:30", "spot": "橋本 発", "note": "JR横浜線→八王子→青梅線→御嶽駅→バスでケーブル下", "url": "" },
-            { "time": "10:15", "spot": "御岳山ケーブルカー", "note": "6分で山上へ。始発・終発は公式で当日確認", "url": "https://www.mitaketozan.co.jp/" },
-            { "time": "10:45", "spot": "武蔵御嶽神社に参拝", "note": "山上集落の参道さんぽ", "url": "" },
-            { "time": "11:30", "spot": "ロックガーデン周回", "note": "沢沿いの苔道と滝。夏でも涼しい約2時間", "url": "" },
-            { "time": "14:00", "spot": "参道の茶屋で遅めの昼", "note": "とろろ蕎麦など・予約不要", "url": "" }
+            {
+              "time": "8:30",
+              "spot": "橋本 発",
+              "note": "JR横浜線→八王子→青梅線→御嶽駅→バスでケーブル下",
+              "url": ""
+            },
+            {
+              "time": "10:15",
+              "spot": "御岳山ケーブルカー",
+              "note": "6分で山上へ。始発・終発は公式で当日確認",
+              "url": "https://www.mitaketozan.co.jp/"
+            },
+            {
+              "time": "10:45",
+              "spot": "武蔵御嶽神社に参拝",
+              "note": "山上集落の参道さんぽ",
+              "url": ""
+            },
+            {
+              "time": "11:30",
+              "spot": "ロックガーデン周回",
+              "note": "沢沿いの苔道と滝。夏でも涼しい約2時間",
+              "url": ""
+            },
+            {
+              "time": "14:00",
+              "spot": "参道の茶屋で遅めの昼",
+              "note": "とろろ蕎麦など・予約不要",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→御嶽 約1時間半＋バス10分（遠めですが山の日帰りの定番圏）",
           "budget": "二人で〜8,000円（ケーブル往復＋昼）",
@@ -803,11 +1627,36 @@
           "motif": "yoru",
           "day": "sat",
           "course": [
-            { "time": "15:30", "spot": "橋本 発", "note": "JR横浜線で約45分、関内・石川町へ", "url": "" },
-            { "time": "16:45", "spot": "山下公園・氷川丸", "note": "海風さんぽ。撮り歩きの助走", "url": "" },
-            { "time": "17:45", "spot": "大さん橋「くじらのせなか」", "note": "屋上広場から港の夕景。開放時間は公式で確認", "url": "https://osanbashi.jp/" },
-            { "time": "19:00", "spot": "中華街で夕食", "note": "予約不要の店が多数。食べ歩きも", "url": "" },
-            { "time": "20:30", "spot": "夜景を撮りつつ帰路", "note": "みなとみらいの灯りが本番", "url": "" }
+            {
+              "time": "15:30",
+              "spot": "橋本 発",
+              "note": "JR横浜線で約45分、関内・石川町へ",
+              "url": ""
+            },
+            {
+              "time": "16:45",
+              "spot": "山下公園・氷川丸",
+              "note": "海風さんぽ。撮り歩きの助走",
+              "url": ""
+            },
+            {
+              "time": "17:45",
+              "spot": "大さん橋「くじらのせなか」",
+              "note": "屋上広場から港の夕景。開放時間は公式で確認",
+              "url": "https://osanbashi.jp/"
+            },
+            {
+              "time": "19:00",
+              "spot": "中華街で夕食",
+              "note": "予約不要の店が多数。食べ歩きも",
+              "url": ""
+            },
+            {
+              "time": "20:30",
+              "spot": "夜景を撮りつつ帰路",
+              "note": "みなとみらいの灯りが本番",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→関内方面 約50分（JR横浜線直通）",
           "budget": "二人で〜9,000円（夕食メイン）",
@@ -825,10 +1674,30 @@
           "motif": "cafe",
           "day": "sun",
           "course": [
-            { "time": "13:00", "spot": "橋本 発", "note": "京王線→渋谷→東急東横線 中目黒 約1時間強", "url": "" },
-            { "time": "14:30", "spot": "スターバックス リザーブ ロースタリー 東京", "note": "4フロアの焙煎所カフェ・予約不要（混雑時は入場整理あり）", "url": "https://www.starbucks.co.jp/reserve/roastery/" },
-            { "time": "16:00", "spot": "目黒川沿いを散策", "note": "蔦屋書店や雑貨店をぶらぶら", "url": "" },
-            { "time": "17:30", "spot": "中目黒高架下で軽くごはん", "note": "帰りは渋谷経由で1本", "url": "" }
+            {
+              "time": "13:00",
+              "spot": "橋本 発",
+              "note": "京王線→渋谷→東急東横線 中目黒 約1時間強",
+              "url": ""
+            },
+            {
+              "time": "14:30",
+              "spot": "スターバックス リザーブ ロースタリー 東京",
+              "note": "4フロアの焙煎所カフェ・予約不要（混雑時は入場整理あり）",
+              "url": "https://www.starbucks.co.jp/reserve/roastery/"
+            },
+            {
+              "time": "16:00",
+              "spot": "目黒川沿いを散策",
+              "note": "蔦屋書店や雑貨店をぶらぶら",
+              "url": ""
+            },
+            {
+              "time": "17:30",
+              "spot": "中目黒高架下で軽くごはん",
+              "note": "帰りは渋谷経由で1本",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→中目黒 約1時間10分",
           "budget": "二人で〜7,000円（おしゃ飲み物＋ごはん）",
@@ -840,7 +1709,12 @@
           "caveats": "ロースタリーは週末混雑しやすく入場待ちの可能性（調査日時点で予約不可・先着制）。営業時間は公式で当日確認を。"
         }
       ],
-      "feedback": { "likes": [], "went": null, "rating": null, "memo": null }
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
     },
     {
       "id": "2026-07-04",
@@ -858,10 +1732,30 @@
           "motif": "onsen",
           "day": "sun",
           "course": [
-            { "time": "10:30", "spot": "橋本 発", "note": "JR横浜線→八王子→高尾→高尾山口", "url": "" },
-            { "time": "11:20", "spot": "京王高尾山温泉 極楽湯", "note": "駅隣接・露天は雨がむしろ風情", "url": "https://www.takaosan-onsen.jp/" },
-            { "time": "13:30", "spot": "遅めの昼・蕎麦", "note": "館内食事処か参道の蕎麦処（各店の営業は当日確認）", "url": "" },
-            { "time": "15:00", "spot": "TAKAO 599 MUSEUM", "note": "入館無料・8:00-17:00・駅から徒歩4分", "url": "https://www.takao599museum.jp/" }
+            {
+              "time": "10:30",
+              "spot": "橋本 発",
+              "note": "JR横浜線→八王子→高尾→高尾山口",
+              "url": ""
+            },
+            {
+              "time": "11:20",
+              "spot": "京王高尾山温泉 極楽湯",
+              "note": "駅隣接・露天は雨がむしろ風情",
+              "url": "https://www.takaosan-onsen.jp/"
+            },
+            {
+              "time": "13:30",
+              "spot": "遅めの昼・蕎麦",
+              "note": "館内食事処か参道の蕎麦処（各店の営業は当日確認）",
+              "url": ""
+            },
+            {
+              "time": "15:00",
+              "spot": "TAKAO 599 MUSEUM",
+              "note": "入館無料・8:00-17:00・駅から徒歩4分",
+              "url": "https://www.takao599museum.jp/"
+            }
           ],
           "access": "電車: 橋本→高尾山口 約45分（八王子・高尾乗換）",
           "budget": "二人で〜7,000円（入浴＋食事）",
@@ -880,11 +1774,36 @@
           "motif": "tenji",
           "day": "sat",
           "course": [
-            { "time": "14:00", "spot": "橋本 発", "note": "JR相模線→茅ヶ崎→東海道線→平塚", "url": "" },
-            { "time": "15:30", "spot": "湘南スターモールの大型飾り", "note": "駅北口すぐ・第74回", "url": "https://tanabata-hiratsuka.com/" },
-            { "time": "16:30", "spot": "露店で食べ歩き", "note": "露店は19:30まで（最終日は18:30）", "url": "" },
-            { "time": "18:30", "spot": "夕暮れの飾りを撮る", "note": "写真さんぽ枠・飾りは夜が映える", "url": "" },
-            { "time": "19:30", "spot": "平塚 発", "note": "まつりは20:30終了（最終日19:00）", "url": "" }
+            {
+              "time": "14:00",
+              "spot": "橋本 発",
+              "note": "JR相模線→茅ヶ崎→東海道線→平塚",
+              "url": ""
+            },
+            {
+              "time": "15:30",
+              "spot": "湘南スターモールの大型飾り",
+              "note": "駅北口すぐ・第74回",
+              "url": "https://tanabata-hiratsuka.com/"
+            },
+            {
+              "time": "16:30",
+              "spot": "露店で食べ歩き",
+              "note": "露店は19:30まで（最終日は18:30）",
+              "url": ""
+            },
+            {
+              "time": "18:30",
+              "spot": "夕暮れの飾りを撮る",
+              "note": "写真さんぽ枠・飾りは夜が映える",
+              "url": ""
+            },
+            {
+              "time": "19:30",
+              "spot": "平塚 発",
+              "note": "まつりは20:30終了（最終日19:00）",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→平塚 約70〜80分（茅ヶ崎乗換）",
           "budget": "二人で〜6,000円（露店＋交通）",
@@ -903,10 +1822,30 @@
           "motif": "neko",
           "day": "sat",
           "course": [
-            { "time": "13:00", "spot": "橋本 発", "note": "JR横浜線 快速で約10分", "url": "" },
-            { "time": "13:30", "spot": "猫カフェ MOCHA 町田ジョルナ店", "note": "予約不要・10:30-20:00（調査日時点）", "url": "https://catmocha.jp/shop/machida/" },
-            { "time": "15:00", "spot": "駅ビルでゲーセン・雑貨", "note": "UFOキャッチャー勝負もあり", "url": "" },
-            { "time": "16:30", "spot": "カフェでひと休み", "note": "猫の写真を見返す時間", "url": "" }
+            {
+              "time": "13:00",
+              "spot": "橋本 発",
+              "note": "JR横浜線 快速で約10分",
+              "url": ""
+            },
+            {
+              "time": "13:30",
+              "spot": "猫カフェ MOCHA 町田ジョルナ店",
+              "note": "予約不要・10:30-20:00（調査日時点）",
+              "url": "https://catmocha.jp/shop/machida/"
+            },
+            {
+              "time": "15:00",
+              "spot": "駅ビルでゲーセン・雑貨",
+              "note": "UFOキャッチャー勝負もあり",
+              "url": ""
+            },
+            {
+              "time": "16:30",
+              "spot": "カフェでひと休み",
+              "note": "猫の写真を見返す時間",
+              "url": ""
+            }
           ],
           "access": "電車: 橋本→町田 約10分（JR横浜線）",
           "budget": "二人で〜6,000円（時間制＋ドリンク＋お茶）",
@@ -918,7 +1857,14 @@
           "caveats": "MOCHAは当日先着制のため混雑時は入場待ちあり。料金体系（時間制＋ワンドリンク）は当日の掲示を確認。"
         }
       ],
-      "feedback": { "likes": ["b"], "went": "none", "rating": null, "memo": "" }
+      "feedback": {
+        "likes": [
+          "b"
+        ],
+        "went": "none",
+        "rating": null,
+        "memo": ""
+      }
     }
   ]
 }
