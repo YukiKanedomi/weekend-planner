@@ -1,9 +1,169 @@
 {
   "meta": {
     "area": "橋本駅起点",
-    "updated": "2026-10-02"
+    "updated": "2026-10-09"
   },
   "weekends": [
+    {
+      "id": "2026-10-10",
+      "weather": {
+        "sat": "晴れ 24°（降水確率0%）",
+        "sun": "快晴 25°（降水確率0%）",
+        "checkedAt": "10/9(金) 17:00 Open-Meteo"
+      },
+      "plans": [
+        {
+          "id": "2026-10-10-a",
+          "kind": "honmei",
+          "title": "相模川の三川合流点で、鮎まつりの花火",
+          "catch": "第80回あつぎ鮎まつり大花火大会。夕方の出店村で腹ごしらえして、17時40分から河原で",
+          "motif": "yoru",
+          "day": "sat",
+          "course": [
+            {
+              "time": "15:00",
+              "spot": "橋本 発",
+              "note": "JR相模線で海老名→小田急線で本厚木。40分ほど。乗換は当日の検索で",
+              "url": ""
+            },
+            {
+              "time": "15:50",
+              "spot": "厚木中央公園の「市民出店村」で夕ごはん",
+              "note": "土曜は9:00〜20:00（公式）。食べ歩きで早めに済ませておきます",
+              "url": "https://www.atsugi-kankou.jp/site/ayu-festival/"
+            },
+            {
+              "time": "16:45",
+              "spot": "相模川の河川敷（厚木側）へ",
+              "note": "本厚木駅から歩いて15〜20分ほど（花火情報サイト）。海老名側の河川敷は全席指定なので、チケットなしなら厚木側か旭町スポーツ広場などへ（公式）",
+              "url": "https://www.atsugi-kankou.jp/site/ayu-festival/"
+            },
+            {
+              "time": "17:40",
+              "spot": "あつぎ鮎まつり 大花火大会（〜19:00）",
+              "note": "相模川三川合流点から打ち上げ。フィナーレの大ナイアガラが名物とされています",
+              "url": "https://www.atsugi-kankou.jp/site/ayu-festival/"
+            },
+            {
+              "time": "19:15",
+              "spot": "時間をずらして、ファミレスで締めてから帰路",
+              "note": "本厚木駅は混むはず。やりたいことリスト☑「夜遊んだあとにファミレスで締めくくる」",
+              "url": ""
+            }
+          ],
+          "access": "電車: 橋本→本厚木 40分ほど（海老名で小田急に乗換）。会場まで徒歩15〜20分",
+          "budget": "二人で〜5,000円（交通費・出店村・ファミレス。有料観覧席は別途）",
+          "why": "花火は「毎年出したい」確定の好みで、この土曜だけの一期一会です。今年で80回目の大会。橋本から乗換1回・40分ほどと、これまで出した花火のなかでいちばん近い会場です。本厚木は初めての街で、夕方から出店村→花火→ファミレス締めと、夜あそびの流れにそのまま乗れます。土曜は晴れ・降水確率0%の予報",
+          "sources": [
+            "https://www.atsugi-kankou.jp/site/ayu-festival/",
+            "https://www.city.atsugi.kanagawa.jp/material/files/group/45/80koutuukisei10-10.pdf",
+            "https://sp.jorudan.co.jp/hanabi/spot_87267.html",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
+          "caveats": "打ち上げ17:40〜19:00は厚木市観光協会の公式ページで確認（調査日10/9）。花火情報サイトには19:00開始など別の時刻の掲載も残っているので、公式の時刻で動いてください。中止の場合の延期はありません（公式）。荒天時の判断は当日に公式で確認を。海老名側の河川敷は全席指定で、チケットがないと入れません。駅から会場までの所要時間は花火情報サイトの目安。帰りの本厚木駅はかなり混みます"
+        },
+        {
+          "id": "2026-10-10-b",
+          "kind": "honmei2",
+          "title": "丘を三つ越えて、鶴巻の湯へ下りる日曜",
+          "catch": "秦野駅から弘法山公園の尾根道を歩いて、ゴールは駅前の日帰り温泉「弘法の里湯」",
+          "motif": "yama",
+          "day": "sun",
+          "course": [
+            {
+              "time": "08:45",
+              "spot": "橋本 発",
+              "note": "JR相模線で海老名→小田急線で秦野。1時間ほど。乗換は当日の検索で",
+              "url": ""
+            },
+            {
+              "time": "09:50",
+              "spot": "秦野駅から歩きはじめる（浅間山→権現山→弘法山→吾妻山）",
+              "note": "弘法山公園・吾妻山コース。約7.5km・歩いて約2時間10分（秦野市観光協会のマップ）。標高200m台の丘が続く、高尾山よりやさしい尾根道です",
+              "url": "https://www.kankou-hadano.org/hadano_hiking/hikingmap_ka.pdf"
+            },
+            {
+              "time": "11:00",
+              "spot": "権現山の展望台でお昼",
+              "note": "富士山・丹沢・海まで見える展望台（県の紹介記事）。秦野駅のあたりでパンやおにぎりを買っておきます",
+              "url": "https://www.pref.kanagawa.jp/docs/ph7/cnt/f7631/2023shokuin-memo-hadanodehiking.html"
+            },
+            {
+              "time": "13:30",
+              "spot": "弘法の里湯（鶴巻温泉駅から徒歩2分）",
+              "note": "10:00〜21:00（最終受付20:00）・月曜休館。土日祝は2時間1,000円（秦野市公式・調査日時点）",
+              "url": "https://www.city.hadano.kanagawa.jp/kanko/onsen/2674.html"
+            },
+            {
+              "time": "15:45",
+              "spot": "鶴巻温泉駅から帰路",
+              "note": "湯上がりにそのまま電車へ。明るいうちに帰れます",
+              "url": ""
+            }
+          ],
+          "access": "電車: 橋本→秦野 1時間ほど（海老名で小田急に乗換）。帰りは鶴巻温泉→海老名→橋本",
+          "budget": "二人で〜6,000円（入浴料・お昼・交通費。料金は調査日時点）",
+          "why": "好みの核「散策×食×癒し」の、山歩き＋温泉の直球です。「高尾山級まで」という条件に収まる標高200m台の尾根道で、歩き終わりがそのまま温泉という順番がいちばん楽。9月の高尾山とは別の山で、秦野・鶴巻は初めてのエリアです。日曜は快晴・降水確率0%の予報で、富士山の見える展望台が生きる日です",
+          "sources": [
+            "https://www.city.hadano.kanagawa.jp/kanko/onsen/2674.html",
+            "https://www.kankou-hadano.org/hadano_hiking/hikingmap_ka.pdf",
+            "https://www.pref.kanagawa.jp/docs/ph7/cnt/f7631/2023shokuin-memo-hadanodehiking.html",
+            "https://kanagawa-kankou.or.jp/spot/1604",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
+          "caveats": "営業時間・料金は秦野市公式ページ（2026/9/12更新）の調査日10/9時点の内容です。休日の混み具合は要確認。コースは未舗装の山道を含むので、歩きやすい靴で。距離・時間は観光協会マップの目安で、県の紹介記事では山道に3時間以上かかったとされています。ゆっくりペースで見積もってください"
+        },
+        {
+          "id": "2026-10-10-c",
+          "kind": "kaze",
+          "title": "目黒川を歩いて、いちばん大きなスタバへ",
+          "catch": "中目黒のスターバックス リザーブ ロースタリー 東京。焙煎所を見ながら、ゆっくり一杯",
+          "motif": "cafe",
+          "day": "sat",
+          "course": [
+            {
+              "time": "10:00",
+              "spot": "橋本 発",
+              "note": "JR横浜線で菊名→東急東横線で中目黒。1時間ほど。乗換は当日の検索で",
+              "url": ""
+            },
+            {
+              "time": "11:00",
+              "spot": "中目黒駅から目黒川沿いを歩く",
+              "note": "お店までは徒歩14分（公式）。川沿いの店をのぞきながらのんびり",
+              "url": ""
+            },
+            {
+              "time": "11:20",
+              "spot": "スターバックス リザーブ ロースタリー 東京",
+              "note": "10/1から営業時間が8:00〜22:00に変更（公式）。土日祝は混雑時に入店整理券が出ることがあり、当日のみ・公式サイトか店頭のQRコードから登録（公式の入店ガイド）",
+              "url": "https://www.starbucks.co.jp/roastery/"
+            },
+            {
+              "time": "13:00",
+              "spot": "目黒川沿いと中目黒の路地をぶらぶらして帰路",
+              "note": "気になった店で寄り道しつつ、駅へ戻ります",
+              "url": ""
+            }
+          ],
+          "access": "電車: 橋本→中目黒 1時間ほど（菊名で東横線に乗換）。駅からお店まで徒歩14分",
+          "budget": "二人で〜6,000円目安（ドリンク・軽食・交通費。値段は店頭で）",
+          "why": "やりたいことリスト☐「でっかいスタバでおしゃ飲み物」そのものです。中目黒・目黒川は初めてのエリア。カフェ巡りの好みの延長なので外しすぎず、冒険枠「ほどほど」の設定に合います。土曜は晴れで、川沿いを歩くのにちょうどいい気温（24°予報）。昼で切り上げれば、夕方からA案の厚木の花火に回すこともできます",
+          "sources": [
+            "https://www.starbucks.co.jp/roastery/",
+            "https://www.starbucks.co.jp/reserve/roastery/entry-guide/",
+            "https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo"
+          ],
+          "caveats": "営業時間は公式サイトの調査日10/9時点の案内です。土日祝は混雑時に整理券制になることがあり、登録は当日のみ（公式の入店ガイド）。整理券は席の予約ではありません。休業の告知は店舗の公式Xで行われるとのことなので、出発前に確認を。A案の花火とつなぐなら乗換が多いので、時間に余裕を"
+        }
+      ],
+      "feedback": {
+        "likes": [],
+        "went": null,
+        "rating": null,
+        "memo": null
+      }
+    },
     {
       "id": "2026-10-03",
       "weather": {
