@@ -28,8 +28,9 @@
 フィードバック: ページの「選択をコピー」→ チャットに貼る → /learn が taste/visited を更新
 ```
 - 表示は Vite + React の静的サイト。`plans.json` を fetch して描画（base サブパス対策は deploy-pages スキル準拠）。
-- 生成は当面ローカルセッションの `/plan`（Claude が天気・イベントを調査して3案を書く）。
-  安定したらクラウド Routine 化（金曜夜トリガー。要ドメイン許可: 天気API等）。
+- 生成は **ローカルの定時ジョブで自動化済み（2026-08-09 移行・稼働中）**: タスクスケジューラ `WeekendPlanner-FridayPlan`（毎週金 17:00）が `scripts/auto-plan.ps1` を起動し、`/plan` 相当の調査→`data/plans.json` 追記→push まで無人で行う。手動で回すときは `/plan`。
+  - 止める: `Disable-ScheduledTask -TaskName 'WeekendPlanner-FridayPlan'`。状態: `Get-ScheduledTaskInfo -TaskName 'WeekendPlanner-FridayPlan'`。作法は `headless-job` スキル。
+  - `plans.json` を手で変えたら `node scripts/validate-plans.mjs` で検証する。
 - 天気: Open-Meteo（無料・キー不要）。橋本の緯度経度は実装時に正確な値を確認して定数化。
 
 ## 4. データモデル

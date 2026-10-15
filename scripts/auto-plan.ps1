@@ -19,11 +19,14 @@ Set-Location $base
 
 $prompt = Get-Content -Raw -Encoding UTF8 $promptFile
 
+# 2026-10-15: the prompt goes in via stdin. PS 5.1 splits a native argument at a space inside
+#   embedded double quotes, which silently cut the prompt mid-instruction (ai-radar 10/12, weekend 10/02).
+$OutputEncoding = New-Object System.Text.UTF8Encoding $false
 "==== $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') START ====" | Out-File -FilePath $log -Append -Encoding utf8
 # EAP=Continue around the claude call: PS 5.1 wraps native stderr as ErrorRecords
-# under 2>&1, which EAP=Stop turns fatal. $null| closes stdin (skips the 3s wait).
+# under 2>&1, which EAP=Stop turns fatal.
 $ErrorActionPreference = 'Continue'
-$null | & claude -p $prompt --model opus --permission-mode acceptEdits `
+$prompt | & claude -p --model opus --permission-mode acceptEdits `
   --allowedTools 'WebSearch' 'WebFetch' 'Read' 'Bash(node:*)' 'Bash(npm:*)' 'Bash(git:*)' 'Bash(gh:*)' 'Bash(curl:*)' 'Bash(powershell:*)' `
   --output-format text 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
 $claudeExit = $LASTEXITCODE

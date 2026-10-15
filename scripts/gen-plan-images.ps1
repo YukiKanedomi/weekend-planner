@@ -12,7 +12,7 @@ $base   = 'C:\Users\kanedomi\Desktop\Claude\weekend-planner'
 $briefs = Join-Path $base 'scripts\image-briefs.json'
 $outDir = Join-Path $base 'public\motifs\weekly'
 $tmpDir = Join-Path $base 'scripts\imggen-tmp'
-$style  = 'mid-century Scandinavian picture book style, flat gouache shapes, soft paper texture, muted teal mustard brick and cream palette, no people, no readable text anywhere'
+$style  = 'mid-century Scandinavian picture book style, flat gouache shapes, soft paper texture, muted teal mustard brick and cream palette, no readable text anywhere'
 
 if (-not (Test-Path $briefs)) { Write-Output 'NO_BRIEFS'; exit 0 }
 $items = (Get-Content -Raw -Encoding UTF8 $briefs | ConvertFrom-Json)
