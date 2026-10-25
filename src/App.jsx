@@ -1,332 +1,323 @@
-import { useMemo, useState } from 'react'
-import plansData from '../data/plans.json'
-import eventsData from '../data/events.json'
+import { useEffect, useMemo, useState } from 'react'
+import feedData from '../data/feed.json'
+import staplesData from '../data/staples.json'
+import {
+  TYPE, CATEGORY, WD, md, mdw, ymd, parseYmd, addDays, daysBetween,
+  seasonOf, minutesOf, wmo, groupFeed,
+} from './lib.js'
 
-const KIND = {
-  honmei: { label: '本命', cls: 'seal-honmei' },
-  honmei2: { label: '本命', cls: 'seal-honmei' },
-  kaze: { label: '風', cls: 'seal-kaze' },
+const ICONS = {
+  sun: <><circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" /></>,
+  suncloud: <><circle cx="8" cy="9" r="3.2" /><path d="M8 3v1.5M3 9h1.5M4.5 5.5l1 1" /><path d="M10 19H7.5a3.5 3.5 0 0 1-.6-6.95A5 5 0 0 1 16.5 11 3.5 3.5 0 0 1 16 19h-6z" /></>,
+  cloud: <path d="M7 17a4 4 0 1 1 1-7.9A5 5 0 0 1 17.5 11 3 3 0 0 1 17 17H7z" />,
+  rain: <><path d="M7 15a4 4 0 1 1 1-7.9A5 5 0 0 1 17.5 9 3.5 3.5 0 0 1 17 16H7z" /><path d="M9 18l-1 2M13 18l-1 2M17 18l-1 2" /></>,
+  snow: <><path d="M7 15a4 4 0 1 1 1-7.9A5 5 0 0 1 17.5 9 3.5 3.5 0 0 1 17 16H7z" /><path d="M9 19h.01M13 19h.01M17 19h.01M11 21h.01M15 21h.01" /></>,
+  list: <path d="M4 6h16M4 12h10M4 18h7" />,
+  pin: <><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></>,
+  ext: <path d="M14 5h5v5M19 5l-8 8M17 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h5" />,
+  chev: <path d="M6 9l6 6 6-6" />,
 }
+const Icon = ({ k, className = '' }) => (
+  <svg className={`ic ${className}`} viewBox="0 0 24 24" aria-hidden="true">{ICONS[k]}</svg>
+)
 
-function fmtWeekend(id) {
-  const sat = new Date(id + 'T00:00:00')
-  const sun = new Date(sat.getTime() + 86400000)
-  return `${sat.getMonth() + 1}月${sat.getDate()}日（土）・${sun.getMonth() + 1}月${sun.getDate()}日（日）`
-}
+export default function App() {
+  const feed = feedData, staples = staplesData
+  const isStaplesUrl = () => location.hash === '#staples' || new URLSearchParams(location.search).get('tab') === 'staples'
+  const [tab, setTab] = useState(() => (isStaplesUrl() ? 'staples' : 'feed'))
+  const today = useMemo(() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d }, [])
+  const season = seasonOf(today)
 
-function dateStamp(id, day) {
-  const sat = new Date(id + 'T00:00:00')
-  const d = day === 'sun' ? new Date(sat.getTime() + 86400000) : sat
-  return `'${String(d.getFullYear()).slice(2)} ${d.getMonth() + 1} ${d.getDate()}`
-}
+  useEffect(() => {
+    document.documentElement.style.setProperty('--season', season.hex)
+  }, [])
+  useEffect(() => {
+    const onHash = () => setTab(isStaplesUrl() ? 'staples' : 'feed')
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+  const go = (t) => { location.hash = t === 'staples' ? '#staples' : ''; setTab(t); window.scrollTo({ top: 0 }) }
 
-function shortDate(id) {
-  const sat = new Date(id + 'T00:00:00')
-  return `${sat.getMonth() + 1}.${sat.getDate()}`
-}
-
-function Photo({ motif, img, stamp }) {
-  const m = motif || 'michi'
-  // 週次生成画像(img) → モチーフライブラリ → CSS絵柄 のフォールバック連鎖
-  const candidates = [...(img ? [img] : []), `motifs/${m}.jpg`]
-  const [srcIdx, setSrcIdx] = useState(0)
   return (
-    <div className={`photo ph-${m}`}>
-      {srcIdx < candidates.length && (
-        <img className="ph-img" src={import.meta.env.BASE_URL + candidates[srcIdx]} alt=""
-          loading="lazy" onError={() => setSrcIdx(srcIdx + 1)} />
-      )}
-      <span className="ph-vig" aria-hidden="true"></span>
-      <span className="date">{stamp}</span>
+    <div className="app">
+      {tab === 'feed'
+        ? <Feed feed={feed} today={today} season={season} />
+        : <Staples staples={staples} today={today} />}
+      <nav className="tabbar" aria-label="ページ切替">
+        <button className={tab === 'feed' ? 'on' : ''} onClick={() => go('feed')}><Icon k="list" />新着</button>
+        <button className={tab === 'staples' ? 'on' : ''} onClick={() => go('staples')}><Icon k="pin" />定番</button>
+      </nav>
     </div>
   )
 }
 
-function Cheki({ plan, weekendId, letter, active, onSelect, liked, onToggleLike, wentStamp }) {
-  const kind = KIND[plan.kind] ?? KIND.honmei
-  const onKey = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect() }
-  }
-  return (
-    <div role="button" tabIndex={0} aria-pressed={active}
-      className={`cheki c${letter} ${active ? 'active' : ''}`}
-      onClick={onSelect} onKeyDown={onKey}>
-      <span className="tape" aria-hidden="true"></span>
-      <span className={`seal ${kind.cls}`}>{kind.label}</span>
-      {onToggleLike ? (
-        <button type="button" className={`like ${liked ? 'on' : ''}`}
-          aria-pressed={liked} aria-label={`案${'ABC'[letter - 1]}にいいね`}
-          onClick={(e) => { e.stopPropagation(); onToggleLike() }}>いいね</button>
-      ) : (
-        liked && <span className="like on">いいね</span>
-      )}
-      {wentStamp && <span className="zumi cheki-zumi">現像<br />済</span>}
-      <Photo motif={plan.motif} img={plan.img} stamp={dateStamp(weekendId, plan.day)} />
-      <span className="caption">
-        {plan.title}
-        <small>{plan.catch}</small>
-      </span>
-    </div>
-  )
-}
+/* ---------------- 新着 ---------------- */
 
-function Film({ plan }) {
+function Feed({ feed, today, season }) {
+  const [filter, setFilter] = useState('all')
+  const [onlyWeekend, setOnlyWeekend] = useState(false)
+  const items = useMemo(() => (feed?.items ?? []).filter((it) => filter === 'all' || it.type === filter), [feed, filter])
+  const g = useMemo(() => groupFeed(items, today), [items, today])
+  const pick = useMemo(() => {
+    const all = feed?.items ?? []
+    const cands = all.filter((it) => it.pick && parseYmd(it.when.to) >= today)
+    return cands.sort((a, b) => a.when.to.localeCompare(b.when.to))[0] ?? null
+  }, [feed, today])
+  const updated = feed?.meta?.updated ? new Date(feed.meta.updated) : null
+  const newToday = (feed?.items ?? []).filter((it) => it.foundAt === ymd(today)).length
+
   return (
-    <div className="filmwrap">
-      <p className="label">▼ 選んだ一枚のフィルム（行程）</p>
-      <div className="film">
-        <span className="edge"><span>SHUMATSU 400</span></span>
-        <div className="frames">
-          {plan.course.map((c, i) => (
-            <div className="frame" key={i}>
-              <span className="no">▸{Math.floor(i / 2) + 4}{i % 2 ? 'A' : ''}</span>
-              <span className="t">{c.time}</span>
-              <span className="n">
-                {c.url
-                  ? <a href={c.url} target="_blank" rel="noreferrer">{c.spot}</a>
-                  : c.spot}
-              </span>
-              {c.note && <span className="m">{c.note}</span>}
-            </div>
-          ))}
+    <main className="feed">
+      <header className="top">
+        <div className="brand"><i /> 旬レーダー</div>
+        <div className="base">橋本駅起点{updated && ` · ${md(updated)} ${String(updated.getHours()).padStart(2, '0')}:${String(updated.getMinutes()).padStart(2, '0')} 更新`}</div>
+      </header>
+      <section className="today">
+        <div className="date num">{today.getMonth() + 1}.{today.getDate()}<small>{WD[today.getDay()]}</small></div>
+        <div className="lede">
+          {feed ? <>
+            {g.weekend.length > 0 ? <>今週末に行けるものが <b className="num">{g.weekend.length}</b> 件</> : <>この週末の予定はまだありません</>}
+            {newToday > 0 && <><br />今朝 <b className="num">{newToday}</b> 件追加</>}
+          </> : '読み込み中…'}
         </div>
-        <span className="edge btm"><span>HASHIMOTO</span><span>{plan.id.toUpperCase().slice(-1)}-01</span></span>
-      </div>
-      <p className="filmnote">
-        <span><b>アクセス</b> {plan.access}</span>
-        <span><b>予算</b> {plan.budget}</span>
-      </p>
-    </div>
-  )
-}
+      </section>
+      <Weather today={today} sat={g.sat} />
 
-function PlanNotes({ plan }) {
-  return (
-    <section className="notes">
-      <div className="note-row">
-        <span className="note-head">この一枚のわけ</span>
-        <p>{plan.why}</p>
-      </div>
-      {plan.caveats && (
-        <div className="note-row caveat">
-          <span className="note-head">注意</span>
-          <p>{plan.caveats}</p>
-        </div>
-      )}
-      {plan.sources?.length > 0 && (
-        <details className="sources">
-          <summary>出典（開催・営業を確認したページ）</summary>
-          <ul>
-            {plan.sources.map((s, i) => (
-              <li key={i}><a href={s} target="_blank" rel="noreferrer">{s}</a></li>
-            ))}
-          </ul>
-        </details>
-      )}
-    </section>
-  )
-}
-
-function OrderSlip({ weekend, likes }) {
-  const [went, setWent] = useState('')
-  const [memo, setMemo] = useState('')
-  const [copied, setCopied] = useState(false)
-  const letters = weekend.plans.map((_, i) => 'abc'[i])
-
-  const likesLabel = likes.length
-    ? likes.map((l) => `案${l.toUpperCase()}`).join('・')
-    : 'なし'
-
-  const buildText = () => {
-    const payload = {
-      weekend: weekend.id,
-      likes: [...likes].sort(),
-      went: went || null,
-      memo: memo.trim(),
-    }
-    const wentLabel = went && went !== 'none'
-      ? `案${went.toUpperCase()}「${weekend.plans[letters.indexOf(went)]?.title ?? ''}」`
-      : went === 'none' ? '行かなかった' : '未定'
-    return [
-      `/learn ${fmtWeekend(weekend.id)}: いいね=${likesLabel} / 行った=${wentLabel}${memo.trim() ? ` / ${memo.trim()}` : ''}`,
-      JSON.stringify(payload),
-    ].join('\n')
-  }
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(buildText())
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2200)
-    } catch {
-      window.prompt('コピーできませんでした。以下を手動でコピーしてください', buildText())
-    }
-  }
-
-  return (
-    <section className="slip">
-      <h2 className="slip-title">現像注文票 <small>— 選択をコピーしてチャットに貼ると、好みが育ちます</small></h2>
-      <div className="slip-row">
-        <span className="slip-label">いいね</span>
-        <span className="slip-likes">{likesLabel}<small>（チェキのシールで貼り外し）</small></span>
-      </div>
-      <div className="slip-row">
-        <span className="slip-label">行った一枚</span>
-        <span className="chips">
-          {letters.map((l) => (
-            <button key={l} type="button" className={went === l ? 'chip on' : 'chip'}
-              onClick={() => setWent(went === l ? '' : l)}>案{l.toUpperCase()}</button>
-          ))}
-          <button type="button" className={went === 'none' ? 'chip on' : 'chip'}
-            onClick={() => setWent(went === 'none' ? '' : 'none')}>行かなかった</button>
-        </span>
-      </div>
-      <textarea className="slip-memo" rows={2} value={memo} onChange={(e) => setMemo(e.target.value)}
-        placeholder="一言感想（例: 蕎麦がおいしかった、歩きすぎた…）" />
-      <button type="button" className="copy-btn" onClick={copy}>
-        {copied ? 'コピーしました — チャットに貼ってください' : '選択をコピー'}
-      </button>
-    </section>
-  )
-}
-
-function EventBoard() {
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const list = (eventsData.events ?? [])
-    .filter((e) => new Date(e.to + 'T23:59:59') >= today)
-    .sort((a, b) => (a.from < b.from ? -1 : 1))
-  if (list.length === 0) return null
-  return (
-    <section className="board">
-      <p className="label">次号予告（この先の一期一会）</p>
-      <ul className="b-list">
-        {list.map((e) => (
-          <li key={e.id}>
-            <span className="b-date">{e.dates}</span>
-            <span className="b-body">
-              <a href={e.url} target="_blank" rel="noreferrer">{e.title}</a>
-              <small>{e.place}{e.note ? `・${e.note}` : ''}</small>
-              {e.match && <small className="b-match">◎ {e.match}</small>}
-            </span>
-          </li>
+      <div className="chips" role="tablist" aria-label="種類で絞る">
+        {[['all', 'すべて'], ['event', '行く'], ['food', '食べる'], ['shop', '買う']].map(([k, l]) => (
+          <button key={k} role="tab" aria-selected={filter === k} className={`chip ${filter === k ? 'on' : ''}`} onClick={() => setFilter(k)}>{l}</button>
         ))}
-      </ul>
-      <p className="b-foot">開催日は出典で確認済み（{eventsData.meta.updated} 調査時点）。おでかけ前に公式で最終確認を。</p>
-    </section>
+        <span className="chip-sep" />
+        <button className={`chip q ${onlyWeekend ? 'on' : ''}`} aria-pressed={onlyWeekend} onClick={() => setOnlyWeekend((v) => !v)}>今週末だけ</button>
+      </div>
+
+      {pick && filter === 'all' && !onlyWeekend && <Hero item={pick} today={today} label={parseYmd(pick.when.from) > g.sun ? '来週末' : '今週末'} />}
+
+      {feed && (
+        <div className="tl">
+          <Group title="今週末に行ける" sub={`${mdw(g.sat)}・${mdw(g.sun)}`} items={g.weekend} today={today} empty="この種類では、今週末に行けるものがまだありません。" />
+          {!onlyWeekend && g.weekdayOnly.length > 0 && <Group title="平日のうちに" sub="週末より前に終わるもの" items={g.weekdayOnly} today={today} />}
+          {!onlyWeekend && <Group title="来週末" sub={`${mdw(g.sat2)}・${mdw(g.sun2)}`} items={g.nextWeekend} today={today} />}
+          {!onlyWeekend && <Group title="その先" sub={`${mdw(addDays(g.sun2, 1))} 以降に始まる`} items={g.later} today={today} />}
+        </div>
+      )}
+      <footer className="foot">
+        <p>載せているのは、公式ページなどで開催日・提供期間を確認できたものだけです。価格や時間は確認日時点のもので、変わることがあります。各項目の「公式を開く」で最新をご確認ください。</p>
+        <p>天気は Open-Meteo の予報です。毎朝 7 時ごろに自動更新。{season.name}の色で表示しています。</p>
+      </footer>
+    </main>
   )
 }
 
-function Album({ weekends, currentId, onPick }) {
-  if (weekends.length === 0) return null
+function Weather({ today, sat }) {
+  const [wx, setWx] = useState(null)
+  useEffect(() => {
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=10'
+    fetch(url).then((r) => r.json()).then((j) => {
+      const map = {}
+      j.daily.time.forEach((t, i) => { map[t] = { code: j.daily.weather_code[i], tmax: j.daily.temperature_2m_max[i], pop: j.daily.precipitation_probability_max[i] } })
+      setWx({ map, at: new Date() })
+    }).catch(() => setWx({ map: null }))
+  }, [])
+  if (!wx || !wx.map) return null
+  const days = [sat, addDays(sat, 1), addDays(sat, 7), addDays(sat, 8)].filter((d) => d >= today)
+  const isToday = (d) => ymd(d) === ymd(today)
   return (
-    <section className="album">
-      <p className="label">現像済みアルバム（これまでの週末）</p>
-      <div className="row">
-        {weekends.map((w, i) => {
-          const went = w.feedback?.went && w.feedback.went !== 'none' ? w.feedback.went : null
-          const pick = went ?? w.feedback?.likes?.[0] ?? 'a'
-          const p = w.plans['abc'.indexOf(pick)] ?? w.plans[0]
+    <section className="wx" aria-label="週末の天気予報">
+      <div className="wx-row">
+        {days.map((d) => {
+          const w = wx.map[ymd(d)]
+          if (!w) return <div key={ymd(d)} className="wx-cell none"><b>{mdw(d)}</b><span className="t">—</span></div>
+          const { text, icon } = wmo(w.code)
           return (
-            <button type="button" key={w.id} className={`mini m${(i % 2) + 1} ${w.id === currentId ? 'active' : ''}`}
-              onClick={() => onPick(w.id)}>
-              <span className="corner tl" aria-hidden="true"></span>
-              <span className="corner br" aria-hidden="true"></span>
-              <Photo motif={p?.motif} img={p?.img} stamp="" />
-              <span className="caption">{shortDate(w.id)} {p?.title ?? ''}</span>
-              {went && <span className="zumi">現像<br />済</span>}
-            </button>
+            <div key={ymd(d)} className={`wx-cell ${isToday(d) ? 'is-today' : ''}`} title={text}>
+              <b>{isToday(d) ? '今日' : mdw(d)}</b>
+              <div className="wx-main"><Icon k={icon} /><span className="t num">{Math.round(w.tmax)}°</span></div>
+              <span className={`pop num ${w.pop >= 50 ? 'wet' : ''}`}>降水 {w.pop}%</span>
+            </div>
           )
         })}
       </div>
+      <div className="wx-note">予報 · Open-Meteo · {String(wx.at.getHours()).padStart(2, '0')}:{String(wx.at.getMinutes()).padStart(2, '0')} 取得 · 最高気温と降水確率</div>
     </section>
   )
 }
 
-export default function App() {
-  const weekends = useMemo(
-    () => [...plansData.weekends].sort((a, b) => (a.id < b.id ? 1 : -1)),
-    [],
+function Hero({ item, today, label }) {
+  const [open, setOpen] = useState(false)
+  const mins = minutesOf(item)
+  const t = TYPE[item.type]
+  return (
+    <section className="hero-wrap">
+      <div className="sec"><h2>{label}の<em>イチ押し</em></h2></div>
+      <article className={`hero ${item.image ? 'has-img' : 'no-img'}`} onClick={() => setOpen((v) => !v)}>
+        {item.image && <img src={item.image} alt="" loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.parentElement.classList.replace('has-img', 'no-img'); e.currentTarget.remove() }} />}
+        <div className="hero-bg num" aria-hidden="true">{md(parseYmd(item.when.from)).replace('/', '.')}<span>→</span>{md(parseYmd(item.when.to)).replace('/', '.')}</div>
+        {mins && <div className="min"><span className="n num">{mins}</span><span className="u">分</span></div>}
+        <div className="ov">
+          <div className="eyebrow">{t.label} · {item.when.text}</div>
+          <h3>{item.title}</h3>
+          <p>{item.place.name}{item.price ? ` · ${item.price}` : ''}</p>
+        </div>
+      </article>
+      {open && <Detail item={item} />}
+    </section>
   )
-  const [currentId, setCurrentId] = useState(weekends[0]?.id)
-  const [planIdx, setPlanIdx] = useState(0)
-  const [likes, setLikes] = useState(() => weekends[0]?.feedback?.likes ?? [])
+}
 
-  const weekend = weekends.find((w) => w.id === currentId)
-  const isLatest = weekend && weekends[0] && weekend.id === weekends[0].id
-  const plan = weekend?.plans[Math.min(planIdx, (weekend?.plans.length ?? 1) - 1)]
+function Group({ title, sub, items, today, empty }) {
+  if (items.length === 0 && !empty) return null
+  return (
+    <section className="group">
+      <div className="day"><b>{title}</b><span>{sub}</span><span className="cnt num">{items.length}</span></div>
+      {items.length === 0 && <p className="empty">{empty}</p>}
+      {items.map((it, i) => <Row key={it.id} item={it} today={today} i={i} />)}
+    </section>
+  )
+}
 
-  // フィードバック未記入の週は、過去週でもいいね＋注文票を操作できる
-  const hasFeedback = (w) => !!(w?.feedback && (w.feedback.went != null || (w.feedback.likes?.length ?? 0) > 0))
-  const canEdit = !!weekend && !hasFeedback(weekend)
+function Row({ item, today, i }) {
+  const [open, setOpen] = useState(false)
+  const mins = minutesOf(item)
+  const t = TYPE[item.type]
+  const from = parseYmd(item.when.from), to = parseYmd(item.when.to)
+  const started = from <= today
+  const left = daysBetween(today, to)
+  const dateLabel = started
+    ? (left === 0 ? '今日まで' : left === 1 ? '明日まで' : `${md(to)}まで`)
+    : `${md(from)}(${WD[from.getDay()]})${ymd(from) === ymd(to) ? '' : '〜'}`
+  const isNew = item.foundAt === ymd(today)
+  return (
+    <article className={`row ${open ? 'open' : ''}`} style={{ '--i': i }}>
+      <button className="row-main" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        <div className="left">
+          {mins ? <><span className="n num">{mins}</span><span className="u">分</span></> : <span className="n num">—</span>}
+          <span className="dt">{dateLabel}</span>
+        </div>
+        <div className="body">
+          <div className="eyebrow" style={{ color: t.hex }}>{isNew && <i className="new" title="今朝追加" />}{t.label} · {item.when.text}</div>
+          <h4>{item.title}</h4>
+          <div className="meta"><b>{item.place.name}</b>{item.price ? ` · ${item.price}` : ''}</div>
+          <div className="sum">{item.summary}</div>
+        </div>
+        <Thumb item={item} />
+      </button>
+      {open && <Detail item={item} />}
+    </article>
+  )
+}
 
-  const pickWeekend = (id) => {
-    setCurrentId(id)
-    setPlanIdx(0)
-    const w = weekends.find((x) => x.id === id)
-    setLikes(w?.feedback?.likes ?? [])
-  }
+function Thumb({ item }) {
+  const [broken, setBroken] = useState(false)
+  const t = TYPE[item.type]
+  if (item.image && !broken) return <img className="thumb" src={item.image} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setBroken(true)} />
+  const d = parseYmd(item.when.from)
+  return (
+    <div className="thumb tile" style={{ '--c': t.hex }} aria-hidden="true">
+      <span className="m num">{d.getMonth() + 1}</span>
+      <span className="d num">{d.getDate()}</span>
+    </div>
+  )
+}
 
-  const toggleLike = (letter) => {
-    setLikes((prev) => prev.includes(letter) ? prev.filter((l) => l !== letter) : [...prev, letter])
-  }
-  const pastWent = weekend?.feedback?.went && weekend.feedback.went !== 'none' ? weekend.feedback.went : null
+function Detail({ item }) {
+  return (
+    <div className="detail">
+      <p className="why">{item.why}</p>
+      <dl>
+        <dt>行き方</dt><dd>{item.access}</dd>
+        {item.place.station && <><dt>最寄り</dt><dd>{item.place.station}</dd></>}
+        {item.caveats && <><dt>注意</dt><dd>{item.caveats}</dd></>}
+        {item.tags?.length > 0 && <><dt>タグ</dt><dd>{item.tags.join('・')}</dd></>}
+      </dl>
+      <div className="src">
+        <span>{item.source.checkedAt.slice(5).replace('-', '/')} に確認 · {item.source.name}</span>
+        <a href={item.source.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>公式を開く <Icon k="ext" /></a>
+      </div>
+    </div>
+  )
+}
+
+/* ---------------- 定番 ---------------- */
+
+function Staples({ staples, today }) {
+  const [cat, setCat] = useState('all')
+  const [q, setQ] = useState('')
+  const items = useMemo(() => {
+    let a = staples?.items ?? []
+    if (cat !== 'all') a = a.filter((s) => s.category === cat)
+    if (q.trim()) a = a.filter((s) => (s.name + s.area + s.summary + (s.best || '')).includes(q.trim()))
+    return [...a].sort((x, y) => (minutesOf(x) ?? 999) - (minutesOf(y) ?? 999))
+  }, [staples, cat, q])
+  const cats = useMemo(() => {
+    const c = {}
+    for (const s of staples?.items ?? []) c[s.category] = (c[s.category] || 0) + 1
+    return Object.entries(c).sort((a, b) => b[1] - a[1])
+  }, [staples])
+  const month = today.getMonth() + 1
+  const seasonal = (staples?.items ?? []).filter((s) => s.best && s.best.includes(`${month}月`))
 
   return (
-    <div className="stage">
-      <header>
-        <p className="eyebrow"><span>週末プランナー ・ 橋本駅起点</span><span className="no">No.{String(weekends.length).padStart(3, '0')}</span></p>
-        <h1>週末、どれ撮る？</h1>
-        {weekend ? (
-          <p className="sub">
-            <span>{fmtWeekend(weekend.id)}</span>
-            {weekend.weather && (
-              <span className="w"><b>土</b> {weekend.weather.sat} / <b>日</b> {weekend.weather.sun}</span>
-            )}
-            {weekend.weather && <span className="yoho">予報・{weekend.weather.checkedAt}時点</span>}
-          </p>
-        ) : (
-          <p className="sub"><span>まだプランがありません。金曜の /plan をお待ちください。</span></p>
-        )}
+    <main className="staples">
+      <header className="top">
+        <div className="brand"><i /> 旬レーダー</div>
+        <div className="base">定番 · いつでも行けるところ</div>
       </header>
+      <section className="today">
+        <div className="date num">{staples ? staples.items.length : '—'}<small>件</small></div>
+        <div className="lede">これまでに提案して、いつでも行ける場所。<br />橋本から近い順。</div>
+      </section>
+      <div className="search"><input type="search" placeholder="名前・エリアで探す" value={q} onChange={(e) => setQ(e.target.value)} /></div>
+      <div className="chips" aria-label="種類で絞る">
+        <button className={`chip ${cat === 'all' ? 'on' : ''}`} onClick={() => setCat('all')}>すべて</button>
+        {cats.map(([k, n]) => <button key={k} className={`chip ${cat === k ? 'on' : ''}`} onClick={() => setCat(k)}>{CATEGORY[k]} <span className="num cnt-in">{n}</span></button>)}
+      </div>
+      {seasonal.length > 0 && cat === 'all' && !q && (
+        <section className="group">
+          <div className="day"><b>{month}月が見ごろ</b><span>定番のうち、いまの季節に</span></div>
+          {seasonal.map((s, i) => <StapleRow key={s.id} s={s} i={i} />)}
+        </section>
+      )}
+      <section className="group">
+        <div className="day"><b>{cat === 'all' ? 'すべて' : CATEGORY[cat]}</b><span>橋本から近い順</span><span className="cnt num">{items.length}</span></div>
+        {items.length === 0 && <p className="empty">見つかりませんでした。</p>}
+        {items.map((s, i) => <StapleRow key={s.id} s={s} i={i} />)}
+      </section>
+      <footer className="foot"><p>過去の提案やフィードから「期限のないもの」を蓄積しています。営業状況は変わることがあるので、行く前に公式をご確認ください。</p></footer>
+    </main>
+  )
+}
 
-      {weekend && (
-        <>
-          <div className="prints">
-            {weekend.plans.map((p, i) => {
-              const letter = 'abc'[i]
-              return (
-                <Cheki key={p.id} plan={p} weekendId={weekend.id} letter={i + 1}
-                  active={i === planIdx} onSelect={() => setPlanIdx(i)}
-                  liked={canEdit ? likes.includes(letter) : (weekend.feedback?.likes ?? []).includes(letter)}
-                  onToggleLike={canEdit ? () => toggleLike(letter) : null}
-                  wentStamp={!isLatest && pastWent === letter} />
-              )
-            })}
+function StapleRow({ s, i }) {
+  const [open, setOpen] = useState(false)
+  const mins = minutesOf(s)
+  return (
+    <article className={`row ${open ? 'open' : ''}`} style={{ '--i': i }}>
+      <button className="row-main" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        <div className="left">
+          {mins ? <><span className="n num">{mins}</span><span className="u">分</span></> : <span className="n num">—</span>}
+          <span className="dt">{s.area}</span>
+        </div>
+        <div className="body">
+          <div className="eyebrow mute">{CATEGORY[s.category]}{s.best ? ` · ${s.best}` : ''}</div>
+          <h4>{s.name}</h4>
+          <div className="sum">{s.summary}</div>
+        </div>
+        <Icon k="chev" className="chev" />
+      </button>
+      {open && (
+        <div className="detail">
+          <dl>
+            <dt>行き方</dt><dd>{s.access}</dd>
+            {s.station && <><dt>最寄り</dt><dd>{s.station}</dd></>}
+            {s.note && <><dt>メモ</dt><dd>{s.note}</dd></>}
+          </dl>
+          <div className="src">
+            <span>初出 {s.firstSeen.slice(0, 7).replace('-', '/')} · 確認 {s.checkedAt.slice(5).replace('-', '/')}</span>
+            {s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">公式を開く <Icon k="ext" /></a> : <span>公式URLなし</span>}
           </div>
-
-          {plan && <Film plan={plan} />}
-          {plan && <PlanNotes plan={plan} />}
-
-          {canEdit && <OrderSlip key={weekend.id} weekend={weekend} likes={likes} />}
-        </>
+        </div>
       )}
-
-      <EventBoard />
-
-      <Album weekends={weekends.slice(1)} currentId={currentId} onPick={pickWeekend} />
-      {!isLatest && weekend && (
-        <p className="backrow">
-          <button type="button" className="chip" onClick={() => pickWeekend(weekends[0].id)}>
-            ← 今週末にもどる
-          </button>
-        </p>
-      )}
-
-      <footer>
-        行った週末は「現像済み」になって、アルバムが育ちます。<br />
-        写真エリアは絵（イメージ）。天気は予報です。営業・開催情報は出典の調査日時点のもの——お出かけ前に公式をご確認ください。
-      </footer>
-    </div>
+    </article>
   )
 }

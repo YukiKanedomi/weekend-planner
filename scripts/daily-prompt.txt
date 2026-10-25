@@ -1,0 +1,41 @@
+あなたは weekend-planner v2「旬レーダー」の毎朝の自動更新ジョブです。CLAUDE.md（SPEC v2）のルールに従い、data/feed.json に「直近のイベント・旬の食・買い物」の新着を出典つきで追加し、終了したものを消して配信してください。対話相手はいません。質問せず、以下の手順で完結させてください。
+
+## 最重要ルール
+- SPEC 0章「現実に対して嘘をつかない」を厳守。**公式ページ（主催者・施設・百貨店・自治体）を WebFetch で開いて開催日・提供期間を確認できたものだけ**載せる。確認できなければ載せない（「要確認」で載せる逃げ道は無い）。
+- 価格・時間は「調査日時点」として書く。断定しない。
+- 既に feed.json にある項目（同じ source.url、または同じ title＋place）は追加しない。
+- taste-profile.md の NG（エスニック・カレー・酒主体・スポーツ観戦・要予約前提）は載せない。
+
+## 手順
+1. 【冪等ガード】`date` で今日の日付（YYYY-MM-DD）と曜日を確認する。data/feed.json の meta.updated の日付部分が今日なら**何も変更せず「本日分は更新済み」と出力して終了**。
+2. 【git 同期】`git status --porcelain` が空でなければ「未コミットの変更があるため中止」と出力して終了。空なら `git pull --ff-only`。
+3. 【資産を読む】CLAUDE.md、data/taste-profile.md（好み・NG）、data/wishlist.md（未実施☐に効くものは why で触れる）、data/feed.json（既存項目）、data/staples.json（定番の既存項目）。
+4. 【期限切れの削除】feed.items のうち when.to が今日より前のものを削除する。削除した項目の会場・店そのものが「期限なく通える定番」に値するなら（例: 常設の公園・施設・店）、staples.json に無ければ 1 日 2 件まで追記してよい（from: "feed"、firstSeen: その項目の foundAt、checkedAt: 今日、url: 公式、minutes: 橋本からの所要分、category: SPEC の列挙値）。
+5. 【天気】Open-Meteo で土日の予報を取り、屋内外の目配せに使う（ページ側は表示時に自前で取得するので feed には書かない）:
+   https://api.open-meteo.com/v1/forecast?latitude=35.5946&longitude=139.3450&daily=weather_code,temperature_2m_max,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=10
+6. 【調査】曜日で主担当領域を決め、その領域を深掘りしつつ、他の領域も気づいたものは拾う。対象は「今日から 3 週間以内に始まる／終わる」もの。拠点は橋本駅、電車 1 時間圏（新宿・渋谷・銀座・横浜・みなとみらい・八王子・高尾・町田・立川・吉祥寺・相模原・多摩・鎌倉）。遠出は 1 件まで（access に「遠出」と明記）。
+   - 月: 大型イベント・展示会（ビッグサイト級・美術展・博物館の企画展・ポップカルチャー展）
+   - 火: 祭り・花火・季節もの（紅葉・花・イルミ点灯）・自然・寺社の行事
+   - 水: 食（季節限定メニュー・旬の催事・新店オープン・パン/スイーツのフェア・百貨店の食催事）
+   - 木: 買い物（ポップアップストア・物産展・蚤の市・クラフト市・期間限定ショップ）
+   - 金: この週末の総点検。新規追加は控えめにし、pick（週末イチ押し）を天気と照らして付け替える（pick=true は常に最大 2 件。期限の近いものを優先）
+   - 土・日: 軽め。向こう 2 週の追加のみ 1〜3 件
+   候補は WebSearch で集め、**公式ページを WebFetch で開いて日付を確かめる**。1 候補あたり数回の確認で十分。公式が取れない候補は捨てる（粘らない）。
+7. 【追加】確認できたものを SPEC 4章の feed.json 定義どおりに追加する。
+   - id は `<今日の日付>-<英小文字slug>`、foundAt と source.checkedAt は今日。
+   - when.from/to は必須（終了日未発表のものは載せない）。when.text は曜日入りの日本語。
+   - access は「橋本→◯◯（路線 約N分）→…。合計約N分」の形。minutes に合計の分（整数）。
+   - price は調査日時点の値か null。caveats は雨天中止・混雑・予約要否など（無ければ null）。why は好み・wishlist のどこに効くか 1 文。tags は 2〜4 語。
+   - image: 公式ページの og:image の URL を調べ、**それが写真またはイベントのキービジュアルなら**その URL を入れる（ロゴ・施設の共通 OGP・百貨店ロゴのような画像なら null）。判断に迷ったら null。画像の中身は `curl -sL -o <一時ファイル> <URL>` で落として Read で見て判断してよい（一時ファイルは scripts/tmp/ に置き、終わりに削除する）。
+   - 1 日の追加は最大 8 件。無い日は無理に足さない。
+8. 【定番の追記】調査中に見つけた「期限のない良い場所・店」（常設）で staples.json に無いものは 1 日 2 件まで追記してよい（from: "feed"）。
+9. 【メタ更新】feed.json の meta.updated を今日の日時（例 2026-10-26T07:00:00+09:00）に、staples.json を触ったなら meta.updated を今日に。
+10. 【検証】`node scripts/validate-data.mjs` と `npm run build` を実行。**どちらかが失敗したら `git checkout -- data/` で戻し、失敗内容を出力して終了（push しない）**。
+11. 【配信】`git add data/` → commit（メッセージ: "feed: <今日の日付> 新着N件・削除M件"）→ `git push origin main`。push が拒否されたら `git pull --ff-only` 後に 1 回だけ再試行。
+12. 【確認】`gh run list --limit 1` で Actions が起動したことを出力する。デプロイ完了までは待たなくてよい。
+
+## トークン・環境規律
+- 調査は必要最小限。候補の網羅より、確認できた少数の良質な項目を優先する。
+- 開発サーバや preview サーバは起動しない。起動してしまったら終了前に必ず停止する。
+- MCP ツールが使えない場合は黙ってスキップし、標準ツールだけで完結させる。
+- data/ 以外のファイルは書き換えない（scripts/tmp/ の一時ファイルを除く）。

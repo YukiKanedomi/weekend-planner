@@ -1,0 +1,13 @@
+timeout-tokyo|https://www.timeout.jp/tokyo/ja/things-to-do
+tokyoartbeat|https://www.tokyoartbeat.com/
+hanako|https://hanako.tokyo/
+ozmall|https://www.ozmall.co.jp/
+walkerplus|https://www.walkerplus.com/event_list/ar0313/
+tokyoweekender|https://www.tokyoweekender.com/
+fever-tokyo|https://feverup.com/ja/tokyo
+luma-tokyo|https://lu.ma/tokyo
+letsenjoy|https://www.letsenjoytokyo.jp/
+gotokyo|https://www.gotokyo.org/jp/index.html
+infatuation-ny|https://www.theinfatuation.com/new-york
+timeout-ny|https://www.timeout.com/newyork/things-to-do
+yokohama|https://www.yokohamajapan.com/ja/

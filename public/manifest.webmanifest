@@ -1,16 +1,37 @@
 {
-  "name": "週末プランナー — 週末、どれ撮る？",
-  "short_name": "週末プランナー",
+  "name": "旬レーダー — 橋本駅起点",
+  "short_name": "旬レーダー",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
-  "background_color": "#EFE8D8",
-  "theme_color": "#BE5843",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "icons": [
-    { "src": "favicon-32.png", "sizes": "32x32", "type": "image/png" },
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
-    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+    {
+      "src": "favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
   ]
 }

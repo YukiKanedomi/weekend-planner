@@ -1,88 +1,119 @@
-# 週末プランナー — 設計図 / ビルド指示書（SPEC）
+# 週末プランナー v2「旬レーダー」— 設計図（SPEC）
 
-> このファイルは新プロジェクトの CLAUDE.md（正典）。`data/` の種データと一緒に置き、
-> 「CLAUDE.md（SPEC）通りに作って」で着工できる。
+> 2026-10-25 全面改訂。v1（金曜に週末3案・選択で好みが育つ）は 16 週運用して、感想の往復が 1 回しか
+> 起きなかったため廃止。v2 は**「毎朝、直近のイベント・旬の食・買い物の新着を出典つきで教える」**専業に
+> 軸を移し、何度も出てくる定番は別ページに蓄積する。閲覧専用（学習ループ・感想の往復は持たない）。
 
 ## 0. 最重要ルール — 現実に対して嘘をつかない
-- **イベント・施設情報は必ず出典（公式URL）つき**で、開催日・営業日をWeb上で確認できたものだけ載せる。確認しきれない場合は「要確認」と明記する。
-- 営業時間・料金は変わりやすい→「調査日時点」と添え、断定しない。
-- 天気は予報であることを明示。捏造・盛りは一切しない（実在しない店・イベントを出したら即信頼喪失）。
+- 載せるのは **Web 上で開催日・提供期間・営業を確認できたものだけ**。各項目に出典 URL（公式優先）と確認日を必ず付ける。確認できないものは載せない（「要確認」で載せる逃げ道も v2 では無し。載せるか捨てるか）。
+- 価格・営業時間は「調査日時点」。断定しない。
+- 天気は予報であることを明示。実在しない店・イベント・限定品を 1 件でも出したら信頼を失う。
 
 ## 1. これは何
-夫婦2人のための週末プランナー。**毎週金曜までに、その週末のお出かけプラン3案**を生成して
-スマホで見られるページに配信する。選択・感想を返すと**好みプロファイルが育ち**、
-提案の精度が上がる。ただし**3案のうち1案は必ず「風の枠」**（未訪問・未経験・季節の一期一会）で、
-マンネリを防ぐ。design-dojo の「2案は好み直球＋1案は定跡外」「選択ログで育つ taste-profile」の型の生活版。
+夫婦 2 人（拠点: 相模原市・橋本駅すぐ、電車移動・日帰り）のための、**毎朝自動更新される「おでかけ・食・買い物の旬レーダー」**。
+
+- **新着（Feed）**: 期限のあるもの。向こう約 3 週間のイベント・祭り・花火・展示・ポップアップ、季節限定メニュー・旬の食材の催事、期間限定ショップ・物産展・新店オープン。毎朝 Opus が調査して追加し、終了したものは自動で消える。
+- **定番（Staples）**: いつでも行ける・買える・食べられるもの。過去の提案やフィードから「期限のないもの」を蓄積し、カテゴリ／エリア別に一覧できる。育つ資産。
+- 好み・NG は `data/taste-profile.md`（手で更新）。調査の絞り込みに使う。
 
 ## 2. 前提（確定事項）
-- **拠点**: 相模原市・橋本駅すぐ（京王相模原線・JR横浜線・JR相模線）。
-- **移動**: 電車が主（初期調査により**事実上電車前提**。車は例外時のみ）。**日帰りが基本**。
-- 行動圏の目安: 電車＝新宿/横浜/八王子/高尾方面が定番圏（1時間圏が基本）。
-- 利用者: 夫婦2人（プロフィールは共有1本。個人差が見えたらメモ欄で扱う）。
-- **好み・NG・冒険枠の正は `data/taste-profile.md`**（初期調査反映済み）。生成時は必ず参照する。
+- 拠点: 橋本駅（京王相模原線・JR 横浜線・JR 相模線）。電車前提・日帰り基本。行動圏は 1 時間圏（新宿・渋谷・横浜・八王子・高尾・町田・立川・鎌倉あたり）。遠出は「特別編」として少量なら可。
+- 利用者は夫婦 2 人。奥様も読む → わかりやすさ最優先。絵文字アイコン禁止。スマホ縦画面ファースト。
+- 好み・NG の正は `data/taste-profile.md`。NG（エスニック・カレー・酒主体・スポーツ観戦・要予約基本）は載せない。
 
-## 3. アーキテクチャ（radar型＝データ/表示分離）
+## 3. アーキテクチャ
 ```
-生成(/plan 週次) → data/plans.json 追記 → 静的サイト(Pages) → スマホ
-                 ↖ data/taste-profile.md ＋ data/visited.json（学習資産）
-フィードバック: ページの「選択をコピー」→ チャットに貼る → /learn が taste/visited を更新
+毎朝 7:00  Task Scheduler `WeekendPlanner-DailyFeed`
+   → scripts/daily-feed.ps1 → claude -p (Opus) → data/feed.json 更新・data/staples.json 追記
+   → npm run build 検証 → git push → GitHub Actions → Pages
+表示: Vite + React 静的サイト。feed.json / staples.json をビルド時に静的 import して描画（base サブパス対策は deploy-pages 準拠）
+天気: Open-Meteo（キー不要）。橋本駅 35.5946, 139.3450
 ```
-- 表示は Vite + React の静的サイト。`plans.json` を fetch して描画（base サブパス対策は deploy-pages スキル準拠）。
-- 生成は **ローカルの定時ジョブで自動化済み（2026-08-09 移行・稼働中）**: タスクスケジューラ `WeekendPlanner-FridayPlan`（毎週金 17:00）が `scripts/auto-plan.ps1` を起動し、`/plan` 相当の調査→`data/plans.json` 追記→push まで無人で行う。手動で回すときは `/plan`。
-  - 止める: `Disable-ScheduledTask -TaskName 'WeekendPlanner-FridayPlan'`。状態: `Get-ScheduledTaskInfo -TaskName 'WeekendPlanner-FridayPlan'`。作法は `headless-job` スキル。
-  - `plans.json` を手で変えたら `node scripts/validate-plans.mjs` で検証する。
-- 天気: Open-Meteo（無料・キー不要）。橋本の緯度経度は実装時に正確な値を確認して定数化。
+- 公開 URL は従来どおり `https://yukikanedomi.github.io/weekend-planner/`（リポジトリ・URL は据え置き）。
+- v1 の金曜ジョブ `WeekendPlanner-FridayPlan` は**廃止**（登録解除）。v1 の資産（plans.json・events.json・visited.json・金曜ジョブ・モチーフ画像・/plan /learn）は `archive/v1/` に移動して保存（定番の種として参照済み）。
+- 表示アプリは `data/feed.json` と `data/staples.json` をビルド時に静的 import する（fetch しない）。データが変わったら push → Actions が再ビルドする。
+- `feed.json`/`staples.json` を手で変えたら `node scripts/validate-data.mjs` で検証（prebuild でも走る）。
 
 ## 4. データモデル
-### data/plans.json
+### data/feed.json — 期限のある新着
 ```jsonc
-{ "meta": { "area": "橋本駅起点", "updated": "..." },
-  "weekends": [ {
-    "id": "2026-07-05",              // 週末の土曜日付
-    "weather": { "sat": "...", "sun": "...", "checkedAt": "..." },
-    "plans": [ {
-      "id": "2026-07-05-a",
-      "kind": "honmei" | "honmei2" | "kaze",   // 風=定跡外枠
-      "title": "...", "catch": "...",
-      "course": [ { "time": "10:00", "spot": "...", "note": "...", "url": "..." } ],
-      "access": "電車: 橋本→◯◯ 40分",  "budget": "二人で〜8,000円",
-      "why": "好みプロファイルのどこに効くか（風の枠なら何が新しいか）",
-      "sources": ["https://..."],      // 開催日・営業を確認したURL
-      "caveats": "雨天中止あり・要予約 等"
-    } ],
-    "feedback": { "likes": ["a","b"], "went": "b|none|null", "rating": "...", "memo": "..." }
-    // /learnが記入。likes=いいねした案（複数可・提案の良さ）、went=実際に行った案1つ（noneは行かず）
-    // likesに入りwentでない案は「とっておき」——後日の/planが時季・天気の合う週に再提案してよい
+{ "meta": { "area": "橋本駅起点", "updated": "2026-10-25T07:00:00+09:00" },
+  "items": [ {
+    "id": "2026-10-25-kanda-furuhon",         // 発見日-slug（英小文字・数字・ハイフン）
+    "type": "event" | "food" | "shop",         // 行く / 食べる / 買う
+    "title": "第66回 神田古本まつり",
+    "summary": "1〜2文。何が・どこで・なぜ今か",
+    "when": { "from": "2026-10-23", "to": "2026-11-01", "text": "10/23(金)〜11/1(日) 10:00〜18:00" },
+    "place": { "name": "神保町 古書店街", "area": "神保町", "station": "神保町駅" },
+    "access": "橋本→新宿（京王線 約45分）→神保町（都営新宿線 約10分）。合計約60〜70分",
+    "minutes": 70,                                // 橋本駅からの所要の目安（整数・分）。並び順と「N分」表示に使う
+    "price": "入場無料",                          // 調査日時点。不明なら null
+    "tags": ["古本", "食べ歩き", "街ぶら"],
+    "why": "好み・wishlist のどこに効くか（1文）",
+    "source": { "url": "https://...", "name": "公式サイト", "checkedAt": "2026-10-25" },
+    "caveats": "雨天中止・要予約・混雑など（無ければ null）",
+    "image": "https://.../ogp.jpg",               // 出典ページの og:image。写真・キービジュアルのときだけ（ロゴなら null）
+    "foundAt": "2026-10-25",
+    "pick": true                                  // 今週末イチ押し（常に最大2件）
   } ] }
 ```
-### data/taste-profile.md — 3層構造（design-dojo と同じ規律）
-確定した好み（3回以上支持で昇格）／仮説（証拠つき）／選択ログ（表）。初期値は「初期好み調査パネル」の回答から起こす。
-### data/visited.json — 訪問済みスポット・エリアの台帳（風の枠の「未訪問」判定に使う）
-### data/wishlist.md — 夫婦の「やりたいことリスト」原本転記（☑済/☐未・カテゴリ別）
-**風の枠はまずここの未実施項目から**天気・季節・開催日の合うものを探す（本人たちが望んだことに勝る提案はない）。新しい望みは随時追記。
+- `when.to` が過去になった項目は日次ジョブが削除する（履歴は git にある）。`when.from/to` は必須（food/shop の季節限定も期間を書く。期限が無いものは feed ではなく staples へ）。
+- 重複禁止: 同じ `source.url` または同じ title＋place の項目は追加しない。
+- 1 日の追加は **最大 8 件**。無い日は無理に足さない。質 > 量。
 
-## 5. 3案の構成ルール
-- **本命2案**: 好みプロファイル直球。天気適合を最優先（雨予報なら屋内系に差し替え）。
-- **風の枠1案**: 優先順に——①wishlist.md の未実施項目で時季が合うもの ②未訪問エリア ③未経験ジャンル ④その週末しかない季節もの・イベント。
-  「なぜ新しいか」を why に明記。奇抜さの水準は taste-profile の「冒険枠の強さ」設定に従う。
-- 各案は**半日〜1日のコース**（タイムライン2〜5点）。ぜんぶ盛りにしない（詰め込みは疲れる）。
-- 過去4週と同じ主目的地は出さない（visited.json 照合）。
+### data/staples.json — 期限のない定番
+```jsonc
+{ "meta": { "updated": "2026-10-25" },
+  "items": [ {
+    "id": "takaosan",
+    "name": "高尾山",
+    "category": "yama" | "onsen" | "kouen" | "machi" | "cafe" | "pan" | "sweets" | "tenji" | "yoru" | "umi" | "animal" | "taiken" | "shop" | "food",
+    "area": "高尾",  "station": "高尾山口駅",
+    "access": "橋本→高尾山口 約25分（京王線）",
+    "minutes": 25,
+    "summary": "1〜2文。何が良いか",
+    "best": "11月下旬の紅葉、夏の夕涼み",            // いつ行くのが良いか。無ければ null
+    "url": "https://...",  "checkedAt": "2026-10-25",
+    "firstSeen": "2026-07-04",                     // 初めて提案・掲載した日
+    "from": "plans-v1" | "feed" | "manual",        // 出自
+    "visited": false,                              // 手で更新（任意）
+    "note": null
+  } ] }
+```
+- 日次ジョブは、調査中に見つけた「期限のない良い場所・店・品」を staples に追記してよい（1 日 2 件まで。重複は name＋area で判定）。feed の項目が終了したとき、会場・店そのものが定番に値するなら staples へ移す。
 
-## 6. フィードバック往復（viz round-trip 方式）
-- プランページ: 各案に**いいねシール**（複数可・提案の良さを残す）＋「行った一枚」（A/B/C/行かなかった）＋一言感想。
-  「選択をコピー」で 週末ID・likes・went・memo を JSON+短文で clipboard へ。ユーザーがチャットに貼る。
-- `/learn` コマンド: 貼られた内容で plans.json の feedback を埋め、taste-profile の選択ログに1行追記、
-  行った先を visited.json に登録。likes は「方向性が刺さった」証拠として仮説に反映。仮説が3回支持されたら確定へ昇格。
-- いいね付き未実行の案は「とっておき」として /plan が再提案候補にする（営業・開催の再確認必須）。
+### data/taste-profile.md — 好み・NG（手で更新。日次ジョブは読むだけ）
 
-## 7. デザイン
-- **design-dojo を必ず発動**（3案儀式・構造から変える・好みプロファイル参照）。
-- 利用者に奥様を含む→わかりやすさ最優先、絵文字アイコン禁止、スマホ縦画面ファースト。
-- 参考の手がかり: 旅のしおり v2（手帳・素材感デザイン）と同じ空気感は好まれる公算大（素材感は確定した好み）。
+## 5. 日次ジョブの調査ルール（scripts/daily-prompt.txt が正典・ここは要約）
+1. 冪等: `meta.updated` が今日なら何もしない。`git pull --ff-only` → `git status` が汚れていたら中止。
+2. 期限切れ削除 → 天気（Open-Meteo 土日）取得。
+3. 調査の枠（毎朝ローテーションで深掘る領域を変える。曜日で主担当を決める）
+   - 月: 大型イベント・展示会（ビッグサイト級・美術展・博物館の企画展）
+   - 火: 祭り・花火・季節もの（紅葉・花・イルミ）・自然
+   - 水: 食（季節限定メニュー・旬の催事・新店・パン/スイーツ）
+   - 木: 買い物（ポップアップ・物産展・蚤の市・新商品）
+   - 金: この週末の総点検（pick の付け替え・天気で屋内外の目配せ）
+   - 土日: 軽め（向こう 2 週の追加のみ）
+   どの日も「向こう 3 週間に始まる／終わる」ものを優先。既に載っているものは再調査しない。
+4. 各候補は **WebSearch → 公式ページを WebFetch** で日付を確かめ、確認できたものだけ feed に追記（source.checkedAt = 今日）。
+5. `node scripts/validate-data.mjs` と `npm run build` が通ったら commit（"feed: YYYY-MM-DD 新着N件・削除M件"）→ push。失敗したら `git checkout -- data/` で戻して終了（push しない）。
+6. 開発サーバは起動しない。起動したら必ず止める。MCP が無ければ黙ってスキップ。
 
-## 8. ビルド手順（着工セッションへ）
-1. Vite+React scaffold → `data/plans.json` 読込で今週末3案＋アーカイブ表示。
-2. design-dojo で AD 3案 → 選択 → 本制作。
-3. GitHub リポ `weekend-planner` 作成 → deploy-pages スキルで Actions 配信。
-4. `/plan`・`/learn` を `.claude/commands/` に定義（本SPECの生成・学習ルールを参照させる）。
-5. 初回は「初期好み調査パネル」の回答（taste-profile 反映済みのはず）を前提に、実在確認済みの3案で試験配信。
+## 6. 画面（デザインは design-dojo で決める。採択結果は `research/design-decision.md` に記録）
+- **ホーム＝新着**: 今日の日付・週末の天気・「今週末のイチ押し」→ 期限の近い順の新着一覧。type（行く／食べる／買う）で絞れる。各項目は「いつ・どこ・橋本から何分・いくら・出典」が一目で分かる。
+- **定番**: カテゴリ／エリアで絞る一覧。「いつ行くのが良いか（best）」を見せる。
+- 詳細は展開式（別ページ遷移を増やさない）。出典リンクは必ず表示。
+- 「予報」「調査日時点」の表記は UI に組み込む（0 章）。
+
+## 7. デザインの作法
+- design-dojo v3 を必ず発動（制約 → field-survey で今年の一級実例 → 本命 1＋対案 1 → 選択 → 本制作 → render-check）。
+- 絵文字アイコン禁止。日本語組版は `design-dojo/mechanics/japanese-typography.md` に従う。
+- 画像: v1 のグワッシュ調モチーフ（public/motifs）は v2 では使わない前提。使うなら design の判断として明記。
+
+## 8. 運用メモ
+- 状態確認: `Get-ScheduledTaskInfo -TaskName 'WeekendPlanner-DailyFeed'`。ログ: `scripts/daily-feed.log`。
+- 止める: `Disable-ScheduledTask -TaskName 'WeekendPlanner-DailyFeed'`。
+- 手動で回す: `/feed`（`.claude/commands/feed.md`）。ジョブの正典は `scripts/daily-prompt.txt`。
+- 画像は出典ページの og:image をリンクプレビューとして表示する（公式が配信用に用意した画像。ロゴしか無い項目は種別色のタイルで日付を見せる）。
+- デザインの採択記録: `research/field-survey.md`（実例採集と文法）、`research/mock-a.html`（採択案）、`research/mock-b.html`（対案）。
+- 作法の正典は `headless-job` スキル。

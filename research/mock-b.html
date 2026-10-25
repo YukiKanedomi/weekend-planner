@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>旬レーダー 対案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1b1b1b;--mute:#6f6f6f;--paper:#fbfaf7;--go:#dfe9f3;--eat:#f7efd6;--buy:#f6e1e4;--go-ink:#2d5c8a;--eat-ink:#8a6a12;--buy-ink:#a0404f}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#d9d9d9}
+body{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);line-height:1.8;letter-spacing:.03em;-webkit-font-smoothing:antialiased}
+.stage{width:390px;margin:0 auto;background:var(--paper);min-height:1900px;position:relative;overflow:hidden}
+.mast{padding:22px 20px 0;text-align:center}
+.mast .t{font-family:"Shippori Mincho",serif;font-size:30px;font-weight:800;letter-spacing:.12em;line-height:1.2}
+.mast .issue{font-family:"Cormorant",serif;font-style:italic;font-size:15px;color:var(--mute);margin-top:2px}
+.mast .lead{font-size:12.5px;line-height:1.9;margin:12px 4px 0;color:#333}
+.mast .lead b{font-weight:700}
+.wline{font-size:11px;color:var(--mute);margin-top:6px;letter-spacing:.05em}
+.nav{display:flex;justify-content:center;gap:22px;margin:16px 0 0;font-size:13px}
+.nav a{text-decoration:none;color:var(--mute);padding-bottom:4px;border-bottom:2px solid transparent}
+.nav a.on{color:var(--ink);border-color:var(--ink);font-weight:700}
+.feature{margin:18px 16px 0;position:relative}
+.feature img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-radius:4px}
+.feature .cap{padding:10px 2px 0}
+.kicker{font-size:11px;letter-spacing:.14em;color:var(--mute)}
+.feature h2{font-family:"Shippori Mincho",serif;font-size:21px;font-weight:700;line-height:1.5;margin-top:2px;word-break:auto-phrase}
+.feature p{font-size:12.5px;color:#333;margin-top:4px}
+.stamp{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);border-radius:2px;padding:4px 8px;font-size:11px;letter-spacing:.08em}
+.h{display:flex;align-items:baseline;gap:10px;padding:26px 16px 8px}
+.h h3{font-family:"Shippori Mincho",serif;font-size:17px;font-weight:700;letter-spacing:.1em}
+.h span{font-size:11px;color:var(--mute)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px}
+.tile{border-radius:6px;overflow:hidden;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.tile .im{aspect-ratio:1/1;background:#eee;position:relative}
+.tile .im img{width:100%;height:100%;object-fit:cover;display:block}
+.tile .im.go{background:var(--go)}.tile .im.eat{background:var(--eat)}.tile .im.buy{background:var(--buy)}
+.tile .im .k{position:absolute;left:8px;top:8px;font-size:10px;letter-spacing:.1em;background:#fff;padding:2px 6px;border-radius:2px}
+.tile .im .big{position:absolute;inset:0;display:grid;place-items:center;font-family:"Shippori Mincho",serif;font-size:34px;font-weight:800;letter-spacing:.05em}
+.tile .im.go .big{color:var(--go-ink)}.tile .im.eat .big{color:var(--eat-ink)}.tile .im.buy .big{color:var(--buy-ink)}
+.tile .b{padding:8px 10px 10px}
+.tile .d{font-size:10.5px;color:var(--mute);letter-spacing:.04em}
+.tile h4{font-family:"Shippori Mincho",serif;font-size:14px;font-weight:700;line-height:1.5;margin-top:2px;word-break:auto-phrase}
+.tile .m{font-size:11px;color:#444;margin-top:3px;line-height:1.5}
+.tile .m b{font-weight:700}
+.band{margin:26px 0 0;padding:18px 16px 22px;background:var(--go)}
+.band.eat{background:var(--eat)}
+.band h3{font-family:"Shippori Mincho",serif;font-size:17px;font-weight:700;letter-spacing:.1em}
+.band p{font-size:12.5px;color:#333;margin-top:4px}
+.list{margin-top:12px}
+.list .it{display:flex;gap:12px;padding:10px 0;border-top:1px solid rgba(0,0,0,.1);font-size:12.5px}
+.list .it:first-child{border-top:0}
+.list .it .dt{font-family:"Cormorant",serif;font-size:18px;font-weight:500;width:58px;flex:none;line-height:1.2}
+.list .it .dt small{display:block;font-family:"Zen Kaku Gothic New";font-size:10px;color:var(--mute)}
+.list .it h5{font-size:13.5px;font-weight:700;line-height:1.5}
+.list .it .m{font-size:11px;color:#444}
+.foot{padding:20px 16px 110px;font-size:11px;color:var(--mute);line-height:1.8}
+.bnav{position:absolute;left:0;right:0;bottom:0;height:62px;background:var(--paper);border-top:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-around;font-size:12px}
+.bnav a{color:var(--mute);text-decoration:none;font-family:"Shippori Mincho",serif;letter-spacing:.1em}
+.bnav a.on{color:var(--ink);font-weight:700}
+</style></head><body><div class="stage">
+<div class="mast"><div class="t">旬レーダー</div><div class="issue">No.1 — 2026.10.25 Sat.</div>
+ <div class="lead">今日と明日は<b>本降りの雨</b>。来週末は晴れ間が戻る予報です。<br>橋本から1時間圏の、いま行ける・食べられる・買えるもの。</div>
+ <div class="wline">土 27° 雨100% ／ 日 18° 雨100% ／ 来週土 22° 25% ／ 日 16° 13%（Open-Meteo 予報・7:00取得）</div>
+ <div class="nav"><a class="on" href="#">すべて</a><a href="#">行く</a><a href="#">食べる</a><a href="#">買う</a></div>
+</div>
+
+<div class="feature"><img src="https://lp.p.pia.jp/shared/materials/e08e6237-3857-4b4b-8a1d-f8cedbbc1033/origin.jpg" alt=""><div class="stamp">今週末の特集 · 雨でも</div>
+ <div class="cap"><div class="kicker">行く ／ 10/26(月)〜11/4(水) ／ 日比谷・有楽町 ／ 橋本から約75分</div><h2>第39回 東京国際映画祭</h2><p>映画館好きの、年に一度のお祭り版。日比谷・有楽町の街ぶらと組める。出典: ぴあ（10/25確認）</p></div></div>
+
+<div class="h"><h3>いま開催中</h3><span>今週末に行ける</span></div>
+<div class="grid">
+ <div class="tile"><div class="im go"><span class="k">行く</span><div class="big">古本</div></div><div class="b"><div class="d">10/23〜11/1 · 神保町 · 70分</div><h4>第66回 神田古本まつり</h4><div class="m">靖国通りに露店約100店。<b>入場無料</b></div></div></div>
+ <div class="tile"><div class="im eat"><span class="k">食べる</span><div class="big">栗</div></div><div class="b"><div class="d">〜11/30 · 新宿 · 65分 ※サンプル</div><h4>栗のモンブラン催事（サンプル行）</h4><div class="m">初回調査で実物に差し替え</div></div></div>
+ <div class="tile"><div class="im"><img src="https://www.yokohama-nightflowers.com/ogp.jpg" alt=""><span class="k">行く</span></div><div class="b"><div class="d">11/14(土) 19:00 · 新港ふ頭 · 60分</div><h4>横浜ナイトフラワーズ</h4><div class="m">5分間の花火。<b>無料</b>・荒天中止</div></div></div>
+ <div class="tile"><div class="im buy"><span class="k">買う</span><div class="big">市</div></div><div class="b"><div class="d">10/31〜11/1 · 横浜 · 60分 ※サンプル</div><h4>ハンドメイドの蚤の市（サンプル行）</h4><div class="m">初回調査で実物に差し替え</div></div></div>
+</div>
+
+<div class="band"><h3>その先の予定</h3><p>11月に入ってからの、日付の決まっているもの。</p>
+ <div class="list">
+  <div class="it"><div class="dt">11.7<small>土</small></div><div><h5>酉の市（浅草 鷲神社）</h5><div class="m">一の酉。熊手の露店と提灯の夜 · 約100分 · 大混雑の見込み</div></div></div>
+  <div class="it"><div class="dt">11.14<small>土日</small></div><div><h5>デザインフェスタ vol.64</h5><div class="m">東京ビッグサイト 西・南館 10:00〜18:00 · 約90分 · 前売あり</div></div></div>
+  <div class="it"><div class="dt">11.7<small>土</small></div><div><h5>土浦全国花火競技大会（遠出）</h5><div class="m">茨城・土浦 17:30〜 · 約2時間超 · 荒天時11/14に順延</div></div></div>
+ </div></div>
+
+<div class="band eat"><h3>定番から、今の季節に</h3><p>いつでも行ける場所のうち、11月が見ごろのもの。</p>
+ <div class="list">
+  <div class="it"><div class="dt">11月<small>下旬</small></div><div><h5>高尾山の紅葉と、ふもとの極楽湯</h5><div class="m">橋本→高尾山口 約25分 · v1で2回提案</div></div></div>
+  <div class="it"><div class="dt">通年<small></small></div><div><h5>深大寺そばと神代植物公園</h5><div class="m">橋本→調布 約40分＋バス · 大温室</div></div></div>
+ </div></div>
+
+<div class="foot">掲載は公式ページで日付を確認できたものだけ。価格・時間は確認日時点のもので、変わることがあります。天気は予報です。</div>
+<div class="bnav"><a class="on" href="#">今日の号</a><a href="#">定番</a><a href="#">バックナンバー</a></div>
+</div></body></html>
