@@ -3,3 +3,8 @@ dist
 scripts/daily-feed.log
 scripts/tmp/
 archive/v1/auto-plan.log
+research/appstore/
+research/appstore2/
+research/og/
+research/web/*.png
+research/*.png
