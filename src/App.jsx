@@ -65,6 +65,7 @@ function Feed({ feed, today, season }) {
   }, [feed, today])
   const updated = feed?.meta?.updated ? new Date(feed.meta.updated) : null
   const newToday = (feed?.items ?? []).filter((it) => it.foundAt === ymd(today)).length
+  const staleHours = updated ? (Date.now() - updated.getTime()) / 36e5 : 0
 
   return (
     <main className="feed">
@@ -81,6 +82,9 @@ function Feed({ feed, today, season }) {
           </> : '読み込み中…'}
         </div>
       </section>
+      {staleHours > 36 && (
+        <div className="stale">自動更新が止まっているかもしれません。最終更新は {md(updated)} です（ログ: scripts/daily-feed.log）。</div>
+      )}
       <Weather today={today} sat={g.sat} />
 
       <div className="chips" role="tablist" aria-label="種類で絞る">

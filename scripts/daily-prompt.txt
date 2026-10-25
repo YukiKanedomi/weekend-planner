@@ -8,7 +8,7 @@
 
 ## 手順
 1. 【冪等ガード】`date` で今日の日付（YYYY-MM-DD）と曜日を確認する。data/feed.json の meta.updated の日付部分が今日なら**何も変更せず「本日分は更新済み」と出力して終了**。
-2. 【git 同期】`git status --porcelain` が空でなければ「未コミットの変更があるため中止」と出力して終了。空なら `git pull --ff-only`。
+2. 【git 同期】`git status --porcelain -- data/` が空でなければ「data/ に未コミットの変更があるため中止」と出力して終了（data/ 以外の変更やファイルは無視してよい）。空なら `git pull --ff-only origin main`（失敗しても続行してよい。ランチャー側が最後に同期・push する）。
 3. 【資産を読む】CLAUDE.md、data/taste-profile.md（好み・NG）、data/wishlist.md（未実施☐に効くものは why で触れる）、data/feed.json（既存項目）、data/staples.json（定番の既存項目）。
 4. 【期限切れの削除】feed.items のうち when.to が今日より前のものを削除する。削除した項目の会場・店そのものが「期限なく通える定番」に値するなら（例: 常設の公園・施設・店）、staples.json に無ければ 1 日 2 件まで追記してよい（from: "feed"、firstSeen: その項目の foundAt、checkedAt: 今日、url: 公式、minutes: 橋本からの所要分、category: SPEC の列挙値）。
 5. 【天気】Open-Meteo で土日の予報を取り、屋内外の目配せに使う（ページ側は表示時に自前で取得するので feed には書かない）:
@@ -31,7 +31,7 @@
 8. 【定番の追記】調査中に見つけた「期限のない良い場所・店」（常設）で staples.json に無いものは 1 日 2 件まで追記してよい（from: "feed"）。
 9. 【メタ更新】feed.json の meta.updated を今日の日時（例 2026-10-26T07:00:00+09:00）に、staples.json を触ったなら meta.updated を今日に。
 10. 【検証】`node scripts/validate-data.mjs` と `npm run build` を実行。**どちらかが失敗したら `git checkout -- data/` で戻し、失敗内容を出力して終了（push しない）**。
-11. 【配信】`git add data/` → commit（メッセージ: "feed: <今日の日付> 新着N件・削除M件"）→ `git push origin main`。push が拒否されたら `git pull --ff-only` 後に 1 回だけ再試行。
+11. 【配信】`git add -- data/` → commit（メッセージ: "feed: <今日の日付> 新着N件・削除M件"。data/ 以外は commit に含めない）→ `git push origin main`。push が拒否されたら `git pull --rebase origin main` 後に 1 回だけ再試行。それでも失敗したら**そこで終了してよい**（ランチャーが検証→commit→push を機械的にやり直す。自分で何度も粘らない）。
 12. 【確認】`gh run list --limit 1` で Actions が起動したことを出力する。デプロイ完了までは待たなくてよい。
 
 ## トークン・環境規律

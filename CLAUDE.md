@@ -117,3 +117,4 @@
 - 画像は出典ページの og:image をリンクプレビューとして表示する（公式が配信用に用意した画像。ロゴしか無い項目は種別色のタイルで日付を見せる）。
 - デザインの採択記録: `research/field-survey.md`（実例採集と文法）、`research/mock-a.html`（採択案）、`research/mock-b.html`（対案）。
 - 作法の正典は `headless-job` スキル。
+- **失敗しない配信の仕組み（2026-10-25）**: ランチャー `scripts/daily-feed.ps1` が Claude の後に機械的な FINALIZE 段を持つ（検証 → data/ の未コミット分を commit → pull --rebase → push を最大4回再試行）。検証に失敗したら data/ を戻して exit 4。Claude の認証切れ（v1 で2回あった唯一の失敗原因）は exit 2 で返し、タスクスケジューラの「失敗時に90分おきに最大4回再実行」で同日中にやり直す。ページ側は最終更新が36時間を超えると警告バナーを出す。
