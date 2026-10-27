@@ -37,6 +37,8 @@ for (const [i, it] of (feed.items ?? []).entries()) {
   if (!DATE.test(it.when?.to ?? '')) err(`${p}.when.to`, 'YYYY-MM-DD が必要')
   if (it.when?.from && it.when?.to && it.when.from > it.when.to) err(`${p}.when`, 'from が to より後')
   str(`${p}.when.text`, it.when?.text)
+  if (it.when?.open !== undefined && typeof it.when.open !== 'boolean') err(`${p}.when.open`, 'true/false が必要（終了日未発表の商品だけ true）')
+  if (it.when?.open === true && !it.caveats) err(`${p}.caveats`, 'when.open の商品は caveats に「終了日は公式未発表」を書く')
   str(`${p}.place.name`, it.place?.name)
   str(`${p}.place.area`, it.place?.area)
   str(`${p}.access`, it.access)

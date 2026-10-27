@@ -156,7 +156,7 @@ function Hero({ item, today, label }) {
       <div className="sec"><h2>{label}の<em>イチ押し</em></h2></div>
       <article className={`hero ${item.image ? 'has-img' : 'no-img'}`} onClick={() => setOpen((v) => !v)}>
         {item.image && <img src={item.image} alt="" loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.parentElement.classList.replace('has-img', 'no-img'); e.currentTarget.remove() }} />}
-        <div className="hero-bg num" aria-hidden="true">{md(parseYmd(item.when.from)).replace('/', '.')}<span>→</span>{md(parseYmd(item.when.to)).replace('/', '.')}</div>
+        <div className="hero-bg num" aria-hidden="true">{md(parseYmd(item.when.from)).replace('/', '.')}{item.when.open ? <span>〜</span> : <><span>→</span>{md(parseYmd(item.when.to)).replace('/', '.')}</>}</div>
         {mins && <div className="min"><span className="n num">{mins}</span><span className="u">分</span></div>}
         <div className="ov">
           <div className="eyebrow">{t.label} · {item.when.text}</div>
@@ -187,7 +187,9 @@ function Row({ item, today, i }) {
   const from = parseYmd(item.when.from), to = parseYmd(item.when.to)
   const started = from <= today
   const left = daysBetween(today, to)
-  const dateLabel = started
+  const dateLabel = item.when.open
+    ? (started ? '発売中' : `${md(from)}発売`)
+    : started
     ? (left === 0 ? '今日まで' : left === 1 ? '明日まで' : `${md(to)}まで`)
     : `${md(from)}(${WD[from.getDay()]})${ymd(from) === ymd(to) ? '' : '〜'}`
   const isNew = item.foundAt === ymd(today)
@@ -229,7 +231,7 @@ function Detail({ item }) {
     <div className="detail">
       <p className="why">{item.why}</p>
       <dl>
-        <dt>行き方</dt><dd>{item.access}</dd>
+        <dt>{item.when.open ? '買える店' : '行き方'}</dt><dd>{item.access}</dd>
         {item.place.station && <><dt>最寄り</dt><dd>{item.place.station}</dd></>}
         {item.caveats && <><dt>注意</dt><dd>{item.caveats}</dd></>}
         {item.tags?.length > 0 && <><dt>タグ</dt><dd>{item.tags.join('・')}</dd></>}
