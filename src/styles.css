@@ -104,6 +104,8 @@ a { color: inherit; }
 .day span { font-size: 11px; color: var(--mute); }
 .day .cnt { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--mute); }
 .empty { font-size: 12.5px; color: var(--mute); padding: 6px 0 14px; }
+.more { display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; padding: 11px 0 13px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.more .ic { width: 16px; height: 16px; color: var(--mute); }
 
 .row { border-top: 1px solid var(--line); animation: rise .35s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 30ms); }
 .row:first-of-type { border-top: 0; }

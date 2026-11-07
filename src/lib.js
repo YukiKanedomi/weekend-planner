@@ -77,15 +77,17 @@ export function wmo(code) {
 // 期間が [a,b] と交差するか
 const overlaps = (from, to, a, b) => from <= b && to >= a
 
-// フィードを「今週末に行ける／来週末／その先」に分ける
+// フィードを「今週末に行ける／来週末／その先」に分ける。
+// 会期の長い項目（when.ongoing）は新着の並びに居座らないよう、別枠 ongoing（末尾の「開催中（長期）」）へ
 export function groupFeed(items, today) {
   const [sat, sun] = upcomingWeekend(today)
   const sat2 = addDays(sat, 7), sun2 = addDays(sun, 7)
-  const g = { weekend: [], nextWeekend: [], later: [], weekdayOnly: [] }
+  const g = { weekend: [], nextWeekend: [], later: [], weekdayOnly: [], ongoing: [] }
   for (const it of items) {
     const from = parseYmd(it.when.from), to = parseYmd(it.when.to)
     if (to < today) continue
-    if (overlaps(from, to, sat, sun)) g.weekend.push(it)
+    if (it.when.ongoing) g.ongoing.push(it)
+    else if (overlaps(from, to, sat, sun)) g.weekend.push(it)
     else if (to < sat) g.weekdayOnly.push(it)
     else if (overlaps(from, to, sat2, sun2)) g.nextWeekend.push(it)
     else g.later.push(it)
@@ -96,5 +98,6 @@ export function groupFeed(items, today) {
   g.weekdayOnly.sort(byTo)
   g.nextWeekend.sort(byFrom)
   g.later.sort(byFrom)
+  g.ongoing.sort(byTo)
   return { ...g, sat, sun, sat2, sun2 }
 }

@@ -58,10 +58,16 @@ function Feed({ feed, today, season }) {
   const [onlyWeekend, setOnlyWeekend] = useState(false)
   const items = useMemo(() => (feed?.items ?? []).filter((it) => filter === 'all' || it.type === filter), [feed, filter])
   const g = useMemo(() => groupFeed(items, today), [items, today])
+  // イチ押しはデータの pick: true。無い・期限切れのときは、今週末に行ける中から橋本に一番近いもの（商品は除く）で代える
   const pick = useMemo(() => {
     const all = feed?.items ?? []
     const cands = all.filter((it) => it.pick && parseYmd(it.when.to) >= today)
-    return cands.sort((a, b) => a.when.to.localeCompare(b.when.to))[0] ?? null
+    const chosen = cands.sort((a, b) => a.when.to.localeCompare(b.when.to))[0]
+    if (chosen) return { item: chosen, auto: false }
+    const near = groupFeed(all, today).weekend
+      .filter((it) => !it.when.open && minutesOf(it) != null)
+      .sort((a, b) => minutesOf(a) - minutesOf(b) || a.when.to.localeCompare(b.when.to))[0]
+    return near ? { item: near, auto: true } : null
   }, [feed, today])
   const updated = feed?.meta?.updated ? new Date(feed.meta.updated) : null
   const newToday = (feed?.items ?? []).filter((it) => it.foundAt === ymd(today)).length
@@ -95,14 +101,16 @@ function Feed({ feed, today, season }) {
         <button className={`chip q ${onlyWeekend ? 'on' : ''}`} aria-pressed={onlyWeekend} onClick={() => setOnlyWeekend((v) => !v)}>今週末だけ</button>
       </div>
 
-      {pick && filter === 'all' && !onlyWeekend && <Hero item={pick} today={today} label={parseYmd(pick.when.from) > g.sun ? '来週末' : '今週末'} />}
+      {pick && filter === 'all' && !onlyWeekend && <Hero item={pick.item} today={today} auto={pick.auto} label={parseYmd(pick.item.when.from) > g.sun ? '来週末' : '今週末'} />}
 
       {feed && (
         <div className="tl">
-          <Group title="今週末に行ける" sub={`${mdw(g.sat)}・${mdw(g.sun)}`} items={g.weekend} today={today} empty="この種類では、今週末に行けるものがまだありません。" />
+          <Group title="今週末に行ける" sub={`${mdw(g.sat)}・${mdw(g.sun)}`} items={g.weekend} today={today} limit={6} empty="この種類では、今週末に行けるものがまだありません。" />
           {!onlyWeekend && g.weekdayOnly.length > 0 && <Group title="平日のうちに" sub="週末より前に終わるもの" items={g.weekdayOnly} today={today} />}
           {!onlyWeekend && <Group title="来週末" sub={`${mdw(g.sat2)}・${mdw(g.sun2)}`} items={g.nextWeekend} today={today} />}
           {!onlyWeekend && <Group title="その先" sub={`${mdw(addDays(g.sun2, 1))} 以降に始まる`} items={g.later} today={today} />}
+          <Group title="開催中（長期）" sub="会期の長いもの・終わりの近い順" today={today} limit={0}
+            items={onlyWeekend ? g.ongoing.filter((it) => it.when.from <= ymd(g.sun) && it.when.to >= ymd(g.sat)) : g.ongoing} />
         </div>
       )}
       <footer className="foot">
@@ -147,13 +155,13 @@ function Weather({ today, sat }) {
   )
 }
 
-function Hero({ item, today, label }) {
+function Hero({ item, today, label, auto }) {
   const [open, setOpen] = useState(false)
   const mins = minutesOf(item)
   const t = TYPE[item.type]
   return (
     <section className="hero-wrap">
-      <div className="sec"><h2>{label}の<em>イチ押し</em></h2></div>
+      <div className="sec"><h2>{label}の<em>{auto ? 'いちばん近場' : 'イチ押し'}</em></h2></div>
       <article className={`hero ${item.image ? 'has-img' : 'no-img'}`} onClick={() => setOpen((v) => !v)}>
         {item.image && <img src={item.image} alt="" loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.parentElement.classList.replace('has-img', 'no-img'); e.currentTarget.remove() }} />}
         <div className="hero-bg num" aria-hidden="true">{md(parseYmd(item.when.from)).replace('/', '.')}{item.when.open ? <span>〜</span> : <><span>→</span>{md(parseYmd(item.when.to)).replace('/', '.')}</>}</div>
@@ -169,13 +177,22 @@ function Hero({ item, today, label }) {
   )
 }
 
-function Group({ title, sub, items, today, empty }) {
+// limit を渡すと先頭 limit 件だけ見せ、残りは「ほかN件を表示」で開く（0 なら見出しだけの畳んだ枠）
+function Group({ title, sub, items, today, empty, limit }) {
+  const [all, setAll] = useState(false)
   if (items.length === 0 && !empty) return null
+  const shown = all || limit == null ? items : items.slice(0, limit)
+  const rest = items.length - shown.length
   return (
     <section className="group">
       <div className="day"><b>{title}</b><span>{sub}</span><span className="cnt num">{items.length}</span></div>
       {items.length === 0 && <p className="empty">{empty}</p>}
-      {items.map((it, i) => <Row key={it.id} item={it} today={today} i={i} />)}
+      {shown.map((it, i) => <Row key={it.id} item={it} today={today} i={i} />)}
+      {rest > 0 && (
+        <button className="more" onClick={() => setAll(true)}>
+          {shown.length ? `ほか${rest}件を表示` : `${rest}件を表示`}<Icon k="chev" />
+        </button>
+      )}
     </section>
   )
 }
