@@ -25,6 +25,13 @@ const feed = load('feed.json')
 if (typeof feed.meta?.updated !== 'string') err('feed.meta.updated', '文字列が必要')
 if (!Array.isArray(feed.items)) err('feed.items', '配列が必要')
 const seenId = new Set(), seenUrl = new Set(), seenKey = new Set()
+// 今日（日本時間）。CI（UTC）で走っても日付がずれないように JST で求める
+const TODAY = new Date(Date.now() + 9 * 36e5).toISOString().slice(0, 10)
+const ONGOING_DAYS = 21 // 会期がこれを超えるものは「新着」でなく会期中（when.ongoing: true）
+const ONGOING_SINCE = '2026-11-08' // この日以降に見つけた項目は ongoing 未付与をエラーにする（それ以前は警告）
+const FAR_MINUTES = 80, FAR_MAX = 2
+const spanDays = (w) => (Date.parse(w.to) - Date.parse(w.from)) / 864e5
+let picks = 0, far = []
 for (const [i, it] of (feed.items ?? []).entries()) {
   const p = `feed.items[${i}]`
   if (!/^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/.test(it.id ?? '')) err(`${p}.id`, `YYYY-MM-DD-slug 形式が必要 (got: ${it.id})`)
@@ -52,6 +59,21 @@ for (const [i, it] of (feed.items ?? []).entries()) {
   str(`${p}.caveats`, it.caveats, true)
   if (!DATE.test(it.foundAt ?? '')) err(`${p}.foundAt`, 'YYYY-MM-DD が必要')
   if (typeof it.pick !== 'boolean') err(`${p}.pick`, 'true/false が必要')
+  if (it.pick === true) {
+    picks++
+    if (DATE.test(it.when?.to ?? '') && it.when.to < TODAY) err(`${p}.pick`, `期限切れ（when.to ${it.when.to}）の項目にイチ押しが付いている`)
+  }
+  if (it.when?.ongoing !== undefined && typeof it.when.ongoing !== 'boolean') err(`${p}.when.ongoing`, 'true/false が必要')
+  if (DATE.test(it.when?.from ?? '') && DATE.test(it.when?.to ?? '') && it.when.open !== true) {
+    const long = spanDays(it.when) > ONGOING_DAYS
+    if (it.when.ongoing === true && !long) err(`${p}.when.ongoing`, `会期 ${ONGOING_DAYS} 日以内なのに ongoing: true`)
+    if (long && it.when.ongoing !== true) {
+      const msg = `会期が ${ONGOING_DAYS} 日超（${it.when.from}〜${it.when.to}）なので when.ongoing: true が必要`
+      if ((it.foundAt ?? '') >= ONGOING_SINCE) err(`${p}.when.ongoing`, msg)
+      else console.warn(`warn: ${p}.when.ongoing ${msg}（既存項目）`)
+    }
+  }
+  if (Number.isInteger(it.minutes) && it.minutes > FAR_MINUTES) far.push(`${it.id}(${it.minutes}分)`)
   if (it.image !== undefined && it.image !== null && !/^https?:\/\//.test(it.image)) err(`${p}.image`, 'http(s) の URL か null')
   const key = `${it.title}|${it.place?.name}`
   if (seenKey.has(key)) err(`${p}`, `title＋place が重複 (${key})`)
@@ -61,6 +83,9 @@ for (const [i, it] of (feed.items ?? []).entries()) {
     seenUrl.add(it.source.url)
   }
 }
+
+if (picks > 2) err('feed.items', `pick: true は最大 2 件（got: ${picks}）`)
+if (far.length > FAR_MAX) console.warn(`warn: 遠出（${FAR_MINUTES}分超）が ${far.length} 件（上限 ${FAR_MAX}。新規の遠出は追加しない）: ${far.join(', ')}`)
 
 // ---- staples.json ----
 const st = load('staples.json')

@@ -12,6 +12,7 @@
 #
 # Exit codes: 0 ok / 2 auth failure (claude could not authenticate) / 3 claude failed /
 #             4 validation failed (data restored) / 5 push failed (commit kept locally)
+#             Any non-zero exit appends one line to bridge\knowledge\job-alerts.md.
 # Stop:    Disable-ScheduledTask -TaskName 'WeekendPlanner-DailyFeed'
 # Remove:  Unregister-ScheduledTask -TaskName 'WeekendPlanner-DailyFeed' -Confirm:$false
 # NOTE: keep THIS file ASCII-only. The (Japanese) prompt lives in daily-prompt.txt
@@ -23,9 +24,20 @@ $OutputEncoding = New-Object System.Text.UTF8Encoding $false
 $base       = 'C:\Users\kanedomi\Desktop\Claude\weekend-planner'
 $log        = Join-Path $base 'scripts\daily-feed.log'
 $promptFile = Join-Path $base 'scripts\daily-prompt.txt'
+$alerts     = 'C:\Users\kanedomi\Desktop\Claude\bridge\knowledge\job-alerts.md'
 Set-Location $base
+# Long-lived token for unattended jobs (claude setup-token). Kept outside repos; set for this job process only.
+$tokenFile = Join-Path $env:USERPROFILE '.claude-jobs\oauth-token.txt'
+if (Test-Path $tokenFile) { $env:CLAUDE_CODE_OAUTH_TOKEN = (Get-Content $tokenFile -Raw).Trim() }
 
 function Log($msg) { "$(Get-Date -Format 'HH:mm:ss') $msg" | Out-File -FilePath $log -Append -Encoding utf8 }
+function Alert($code, $reason) {
+  # append one line to the shared job-alerts file (UTF-8 no BOM); never let this break the job
+  try {
+    $line = "- $(Get-Date -Format 'yyyy-MM-dd HH:mm') | WeekendPlanner-DailyFeed | exit=$code | $reason`n"
+    [System.IO.File]::AppendAllText($alerts, $line, (New-Object System.Text.UTF8Encoding $false))
+  } catch { Log "job-alerts append failed: $($_.Exception.Message)" }
+}
 function Run($exe, [string[]]$argv) {
   # run a native command with EAP=Continue (PS 5.1 turns stderr into ErrorRecords under Stop)
   $ErrorActionPreference = 'Continue'
@@ -65,6 +77,7 @@ if ($v.code -ne 0) {
   Log "validate FAILED:`n$($v.out)"
   $r = Run 'git' @('checkout', '--', 'data/')
   Log "data/ restored (git checkout): exit=$($r.code)"
+  Alert 4 'data validation failed; data/ restored, nothing published (see scripts\daily-feed.log)'
   "==== $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') END (exit=4) ====" | Out-File -FilePath $log -Append -Encoding utf8
   exit 4
 }
@@ -97,5 +110,10 @@ if ($ahead -and [int]$ahead -gt 0) {
   Log "nothing to push"
 }
 
+switch ($exitCode) {
+  2 { Alert 2 'claude auth failure (OAuth/login); run claude auth login or setup-token' }
+  3 { Alert 3 "claude -p failed (exit=$claudeExit); finalize ran on whatever was valid" }
+  5 { Alert 5 'git push failed after retries; commit kept locally, next run will push' }
+}
 "==== $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') END (exit=$exitCode) ====" | Out-File -FilePath $log -Append -Encoding utf8
 exit $exitCode
