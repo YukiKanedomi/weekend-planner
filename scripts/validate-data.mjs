@@ -59,6 +59,7 @@ for (const [i, it] of (feed.items ?? []).entries()) {
   str(`${p}.caveats`, it.caveats, true)
   if (!DATE.test(it.foundAt ?? '')) err(`${p}.foundAt`, 'YYYY-MM-DD が必要')
   if (typeof it.pick !== 'boolean') err(`${p}.pick`, 'true/false が必要')
+  if (it.scoop !== undefined && !['openday', 'local', 'staple'].includes(it.scoop)) err(`${p}.scoop`, 'openday / local / staple か省略')
   if (it.usual !== undefined && (typeof it.usual !== 'string' || !it.usual.trim())) err(`${p}.usual`, '街の名前（文字列）か省略（scripts/mark-usual.mjs が付ける）')
   if (it.pick === true) {
     picks++

@@ -21,6 +21,8 @@ const Icon = ({ k, className = '' }) => (
   <svg className={`ic ${className}`} viewBox="0 0 24 24" aria-hidden="true">{ICONS[k]}</svg>
 )
 
+const SCOOP = { openday: '一般公開', local: '地元の催し', staple: '定番のお知らせ' }
+
 export default function App() {
   const feed = feedData, staples = staplesData
   const isStaplesUrl = () => location.hash === '#staples' || new URLSearchParams(location.search).get('tab') === 'staples'
@@ -227,7 +229,7 @@ function Row({ item, today, i }) {
         <div className="body">
           <div className="eyebrow" style={{ color: t.hex }}>{isNew && <i className="new" title="今朝追加" />}{t.label} · {item.when.text}</div>
           <h4>{item.title}</h4>
-          <div className="meta">{item.usual && <span className="usual">いつもの街</span>}<b>{item.place.name}</b>{item.price ? ` · ${item.price}` : ''}</div>
+          <div className="meta">{item.scoop && <span className="scoop">{SCOOP[item.scoop]}</span>}{item.usual && <span className="usual">いつもの街</span>}<b>{item.place.name}</b>{item.price ? ` · ${item.price}` : ''}</div>
           <div className="sum">{item.summary}</div>
         </div>
         <Thumb item={item} />
