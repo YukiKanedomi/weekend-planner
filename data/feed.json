@@ -1866,7 +1866,8 @@
       "caveats": null,
       "image": null,
       "foundAt": "2026-11-09",
-      "pick": false
+      "pick": false,
+      "usual": "渋谷・原宿"
     },
     {
       "id": "2026-11-09-shoto-rojo-ojama",
@@ -1901,7 +1902,8 @@
       "caveats": "月曜休館（11/23は開館）",
       "image": null,
       "foundAt": "2026-11-09",
-      "pick": false
+      "pick": false,
+      "usual": "渋谷・原宿"
     },
     {
       "id": "2026-11-09-play-museum-kikuchichiki",
@@ -1936,7 +1938,8 @@
       "caveats": "入場は閉館の30分前まで",
       "image": "https://play2020.jp/wp/wp-content/uploads/2026/02/261006_kikuchichiki_0247s1-1600x1143.jpg",
       "foundAt": "2026-11-09",
-      "pick": false
+      "pick": false,
+      "usual": "立川"
     },
     {
       "id": "2026-11-09-yokohama-handmade-marche-autumn",
@@ -1971,7 +1974,8 @@
       "caveats": "体験教室は内容により別料金・事前申込のものあり（詳細は公式）。混雑あり",
       "image": null,
       "foundAt": "2026-11-09",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-11-09-ja-tsukui-matsuri",
