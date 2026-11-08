@@ -8,3 +8,6 @@ research/appstore2/
 research/og/
 research/web/*.png
 research/*.png
+
+# ふたりの滞在記録（Google マップ タイムラインとの照合結果）。公開リポジトリに出さない
+private/
