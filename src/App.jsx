@@ -69,6 +69,12 @@ function Feed({ feed, today, season }) {
       .sort((a, b) => minutesOf(a) - minutesOf(b) || a.when.to.localeCompare(b.when.to))[0]
     return near ? { item: near, auto: true } : null
   }, [feed, today])
+  // いつもの街（Google マップの記録でよく出かけている街）にある項目。新しく載ったものから
+  const usual = useMemo(() => items
+    .filter((it) => it.usual && !it.when.ongoing && parseYmd(it.when.to) >= today)
+    .filter((it) => !onlyWeekend || g.weekend.includes(it))
+    .sort((a, b) => b.foundAt.localeCompare(a.foundAt) || a.when.to.localeCompare(b.when.to)), [items, today, onlyWeekend, g])
+  const usualAreas = [...new Set(usual.map((it) => it.usual))]
   const updated = feed?.meta?.updated ? new Date(feed.meta.updated) : null
   const newToday = (feed?.items ?? []).filter((it) => it.foundAt === ymd(today)).length
   const staleHours = updated ? (Date.now() - updated.getTime()) / 36e5 : 0
@@ -105,6 +111,7 @@ function Feed({ feed, today, season }) {
 
       {feed && (
         <div className="tl">
+          {usual.length > 0 && <Group title="いつもの街で" sub={usualAreas.slice(0, 3).join('・') + (usualAreas.length > 3 ? ' ほか' : '')} items={usual} today={today} limit={3} />}
           <Group title="今週末に行ける" sub={`${mdw(g.sat)}・${mdw(g.sun)}`} items={g.weekend} today={today} limit={6} empty="この種類では、今週末に行けるものがまだありません。" />
           {!onlyWeekend && g.weekdayOnly.length > 0 && <Group title="平日のうちに" sub="週末より前に終わるもの" items={g.weekdayOnly} today={today} />}
           {!onlyWeekend && <Group title="来週末" sub={`${mdw(g.sat2)}・${mdw(g.sun2)}`} items={g.nextWeekend} today={today} />}
@@ -220,7 +227,7 @@ function Row({ item, today, i }) {
         <div className="body">
           <div className="eyebrow" style={{ color: t.hex }}>{isNew && <i className="new" title="今朝追加" />}{t.label} · {item.when.text}</div>
           <h4>{item.title}</h4>
-          <div className="meta"><b>{item.place.name}</b>{item.price ? ` · ${item.price}` : ''}</div>
+          <div className="meta">{item.usual && <span className="usual">いつもの街</span>}<b>{item.place.name}</b>{item.price ? ` · ${item.price}` : ''}</div>
           <div className="sum">{item.summary}</div>
         </div>
         <Thumb item={item} />

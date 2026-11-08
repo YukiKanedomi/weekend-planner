@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import { venues } from './venues.mjs'
+import { AREAS, HASHIMOTO, distKm, areaOfPoint } from './areas.mjs'
 
 const tlPath = process.argv[2] ?? join(homedir(), 'マイドライブ', 'Timeline.json')
 if (!existsSync(tlPath)) { console.error(`Timeline.json が見つかりません: ${tlPath}`); process.exit(1) }
@@ -64,7 +65,33 @@ for (const v of venues()) {
       dates, afterListing: dates.filter((d) => d >= v.staple.firstSeen).length, precision: g.precision })
   }
 }
+// ---- よく行く街（土日に橋本から 3km 以上出かけた日を、街ごとに数える） ----
+// 結果は private/area-affinity.json（git 管理外）。毎朝のジョブはこれを読んで調査の重みを決め、
+// scripts/mark-usual.mjs が掲載項目に usual（いつもの街）の印を付ける。公開されるのは印だけ。
+const USUAL_MIN_DAYS = 3
+const isWeekend = (d) => [0, 6].includes(new Date(d + 'T12:00:00+09:00').getUTCDay())
+const outingDays = new Map()
+for (const s of stays) {
+  if (!isWeekend(s.date) || distKm(HASHIMOTO, [s.lat, s.lng]) <= 3) continue
+  const set = outingDays.get(s.date) ?? new Set()
+  set.add(areaOfPoint([s.lat, s.lng]) ?? '(街の表に無い場所)')
+  outingDays.set(s.date, set)
+}
+const tally = new Map()
+for (const [date, set] of outingDays) for (const a of set) {
+  const t = tally.get(a) ?? { name: a, days: 0, last: date }
+  t.days++; if (date > t.last) t.last = date; tally.set(a, t)
+}
+const ranked = [...tally.values()].sort((a, b) => b.days - a.days)
+const affinity = {
+  generatedAt: out.generatedAt, range, outingDays: outingDays.size, minDays: USUAL_MIN_DAYS,
+  usual: ranked.filter((t) => t.days >= USUAL_MIN_DAYS && AREAS.some((a) => a.name === t.name)).map((t) => t.name),
+  areas: ranked,
+}
+out.affinity = affinity
+
 mkdirSync(new URL('../private/', import.meta.url), { recursive: true })
+writeFileSync(new URL('../private/area-affinity.json', import.meta.url), JSON.stringify(affinity, null, 2) + '\n')
 writeFileSync(new URL('../private/visits.json', import.meta.url), JSON.stringify(out, null, 2) + '\n')
 
 // ---- 報告 ----
@@ -73,6 +100,9 @@ console.log(`\n[新着] 会期中に行った: ${out.feed.length} 件`)
 for (const f of out.feed) console.log(`  ${f.afterListing ? '載せた後' : '載せる前'}  ${f.dates.join(',')}  ${f.title}（${f.place}）`)
 console.log(`\n[定番] 行ったことがある: ${out.staples.length} / ${venues().filter((v) => v.kind === 'staple').length} 件`)
 for (const s of out.staples.sort((a, b) => b.dates.length - a.dates.length)) console.log(`  ${String(s.dates.length).padStart(3)}日  最後 ${s.dates.at(-1)}  ${s.name}`)
+console.log(`
+[よく行く街] 土日に出かけた ${affinity.outingDays} 日のうち（${USUAL_MIN_DAYS} 日以上 → いつもの街）`)
+for (const t of ranked) console.log(`  ${String(t.days).padStart(3)}日  最後 ${t.last}  ${t.name}${affinity.usual.includes(t.name) ? '  ★いつもの街' : ''}`)
 if (out.stationOnly.length) console.log(`
 座標が駅しかなく判定を保留: ${out.stationOnly.length} 件（${out.stationOnly.map((k) => k.split(':')[1]).join(' / ')}）`)
 if (out.unlocated.length) console.log(`\n座標なしで照合できなかった場所: ${out.unlocated.join(' / ')}`)

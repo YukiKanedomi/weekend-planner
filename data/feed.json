@@ -75,7 +75,8 @@
       "foundAt": "2026-10-25",
       "pick": false,
       "minutes": 35,
-      "image": "https://prcdn.freetls.fastly.net/release_image/32901/909/32901-909-b7d2ce617b8831eddbc6ed2c6910217c-800x565.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260"
+      "image": "https://prcdn.freetls.fastly.net/release_image/32901/909/32901-909-b7d2ce617b8831eddbc6ed2c6910217c-800x565.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+      "usual": "立川"
     },
     {
       "id": "2026-10-25-shinjuku-gyoen-kikukadan",
@@ -181,7 +182,8 @@
       "foundAt": "2026-10-25",
       "pick": true,
       "minutes": 50,
-      "image": null
+      "image": null,
+      "usual": "渋谷・原宿"
     },
     {
       "id": "2026-10-25-heralbony-popup-shibuya-parco",
@@ -215,7 +217,8 @@
       "foundAt": "2026-10-25",
       "pick": false,
       "minutes": 50,
-      "image": null
+      "image": null,
+      "usual": "渋谷・原宿"
     },
     {
       "id": "2026-10-25-sagamihara-festa-2026",
@@ -496,7 +499,8 @@
       "foundAt": "2026-10-25",
       "pick": false,
       "minutes": 65,
-      "image": null
+      "image": null,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-10-25-designfesta-64",
@@ -568,7 +572,8 @@
       "foundAt": "2026-10-25",
       "pick": false,
       "minutes": 15,
-      "image": null
+      "image": null,
+      "usual": "町田"
     },
     {
       "id": "2026-10-26-designart-tokyo-2026",
@@ -746,7 +751,8 @@
       "caveats": "点灯式のステージ前方観覧エリアは事前抽選制（締切済み）。初日夕方は混雑する。",
       "image": null,
       "foundAt": "2026-10-27",
-      "pick": false
+      "pick": false,
+      "usual": "立川"
     },
     {
       "id": "2026-10-27-yakushiike-momiji-matsuri",
@@ -782,7 +788,8 @@
       "caveats": "天候により内容・時間の変更や中止あり。紅葉シーズンは駐車場が混むため公共交通推奨。紅葉の見頃は例年11月中旬以降。",
       "image": null,
       "foundAt": "2026-10-27",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-10-27-jindai-autumn-rose-festa",
@@ -1102,7 +1109,8 @@
       "caveats": "終了日は公式未発表。なくなり次第終了の可能性あり。一部取扱いのない店舗あり。",
       "image": "https://prcdn.freetls.fastly.net/release_image/20545/584/20545-584-868d415d979bf116ea0bf4c8c611424f-1000x693.jpg",
       "foundAt": "2026-11-01",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-11-02-tobikan-orsay",
@@ -1173,7 +1181,8 @@
       "caveats": "残り約3週間で、終盤は混雑しやすい。日時指定の要否は公式ページに記載なし（特設サイトで確認）。",
       "image": null,
       "foundAt": "2026-11-02",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-11-02-akarenga-christmas-market",
@@ -1209,7 +1218,8 @@
       "caveats": "雨天決行・荒天時休業あり。混雑時は入場規制あり。通常チケットは当日購入可（優先入場は事前販売のみ、11/6 12:00発売）。赤レンガパークの「Christmas Village」は入場無料。",
       "image": null,
       "foundAt": "2026-11-02",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-11-03-takahata-kikumatsuri",
@@ -1279,7 +1289,8 @@
       "caveats": "公式サイトは開催内容を「決まり次第案内」としており、調査日時点で詳細は未掲載。駐車場の案内は確認できないため電車で。いちょうの色づきは年により前後する。",
       "image": null,
       "foundAt": "2026-11-03",
-      "pick": false
+      "pick": false,
+      "usual": "八王子"
     },
     {
       "id": "2026-11-03-oyama-koyo-lightup",
@@ -1349,7 +1360,8 @@
       "caveats": "雨天決行・荒天中止。時間は予定。入場料はリリースに記載なし。焼き菓子の lerisa と 22Bakery などは15日(日)のみ出店（出店者は調査日時点）。",
       "image": "https://prcdn.freetls.fastly.net/release_image/99018/190/99018-190-de87e88e0bbc72933ab3a9fe06925c9d-3900x2357.jpg",
       "foundAt": "2026-11-04",
-      "pick": false
+      "pick": false,
+      "usual": "立川"
     },
     {
       "id": "2026-11-04-famima-hattendo-torokeru-milk",
@@ -1633,7 +1645,8 @@
       "caveats": "雨天決行・荒天中止。大鍋パエリアは各日11:30と14:30の回。駐車場なし",
       "image": null,
       "foundAt": "2026-11-06",
-      "pick": false
+      "pick": false,
+      "usual": "渋谷・原宿"
     },
     {
       "id": "2026-11-07-ginza-loft-season-of-light",

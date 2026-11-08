@@ -71,6 +71,10 @@ if ($claudeOut -match 'Failed to authenticate|OAuth session expired|not logged i
 }
 
 # ---------- Stage 2: FINALIZE (deterministic) ----------
+# 2-pre. tag feed items in the usual areas (no-op without private/area-affinity.json)
+$m = Run 'node' @('scripts/mark-usual.mjs')
+Log "mark-usual: exit=$($m.code) $($m.out.Trim())"
+
 # 2a. validate; on failure restore data/ and stop
 $v = Run 'node' @('scripts/validate-data.mjs')
 if ($v.code -ne 0) {
