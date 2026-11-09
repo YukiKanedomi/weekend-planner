@@ -2116,7 +2116,8 @@
       "caveats": "ハローキティのバルーンイルミは20:30まで。初日は混雑の見込み",
       "image": null,
       "foundAt": "2026-11-10",
-      "pick": false
+      "pick": false,
+      "usual": "多摩センター"
     },
     {
       "id": "2026-11-10-grandberry-christmas",
@@ -2151,7 +2152,8 @@
       "caveats": "初日はペーパーハット配布で混雑の見込み。スケートリンクは12/5から別料金",
       "image": "https://prcdn.freetls.fastly.net/release_image/73657/69/73657-69-5aac1a04e1afcf72ab9854a85d473e97-902x593.jpg",
       "foundAt": "2026-11-10",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-11-10-hashimoto-torinoichi",
@@ -2291,7 +2293,8 @@
       "image": null,
       "foundAt": "2026-11-10",
       "scoop": "local",
-      "pick": false
+      "pick": false,
+      "usual": "多摩センター"
     },
     {
       "id": "2026-11-10-minamiosawa-hida-bussan",
