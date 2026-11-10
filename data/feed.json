@@ -1,7 +1,7 @@
 {
   "meta": {
     "area": "橋本駅起点",
-    "updated": "2026-11-10T07:00:00+09:00"
+    "updated": "2026-11-11T07:00:00+09:00"
   },
   "items": [
     {
@@ -2330,6 +2330,149 @@
       "foundAt": "2026-11-10",
       "scoop": "local",
       "pick": false
+    },
+    {
+      "id": "2026-11-11-kimuraya-tanukikun",
+      "type": "food",
+      "title": "木村屋總本店 動物パン「たぬきくん」（11月限定）",
+      "summary": "チョコ風味のビス生地で目元を描いたたぬき顔のパン。中はチョコチップ入りのキャラメルクリーム。11/8「信楽たぬきの日」に合わせた11月だけの品で、町田小田急店でも買える。",
+      "when": {
+        "from": "2026-11-01",
+        "to": "2026-11-30",
+        "ongoing": true,
+        "text": "11/1(日)〜11/30(月)"
+      },
+      "place": {
+        "name": "木村屋總本店 町田小田急店（ほか関東の直営24店）",
+        "area": "町田",
+        "station": "町田駅"
+      },
+      "access": "橋本→町田（JR横浜線 約15分）→徒歩約2分。合計約20分（横浜髙島屋店でも販売）",
+      "minutes": 20,
+      "price": "400円（税込・調査日時点）",
+      "tags": [
+        "パン",
+        "動物パン",
+        "季節限定",
+        "町田"
+      ],
+      "why": "パン屋巡りの好みに効く。町田の街ぶらついでに買える見た目の楽しい季節のパン。",
+      "source": {
+        "url": "https://prtimes.jp/main/html/rd/p/000000377.000110949.html",
+        "name": "木村屋總本店 プレスリリース（PR TIMES）",
+        "checkedAt": "2026-11-11"
+      },
+      "caveats": "店舗によって商品が異なる場合あり。品名・価格・販売時期は変更の場合あり。銀座本店では取り扱いなし。",
+      "image": "https://prcdn.freetls.fastly.net/release_image/110949/377/110949-377-2e85d88899d2c9d9f273056e164ef8f2-1400x900.png",
+      "foundAt": "2026-11-11",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-tachikawa-toukiichi",
+      "type": "shop",
+      "title": "工藝マルシェ たちかわ陶器市（GREEN SPRINGS）",
+      "summary": "関東一円の窯元・作家約30組が器を並べる3日間の陶器市。日本茶の「立川お茶めぐり」と和菓子・スイーツの出店、28日(土)には芝生広場で野点もある。",
+      "when": {
+        "from": "2026-11-27",
+        "to": "2026-11-29",
+        "text": "11/27(金)〜11/29(日) 11:00〜16:30"
+      },
+      "place": {
+        "name": "GREEN SPRINGS 2F 街区内",
+        "area": "立川",
+        "station": "立川駅"
+      },
+      "access": "橋本→八王子（JR横浜線 約12分）→立川（中央線 約10分）→北口から徒歩。合計約35分",
+      "minutes": 35,
+      "price": null,
+      "tags": [
+        "陶器",
+        "器",
+        "日本茶",
+        "和菓子"
+      ],
+      "why": "ものづくり好きの器選びと、日本茶・和菓子の食べ歩きを一度に。昭和記念公園の紅葉やたちかわイルミネーションと組める。",
+      "source": {
+        "url": "https://greensprings.jp/event/11016/",
+        "name": "GREEN SPRINGS 公式サイト",
+        "checkedAt": "2026-11-11"
+      },
+      "caveats": "雨天決行・荒天中止（野点は11/28 13:00〜と15:00〜の2席、雨天時はATRIUMで実施）。入場料は公式に記載なし。キッチンカーにビール（TACHIHI BREWERY）の出店あり。出店者は調査日時点。",
+      "image": "https://greensprings.jp/wp/wp-content/uploads/2026/11/web_bnr800_500px_2x.jpg",
+      "foundAt": "2026-11-11",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-tokyo-modernism-show",
+      "type": "shop",
+      "title": "TOKYO MODERNISM SHOW 2026（Ginza Sony Park）",
+      "summary": "ヴィンテージ家具、照明、陶器、文具、デザイン書籍を見て触って買える4日間の展示販売。Ginza Sony Park の地下2階〜4階と MUJI HOTEL GINZA の2会場で開く。",
+      "when": {
+        "from": "2026-11-12",
+        "to": "2026-11-15",
+        "text": "11/12(木)18:00〜21:00、11/13(金)・11/14(土)11:00〜20:00、11/15(日)11:00〜17:00"
+      },
+      "place": {
+        "name": "Ginza Sony Park（B2・B1・1F・4F）／MUJI HOTEL GINZA",
+        "area": "銀座",
+        "station": "銀座駅"
+      },
+      "access": "橋本→新宿（京王線 約40分）→銀座（東京メトロ丸ノ内線 約15分）。合計約60分",
+      "minutes": 60,
+      "price": "1日券 3,000円（11/14・11/15）、3日通し券 6,000円ほか（調査日時点）",
+      "tags": [
+        "家具",
+        "デザイン",
+        "雑貨",
+        "銀座"
+      ],
+      "why": "wishlist の未実施「ソニーパークに行く」に効く。日曜は雨予報なので屋内で過ごせるのも利点。",
+      "source": {
+        "url": "https://www.ginzasonypark.com/activity/028",
+        "name": "Ginza Sony Park 公式サイト",
+        "checkedAt": "2026-11-11"
+      },
+      "caveats": "チケット制（Peatixで購入）。1Fの書店エリアは入場無料。11/16(月)は Ginza Sony Park の休園日。",
+      "image": "https://www.ginzasonypark.com/img/activity/028/ogp.jpg",
+      "foundAt": "2026-11-11",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-yamate-sekai-no-christmas",
+      "type": "event",
+      "title": "横浜山手西洋館「世界のクリスマス2026」",
+      "summary": "山手の洋館7館が、ブラジル・イタリア・オランダ・日本・フィンランド・英国・アルゼンチンのクリスマス装飾に変わる。入館無料。",
+      "when": {
+        "from": "2026-12-01",
+        "to": "2026-12-25",
+        "ongoing": true,
+        "text": "12/1(火)〜12/25(金) 9:30〜17:00（期間中無休）"
+      },
+      "place": {
+        "name": "横浜山手西洋館（外交官の家・ベーリック・ホールほか7館）",
+        "area": "横浜・山手",
+        "station": "石川町駅"
+      },
+      "access": "橋本→東神奈川（JR横浜線 約40分）→石川町（根岸線 約10分）→徒歩で坂を上る。合計約60分",
+      "minutes": 60,
+      "price": "入館無料",
+      "tags": [
+        "洋館",
+        "クリスマス",
+        "街ぶら",
+        "写真さんぽ"
+      ],
+      "why": "定番の山手西洋館が一年でいちばん華やぐ時期。元町・中華街の街ぶらと組め、写真さんぽにも向く。",
+      "source": {
+        "url": "https://www.hama-midorinokyokai.or.jp/yamate-seiyoukan/details/sekainokurisumasu2026.php",
+        "name": "横浜山手西洋館 公式サイト",
+        "checkedAt": "2026-11-11"
+      },
+      "caveats": "12/19(土)は山手イタリア山庭園でキャンドルガーデン（日没〜19:00・雨天中止）、当日は外交官の家・ブラフ18番館が19:00まで開館。旧山手68番館は改修工事のため不参加。",
+      "image": "https://www.hama-midorinokyokai.or.jp/yamate-seiyoukan/assets_c/2026/10/title-thumb-1200xauto-258289.jpg",
+      "foundAt": "2026-11-11",
+      "pick": false,
+      "scoop": "staple"
     }
   ]
 }
