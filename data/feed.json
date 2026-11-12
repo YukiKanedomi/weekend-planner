@@ -2510,7 +2510,8 @@
       "caveats": "雨天実施。キッチンカーは日によって出店が異なり、天候で変更あり",
       "image": null,
       "foundAt": "2026-11-13",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-11-13-snoopy-museum-belle",
@@ -2545,7 +2546,8 @@
       "image": null,
       "foundAt": "2026-11-13",
       "pick": false,
-      "scoop": "staple"
+      "scoop": "staple",
+      "usual": "町田"
     }
   ]
 }
