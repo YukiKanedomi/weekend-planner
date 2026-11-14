@@ -2512,7 +2512,8 @@
       "image": null,
       "foundAt": "2026-11-15",
       "pick": false,
-      "scoop": "local"
+      "scoop": "local",
+      "usual": "町田"
     },
     {
       "id": "2026-11-15-vintage-artisan-market-minatomirai",
@@ -2547,7 +2548,8 @@
       "caveats": "雨天決行・荒天中止（中止は公式Instagramで告知）。出店者は日によって異なる。酒類の出店の有無は公式に記載なし（未確認）。",
       "image": null,
       "foundAt": "2026-11-15",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     }
   ]
 }
