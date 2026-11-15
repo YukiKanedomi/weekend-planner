@@ -2230,7 +2230,8 @@
       "caveats": "会期は残り1週間（最終日 11/23）。後期展示中",
       "image": null,
       "foundAt": "2026-11-16",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-11-16-yumebi-muttoni",
@@ -2266,7 +2267,8 @@
       "caveats": "作家の上演会は土日祝 13:00・16:00（各約45分・申込不要、観覧料が必要）",
       "image": null,
       "foundAt": "2026-11-16",
-      "pick": false
+      "pick": false,
+      "usual": "八王子"
     },
     {
       "id": "2026-11-16-aquarium-sagamihara-kaeru",
