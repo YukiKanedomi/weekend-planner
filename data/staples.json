@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated": "2026-10-25"
+    "updated": "2026-11-16"
   },
   "items": [
     {
@@ -682,6 +682,40 @@
       "visited": false,
       "note": "wishlist「猫カフェ」。混雑時は入場待ちあり",
       "minutes": 10
+    },
+    {
+      "id": "tsukuiko-shiroyama-park",
+      "name": "県立津久井湖城山公園",
+      "category": "kouen",
+      "area": "津久井湖",
+      "station": "橋本駅（バス）",
+      "access": "橋本→神奈中バス「津久井湖観光センター前」下車 徒歩1分（花の苑地）。合計約30分",
+      "minutes": 30,
+      "summary": "津久井湖を望む花の苑地・水の苑地と、城跡の残る城山。湖畔の展望園路を歩いて根小屋のパークセンターまで約30分。",
+      "best": "春の桜、夏のジニア、秋の湖上祭",
+      "url": "https://www.pref.kanagawa.jp/docs/u5r/cnt/f550/tabi-163.html",
+      "checkedAt": "2026-11-16",
+      "firstSeen": "2026-11-08",
+      "from": "feed",
+      "visited": false,
+      "note": null
+    },
+    {
+      "id": "green-springs-tachikawa",
+      "name": "GREEN SPRINGS",
+      "category": "machi",
+      "area": "立川",
+      "station": "立川駅",
+      "access": "橋本→八王子（JR横浜線）→立川（JR中央線）→徒歩。合計約35分",
+      "minutes": 35,
+      "summary": "PLAY! MUSEUM やホテル、カフェ・ショップが集まる緑の街区。週末はマルシェや陶器市などの催しがよく開かれる。",
+      "best": "催しのある週末、昭和記念公園の帰り",
+      "url": "https://greensprings.jp/",
+      "checkedAt": "2026-11-16",
+      "firstSeen": "2026-11-04",
+      "from": "feed",
+      "visited": false,
+      "note": null
     }
   ]
 }
