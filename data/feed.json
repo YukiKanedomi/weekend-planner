@@ -2413,7 +2413,8 @@
       "caveats": "点灯時間はエリア・施設により一部異なる。マーケットのドリンクの内容（酒類の有無）は公式では未確認",
       "image": "https://prcdn.freetls.fastly.net/release_image/171594/2/171594-2-d298d57dc5d9dbb2c5ffbb23d58e4a02-1920x1920.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
       "foundAt": "2026-11-17",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-11-17-zokei-hakushi-shinsaten",
