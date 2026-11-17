@@ -2523,7 +2523,8 @@
       "caveats": "両店に予約サイトがあるが、アフタヌーンティーに予約が要るかは公式で確認できていない。週末は混雑が予想される。",
       "image": "https://prcdn.freetls.fastly.net/release_image/32163/215/32163-215-1ad27f560907e30f131cbe5bfb809527-1800x1200.jpg",
       "foundAt": "2026-11-18",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     }
   ]
 }
