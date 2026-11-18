@@ -2488,7 +2488,8 @@
       "caveats": "各日在庫がなくなり次第終了。混雑時は整理券配布や店頭での待機の可能性あり（公式）。販売商品は変更の場合あり",
       "image": "https://cdn.shopify.com/s/files/1/0649/7196/4642/files/popup_ogp_1.jpg?v=1657179834",
       "foundAt": "2026-11-19",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-11-19-izumi-tandai-xmas-market",
