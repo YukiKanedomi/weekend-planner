@@ -2494,7 +2494,8 @@
       "image": "https://www.puroland.jp/wp-content/uploads/2026/10/2026_christmas_KV-840x630.jpg",
       "foundAt": "2026-11-21",
       "pick": false,
-      "scoop": "staple"
+      "scoop": "staple",
+      "usual": "多摩センター"
     },
     {
       "id": "2026-11-21-mm-winter-holiday-dqff",
@@ -2530,7 +2531,8 @@
       "caveats": "スタンプラリーのステッカーはなくなり次第終了。ポップアップストアは混雑時に入場制限・整理券の場合あり。",
       "image": "https://yokohama-landmark.jp/lp/winterholiday2026/img/ogimage.jpg",
       "foundAt": "2026-11-21",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     }
   ]
 }
