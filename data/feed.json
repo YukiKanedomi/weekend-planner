@@ -2459,7 +2459,8 @@
       "image": null,
       "foundAt": "2026-11-23",
       "scoop": "local",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-11-23-celeo-hachioji-foodfloor",
@@ -2495,7 +2496,8 @@
       "image": null,
       "foundAt": "2026-11-23",
       "scoop": "local",
-      "pick": false
+      "pick": false,
+      "usual": "八王子"
     }
   ]
 }
