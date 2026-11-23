@@ -5,7 +5,7 @@ import {
   TYPE, CATEGORY, WD, md, mdw, ymd, parseYmd, addDays, daysBetween,
   seasonOf, minutesOf, wmo, groupFeed,
 } from './lib.js'
-import { setupFromHash, feedbackReady, voteOf, saveVote, flush } from './feedback.js'
+import { setupFromHash, applySetup, feedbackReady, feedbackWho, voteOf, saveVote, flush } from './feedback.js'
 
 const ICONS = {
   sun: <><circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" /></>,
@@ -129,6 +129,7 @@ function Feed({ feed, today, season }) {
       <footer className="foot">
         <p>載せているのは、公式ページなどで開催日・提供期間を確認できたものだけです。価格や時間は確認日時点のもので、変わることがあります。各項目の「公式を開く」で最新をご確認ください。</p>
         <p>天気は Open-Meteo の予報です。毎朝 7 時ごろに自動更新。{season.name}の色で表示しています。</p>
+        <FeedbackSetup />
       </footer>
     </main>
   )
@@ -271,6 +272,31 @@ function Detail({ item }) {
         <a href={item.source.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>公式を開く <Icon k="ext" /></a>
       </div>
       {feedbackReady() && <Feedback item={item} />}
+    </div>
+  )
+}
+
+function FeedbackSetup() {
+  const [open, setOpen] = useState(false)
+  const [text, setText] = useState('')
+  const [msg, setMsg] = useState('')
+  const ready = feedbackReady()
+  const save = () => {
+    if (applySetup(text)) { setMsg('設定しました。項目を開くとボタンが出ます'); setText(''); flush() }
+    else setMsg('リンクを読み取れませんでした。全体をコピーして貼り付けてください')
+  }
+  return (
+    <div className="fb-setup">
+      <button className="fb-toggle" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        フィードバックの設定{ready ? `（設定済み${feedbackWho() ? `・${feedbackWho()}` : ''}）` : ''}
+      </button>
+      {open && (
+        <div className="fb-form">
+          <label htmlFor="fb-link">受け取った設定リンクを貼り付けてください</label>
+          <div><input id="fb-link" value={text} onChange={(e) => setText(e.target.value)} placeholder="https://…#fb=…" autoCapitalize="off" autoCorrect="off" spellCheck={false} /><button onClick={save}>保存</button></div>
+          {msg && <p role="status">{msg}</p>}
+        </div>
+      )}
     </div>
   )
 }

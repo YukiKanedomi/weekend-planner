@@ -6,19 +6,27 @@ const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } cat
 
 // #fb=<base64url(JSON [宛先, 合言葉, 名前])> を読んで保存し、アドレスから消す
 export function setupFromHash() {
-  const m = location.hash.match(/^#fb=([\w-]+)$/)
+  if (!applySetup(location.hash)) return false
+  history.replaceState(null, '', location.pathname + location.search)
+  return true
+}
+
+// 設定リンク（全体でも #fb= 以降だけでも可）を読んで保存する。ホーム画面のアイコンから開いた画面は
+// ブラウザと保存場所が別なので、そちらではページ下部の欄にリンクを貼り付けて設定する
+export function applySetup(text) {
+  const m = String(text).trim().match(/#fb=([\w-]+)$/)
   if (!m) return false
   try {
     const bin = atob(m[1].replace(/-/g, '+').replace(/_/g, '/'))
     const [url, key, who] = JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0))))
     if (!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(url) || !key) return false
     write(CFG, { url, key, who: who || '' })
-    history.replaceState(null, '', location.pathname + location.search)
     return true
   } catch { return false }
 }
 
 export const feedbackReady = () => !!read(CFG, null)
+export const feedbackWho = () => read(CFG, null)?.who ?? ''
 export const voteOf = (id) => read(VOTES, {})[id] ?? { rate: null, reason: null, went: false }
 
 export function saveVote(item, vote) {
