@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated": "2026-11-18"
+    "updated": "2026-11-24"
   },
   "items": [
     {
@@ -730,6 +730,40 @@
       "url": "https://www.takahatafudoson.or.jp/",
       "checkedAt": "2026-11-18",
       "firstSeen": "2026-11-03",
+      "from": "feed",
+      "visited": false,
+      "note": null
+    },
+    {
+      "id": "yokohama-art-museum",
+      "name": "横浜美術館",
+      "category": "tenji",
+      "area": "横浜・みなとみらい",
+      "station": "みなとみらい駅",
+      "access": "橋本→横浜（JR横浜線 約45分）→みなとみらい（みなとみらい線 約4分）→徒歩約3分。合計約55分",
+      "minutes": 55,
+      "summary": "みなとみらいの真ん中にある市立美術館。企画展に合わせて、みなとみらいの散策の途中に寄りやすい。",
+      "best": "企画展の会期中、みなとみらいの散策ついでに",
+      "url": "https://yokohama.art.museum/",
+      "checkedAt": "2026-11-24",
+      "firstSeen": "2026-11-02",
+      "from": "feed",
+      "visited": false,
+      "note": null
+    },
+    {
+      "id": "machida-hanga-museum",
+      "name": "町田市立国際版画美術館（芹ヶ谷公園）",
+      "category": "tenji",
+      "area": "町田",
+      "station": "町田駅",
+      "access": "橋本→町田（JR横浜線 約15分）→徒歩約15分（芹ヶ谷公園内）。合計約30分",
+      "minutes": 30,
+      "summary": "版画専門の美術館。芹ヶ谷公園の中にあり、展示のあとに公園の散歩を続けられる。",
+      "best": "企画展の会期中、新緑や紅葉の芹ヶ谷公園と合わせて",
+      "url": "https://hanga-museum.jp/",
+      "checkedAt": "2026-11-24",
+      "firstSeen": "2026-11-16",
       "from": "feed",
       "visited": false,
       "note": null
