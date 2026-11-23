@@ -50,6 +50,10 @@ function Run($exe, [string[]]$argv) {
 "==== $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') START ====" | Out-File -FilePath $log -Append -Encoding utf8
 $today = Get-Date -Format 'yyyy-MM-dd'
 
+# ---------- Stage 0: sync button feedback from Drive into private/ (never fatal) ----------
+$f = Run 'node' @('scripts/feedback-sync.mjs')
+Log "feedback-sync: exit=$($f.code) $($f.out.Trim())"
+
 # ---------- Stage 1: claude ----------
 $prompt = Get-Content -Raw -Encoding UTF8 $promptFile
 $ErrorActionPreference = 'Continue'

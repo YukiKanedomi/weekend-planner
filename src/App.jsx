@@ -5,6 +5,7 @@ import {
   TYPE, CATEGORY, WD, md, mdw, ymd, parseYmd, addDays, daysBetween,
   seasonOf, minutesOf, wmo, groupFeed,
 } from './lib.js'
+import { setupFromHash, feedbackReady, voteOf, saveVote, flush } from './feedback.js'
 
 const ICONS = {
   sun: <><circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" /></>,
@@ -33,6 +34,8 @@ export default function App() {
   useEffect(() => {
     document.documentElement.style.setProperty('--season', season.hex)
   }, [])
+  const [fbSet, setFbSet] = useState(false)
+  useEffect(() => { if (setupFromHash()) setFbSet(true); flush() }, [])
   useEffect(() => {
     const onHash = () => setTab(isStaplesUrl() ? 'staples' : 'feed')
     window.addEventListener('hashchange', onHash)
@@ -42,6 +45,7 @@ export default function App() {
 
   return (
     <div className="app">
+      {fbSet && <p className="fb-set" role="status">この端末からフィードバックを送れるようになりました</p>}
       {tab === 'feed'
         ? <Feed feed={feed} today={today} season={season} />
         : <Staples staples={staples} today={today} />}
@@ -266,6 +270,32 @@ function Detail({ item }) {
         <span>{item.source.checkedAt.slice(5).replace('-', '/')} に確認 · {item.source.name}</span>
         <a href={item.source.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>公式を開く <Icon k="ext" /></a>
       </div>
+      {feedbackReady() && <Feedback item={item} />}
+    </div>
+  )
+}
+
+const REASONS = ['遠い', '興味がない', 'もう知っている', '高い']
+
+function Feedback({ item }) {
+  const [v, setV] = useState(() => voteOf(item.id))
+  const set = (next) => { setV(next); saveVote(item, next) }
+  const rate = (r) => set({ ...v, rate: v.rate === r ? null : r, reason: null })
+  return (
+    <div className="fb">
+      <div className="fb-row">
+        <button className={v.rate === 'like' ? 'on' : ''} aria-pressed={v.rate === 'like'} onClick={() => rate('like')}>気になる</button>
+        <button className={v.rate === 'meh' ? 'on' : ''} aria-pressed={v.rate === 'meh'} onClick={() => rate('meh')}>いまいち</button>
+        <button className={v.went ? 'on' : ''} aria-pressed={v.went} onClick={() => set({ ...v, went: !v.went })}>行った</button>
+      </div>
+      {v.rate === 'meh' && (
+        <div className="fb-row why-not">
+          <span>理由（選ばなくても送れます）</span>
+          {REASONS.map((r) => (
+            <button key={r} className={v.reason === r ? 'on' : ''} aria-pressed={v.reason === r} onClick={() => set({ ...v, reason: v.reason === r ? null : r })}>{r}</button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
