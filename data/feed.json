@@ -2138,7 +2138,8 @@
       "caveats": "夕方以降の屋外イベント。週末の夜は混雑が見込まれる",
       "image": "https://yorunoyo.yokohama/wp-content/themes/yorunoyo/assets/photo/web/kv26i.webp",
       "foundAt": "2026-11-24",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-11-24-hagiyama-koyo-lightup",
@@ -2244,7 +2245,8 @@
       "image": null,
       "foundAt": "2026-11-24",
       "pick": false,
-      "scoop": "staple"
+      "scoop": "staple",
+      "usual": "みなとみらい・中華街"
     }
   ]
 }
