@@ -126,6 +126,15 @@ function Feed({ feed, today, season }) {
             items={onlyWeekend ? g.ongoing.filter((it) => it.when.from <= ymd(g.sun) && it.when.to >= ymd(g.sat)) : g.ongoing} />
         </div>
       )}
+      {feed?.meta?.reactions?.length > 0 && (
+        <section className="rx">
+          <div className="sec"><h2>反応で<em>変えたこと</em></h2></div>
+          <ul>
+            {feed.meta.reactions.map((r, i) => <li key={i}><time className="num">{md(parseYmd(r.date))}</time><span>{r.text}</span></li>)}
+          </ul>
+          <p>「気になる」「いまいち」「行った」のボタンを受けて、調べ方や選び方を変えたときにここへ書きます。</p>
+        </section>
+      )}
       <footer className="foot">
         <p>載せているのは、公式ページなどで開催日・提供期間を確認できたものだけです。価格や時間は確認日時点のもので、変わることがあります。各項目の「公式を開く」で最新をご確認ください。</p>
         <p>天気は Open-Meteo の予報です。毎朝 7 時ごろに自動更新。{season.name}の色で表示しています。</p>
@@ -234,7 +243,7 @@ function Row({ item, today, i }) {
         <div className="body">
           <div className="eyebrow" style={{ color: t.hex }}>{isNew && <i className="new" title="今朝追加" />}{t.label} · {item.when.text}</div>
           <h4>{item.title}</h4>
-          <div className="meta">{item.scoop && <span className="scoop">{SCOOP[item.scoop]}</span>}{item.usual && <span className="usual">いつもの街</span>}<b>{item.place.name}</b>{item.price ? ` · ${item.price}` : ''}</div>
+          <div className="meta">{item.scoop && <span className="scoop">{SCOOP[item.scoop]}</span>}{item.usual && <span className="usual">いつもの街</span>}{item.reacted && <span className="usual">反応から</span>}<b>{item.place.name}</b>{item.price ? ` · ${item.price}` : ''}</div>
           <div className="sum">{item.summary}</div>
         </div>
         <Thumb item={item} />

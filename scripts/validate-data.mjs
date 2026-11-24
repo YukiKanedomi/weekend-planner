@@ -24,6 +24,15 @@ const str = (p, v, allowNull = false) => {
 const feed = load('feed.json')
 if (typeof feed.meta?.updated !== 'string') err('feed.meta.updated', '文字列が必要')
 if (!Array.isArray(feed.items)) err('feed.items', '配列が必要')
+// 反応を受けて変えたこと（公開される一文）。誰が押したか・題名は書かない
+if (feed.meta?.reactions !== undefined) {
+  if (!Array.isArray(feed.meta.reactions) || feed.meta.reactions.length > 6) err('feed.meta.reactions', '6 件までの配列か省略')
+  else feed.meta.reactions.forEach((r, i) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(r?.date ?? '')) err(`feed.meta.reactions[${i}].date`, 'YYYY-MM-DD が必要')
+    if (typeof r?.text !== 'string' || !r.text.trim() || r.text.length > 70) err(`feed.meta.reactions[${i}].text`, '70 字以内の一文が必要')
+    else if (/夫|妻|奥様|さん/.test(r.text)) err(`feed.meta.reactions[${i}].text`, '誰が押したかは書かない')
+  })
+}
 const seenId = new Set(), seenUrl = new Set(), seenKey = new Set()
 // 今日（日本時間）。CI（UTC）で走っても日付がずれないように JST で求める
 const TODAY = new Date(Date.now() + 9 * 36e5).toISOString().slice(0, 10)
@@ -61,6 +70,7 @@ for (const [i, it] of (feed.items ?? []).entries()) {
   if (typeof it.pick !== 'boolean') err(`${p}.pick`, 'true/false が必要')
   if (it.scoop !== undefined && !['openday', 'local', 'staple'].includes(it.scoop)) err(`${p}.scoop`, 'openday / local / staple か省略')
   if (it.usual !== undefined && (typeof it.usual !== 'string' || !it.usual.trim())) err(`${p}.usual`, '街の名前（文字列）か省略（scripts/mark-usual.mjs が付ける）')
+  if (it.reacted !== undefined && it.reacted !== true) err(`${p}.reacted`, 'true か省略（「気になる」に似ているので選んだ項目）')
   if (it.pick === true) {
     picks++
     if (DATE.test(it.when?.to ?? '') && it.when.to < TODAY) err(`${p}.pick`, `期限切れ（when.to ${it.when.to}）の項目にイチ押しが付いている`)

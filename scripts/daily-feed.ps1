@@ -78,6 +78,9 @@ if ($claudeOut -match 'Failed to authenticate|OAuth session expired|not logged i
 # 2-pre. tag feed items in the usual areas (no-op without private/area-affinity.json)
 $m = Run 'node' @('scripts/mark-usual.mjs')
 Log "mark-usual: exit=$($m.code) $($m.out.Trim())"
+# 2-pre. safety net: unpick items that got a "meh" reaction (no-op without private/feedback.json)
+$a = Run 'node' @('scripts/apply-reactions.mjs')
+Log "apply-reactions: exit=$($a.code) $($a.out.Trim())"
 
 # 2a. validate; on failure restore data/ and stop
 $v = Run 'node' @('scripts/validate-data.mjs')

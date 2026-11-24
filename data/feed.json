@@ -1,7 +1,13 @@
 {
   "meta": {
     "area": "橋本駅起点",
-    "updated": "2026-11-24T07:00:00+09:00"
+    "updated": "2026-11-24T07:00:00+09:00",
+    "reactions": [
+      {
+        "date": "2026-11-24",
+        "text": "「いまいち」が付いた 1 件を、週末のイチ押しから外しました。"
+      }
+    ]
   },
   "items": [
     {
@@ -1298,7 +1304,7 @@
       "caveats": "雨天決行・荒天中止（野点は11/28 13:00〜と15:00〜の2席、雨天時はATRIUMで実施）。入場料は公式に記載なし。キッチンカーにビール（TACHIHI BREWERY）の出店あり。出店者は調査日時点。",
       "image": "https://greensprings.jp/wp/wp-content/uploads/2026/11/web_bnr800_500px_2x.jpg",
       "foundAt": "2026-11-11",
-      "pick": true,
+      "pick": false,
       "usual": "立川"
     },
     {
