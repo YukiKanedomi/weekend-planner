@@ -32,9 +32,13 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      # 上げた直後は成果物が一覧に出ないことがあり、deploy-pages が "No artifacts named github-pages" で落ちる（2026-11-24）
+      - run: sleep 20
       - id: deployment
         uses: actions/deploy-pages@v4
         continue-on-error: true
+      - if: steps.deployment.outcome == 'failure'
+        run: sleep 60
       # deploy-pages が一時エラー（"try again later" 等）で落ちた場合の1回リトライ
       - id: deployment-retry
         if: steps.deployment.outcome == 'failure'
