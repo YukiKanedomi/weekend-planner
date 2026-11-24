@@ -2254,7 +2254,8 @@
       "image": "https://image.jimcdn.com/app/cms/image/transf/dimension=1920x10000:format=jpg/path/s29f50a5c9cb88f1a/image/i58bf8000d5c82778/version/1789713199/image.jpg",
       "foundAt": "2026-11-25",
       "scoop": "local",
-      "pick": false
+      "pick": false,
+      "usual": "八王子"
     },
     {
       "id": "2026-11-25-coventgarden-xmas-machida",
@@ -2288,7 +2289,8 @@
       "caveats": null,
       "image": "https://www.odakyu-dept.co.jp/machida/event/laf3i700000006w3-img/261125_m_coventgarden_og.jpg",
       "foundAt": "2026-11-25",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     },
     {
       "id": "2026-11-25-newgrand-sweil-stollen",
@@ -2323,7 +2325,8 @@
       "caveats": "予約・取り置き不可。限定100個のため、なくなり次第終了の可能性あり",
       "image": null,
       "foundAt": "2026-11-25",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-11-25-anniversaire-berubara-sweets",
@@ -2358,7 +2361,8 @@
       "caveats": "アフタヌーンティー（6,900円〜）は予約限定。ミニアフタヌーンティーは当日注文可。パンケーキの予約要否は公式に記載なし",
       "image": null,
       "foundAt": "2026-11-25",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     }
   ]
 }
