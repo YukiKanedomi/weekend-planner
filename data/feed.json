@@ -2289,7 +2289,8 @@
       "caveats": "入場券はイープラスで事前購入が必要（当日券の販売なし。予定数に達し次第終了）。再入場不可。混雑が見込まれる",
       "image": null,
       "foundAt": "2026-11-26",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     },
     {
       "id": "2026-11-26-winter-market-yokohama",
@@ -2324,7 +2325,8 @@
       "caveats": "出店者は日替わり。ワークショップは予約制（Peatix）。12/6はダンスステージあり（雨天時は会場変更）",
       "image": "https://assets.st-note.com/production/uploads/images/331682257/rectangle_large_type_2_83e52143532325ef4da9fd9c060f1e2e.jpeg?fit=bounds&quality=85&width=1280",
       "foundAt": "2026-11-26",
-      "pick": false
+      "pick": false,
+      "usual": "みなとみらい・中華街"
     }
   ]
 }
