@@ -2363,7 +2363,8 @@
       "caveats": "グッズ販売あり（各数千円〜）。混雑状況は公式に記載なし",
       "image": "https://art.parco.jp/img/hq/store/storage/w750xh750/sns1022_2000x2000.jpg",
       "foundAt": "2026-11-28",
-      "pick": false
+      "pick": false,
+      "usual": "渋谷・原宿"
     },
     {
       "id": "2026-11-28-hanga-onchi-koshiro",
@@ -2399,7 +2400,8 @@
       "caveats": "月曜休館（1/11は開館・1/12休館）。年末年始12/28〜1/4は休館",
       "image": null,
       "foundAt": "2026-11-28",
-      "pick": false
+      "pick": false,
+      "usual": "町田"
     }
   ]
 }
